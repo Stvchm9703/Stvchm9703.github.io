@@ -1,0 +1,46 @@
+{
+  "name": "stvchm9703.github.io",
+  "version": "1.0.0",
+  "description": "stv chm logging app",
+  "author": "Steven Cheng",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "@nuxtjs/bulma": "^1.2.1",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/markdownit": "^1.2.6",
+    "nuxt-buefy": "^0.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "lodash": "^4.17.15",
+    "markdown-it-attrs": "^3.0.1",
+    "markdown-it-div": "^1.1.0",
+    "markdown-it-github-headings": "^1.1.1",
+    "markdown-it-github-preamble": "^1.0.0",
+    "markdown-it-highlightjs": "^3.0.0",
+    "markdown-it-multimd-table": "^3.2.3",
+    "markdown-it-table-of-contents": "^0.4.4",
+    "markdown-it-task-lists": "^2.1.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "push-dir": "^0.4.1",
+    "sass-loader": "^7.2.0",
+    "vee-validate": "^2.2.15"
+  }
+}
