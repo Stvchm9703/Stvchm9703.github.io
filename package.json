@@ -14,22 +14,22 @@
     "deploy": "push-dir --dir=dist --branch=gh-page --cleanup"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
-    "@nuxtjs/bulma": "^1.2.1",
+    "nuxt": "^2.10.1",
+    "@nuxtjs/bulma": "^1.2.5",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/markdownit": "^1.2.6",
-    "nuxt-buefy": "^0.3.2"
+    "@nuxtjs/axios": "^5.6.0",
+    "@nuxtjs/markdownit": "^1.2.7",
+    "nuxt-buefy": "^0.3.16"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-nuxt": ">=0.4.3",
     "lodash": "^4.17.15",
     "markdown-it-attrs": "^3.0.1",
     "markdown-it-div": "^1.1.0",
-    "markdown-it-github-headings": "^1.1.1",
+    "markdown-it-github-headings": "^1.1.2",
     "markdown-it-github-preamble": "^1.0.0",
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-multimd-table": "^3.2.3",
@@ -37,10 +37,10 @@
     "markdown-it-task-lists": "^2.1.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
-    "pug": "^2.0.3",
+    "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "push-dir": "^0.4.1",
-    "sass-loader": "^7.2.0",
-    "vee-validate": "^2.2.15"
+    "sass-loader": "^8.0.0",
+    "vee-validate": "^3.0.11"
   }
 }
