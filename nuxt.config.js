@@ -1,9 +1,10 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -19,15 +20,27 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+
   /*
   ** Global CSS
   */
   css: [
+    '@/assets/css/mbr/mbr-additional.css',
+    '@/assets/css/mbr/style.css',
+    '@/assets/css/mbr/mobirise-icons.css',
+  ],
+  rules: [
+    {
+      test: /\.s[ac]ss$/i,
+      use: ['style-loader', 'css-loader', 'sass-loader',],
+    },
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/axios',
+    '~/plugins/smooth_scoll',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -39,16 +52,48 @@ export default {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
+    'nuxt-buefy',
     '@nuxtjs/bulma',
+    'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/markdownit',
+    '@nuxtjs/proxy',
   ],
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs',
+      'markdown-it-multimd-table',
+      'markdown-it-task-lists',
+      'markdown-it-github-headings',
+      // 'markdown-it-highlightjs',
+      'markdown-it-github-preamble',
+      'markdown-it-table-of-contents',
+
+    ],
+    injected: true
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true,
+    baseUrl: "https://stvchm9703.github.io/"
+  },
+  proxy: {
+    '/api': { target: 'http://0.0.0.0:8080', },
+    // '/md': { target: 'http://0.0.0.0:3000' },
+    '/host_md/': {
+      target: 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io/master/',
+      pathRewrite: { '^/host_md/': '' }
+    },
+    '/projMD': { target: 'https://raw.githubusercontent.com/Stvchm9703/' }
   },
   /*
   ** Build configuration
@@ -61,10 +106,15 @@ export default {
         }
       }
     },
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    }
+    publicPath: '/static/',
+    indicator: false,
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.md$/,
+        use: ['raw-loader']
+      });
+    },
+    extractCSS: true,
+    vendor: ['vuex', 'axios']
   }
 }
