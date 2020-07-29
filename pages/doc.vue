@@ -2,50 +2,46 @@
 .section
   .content.is-1(v-html="$md.render(hello)")
   .footer
-    
 </template>
 <script>
 export default {
-  name:"docMDRender",
+  name: "docMDRender",
   data: () => ({
-    hello: "#Hello World"
+    hello: "#Hello World",
   }),
   computed: {
-    topic()  {
-        let a = this.$route.hash ?   this.$route.hash.replace("#","") : ""
-        let b = this.$route.hash? a.split("/") : []
-        return b
-    }
+    topic() {
+      let a = this.$route.hash ? this.$route.hash.replace("#", "") : "";
+      let b = this.$route.hash ? a.split("/") : [];
+      let c = a.includes("https://") ? a : b;
+      return c;
+    },
   },
   watch: {
-    topic(){
-      this.fetchPost()
-    }
+    topic() {
+      this.fetchPost();
+    },
   },
   methods: {
     async fetchPost() {
       try {
-        // let filename = 'info'
-        // if (this.topic[1]){
-        //     filename = this.topic[0] + "/" +this.topic[1];
-        // } else if (this.topic[0]){
-        //     filename = this.topic[0] + "/index"
-        // }
         console.log(this.topic);
         let ip = await this.$axios.$get("/host_md/README.md");
-        // let ip = require("~/md/info/index.md");
+        let lip = await this.$axios.$get(this.topic);
         console.log(ip);
-        this.hello = ip
+        console.log(lip);
+        if (lip == "") this.hello = ip;
+        else this.hello = lip;
       } catch (e) {
         console.warn(e);
         this.$router.push({
-          path:"/doc"
-        })
+          path: "/doc",
+        });
       }
-    }
+    },
   },
   created() {
-    this.fetchPost()
-  }
+    this.fetchPost();
+  },
 };
 </script>

@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Copr";
+  src: url("./COPRGTL.TTF");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Copr";
+  src: url("./COPRGTB.TTF");
+  font-weight: Bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:  "Yond";
+  src: url("./YONDERRE.TTF");
+}

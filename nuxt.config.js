@@ -19,16 +19,28 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
-
+  // loading: { color: '#fff' },
+  loading: {
+    color: '#FF8C00',
+    height: '5px'
+  },
   /*
   ** Global CSS
   */
   css: [
-    '@/assets/css/mbr/mbr-additional.css',
-    '@/assets/css/mbr/style.css',
-    '@/assets/css/mbr/mobirise-icons.css',
+    '~/assets/css/page_trans.css',
+    '~/assets/css/mbr/mbr-additional.css',
+    '~/assets/css/mbr/style.css',
+    '~/assets/css/mbr/mobirise-icons.css',
+    '~/assets/css/fonts/font_face.css'
   ],
+  pageTransition: {
+    name: 'page',
+    mode: 'out-in',
+    beforeEnter(el) {
+      // console.log('Before enter...');
+    }
+  },
   rules: [
     {
       test: /\.s[ac]ss$/i,
@@ -54,7 +66,7 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     'nuxt-buefy',
     '@nuxtjs/bulma',
-    'bootstrap-vue/nuxt',
+    // 'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',

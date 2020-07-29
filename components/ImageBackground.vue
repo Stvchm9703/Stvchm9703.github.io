@@ -1,15 +1,19 @@
 <template lang="pug">
-div.backgournd
+.backgournd(:style="css_rend")
+  slot
 </template>
 
-<script>
+<script scoped>
 export default {
   props: {
-    src: { type: String }
+    src: { type: String },
   },
-  created() {
-    
+  computed: {
+    css_rend: (self) => ({
+      background: "url(" + require(`~/static/images/${self.src}`) + ")",
+    }),
   },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>

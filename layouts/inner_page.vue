@@ -1,5 +1,7 @@
-<template>
-  <nuxt />
+<template lang="pug">
+  div 
+    //- navigation
+    nuxt 
 </template>
 
 <style >

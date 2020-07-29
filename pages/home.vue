@@ -1,15 +1,16 @@
 <template lang="pug">
-div    
+div 
   header_row_block#header6-h
   contact_row_block#maps4-p
 </template>
-<script>
-import header_row_block from '~/components/mbr/header_row_block';
-import contact_row_block from '~/components/mbr/contact_row_block';
+
+<script scope>
+import header_row_block from "~/components/mbr/header_row_block";
+import contact_row_block from "~/components/mbr/contact_row_block";
 export default {
-  components :{
+  components: {
     header_row_block,
     contact_row_block,
-  }
-}
+  },
+};
 </script>

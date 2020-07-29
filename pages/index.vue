@@ -1,55 +1,53 @@
 <template lang="pug">
 div
-  ImageBackground(
-    src="trialScene4.jpg"
-  )
-
-  .container
-    div
+  ImageBackground.container(src="trialScene4.png")
+    transition
       h1.title Hey Steven
       h2.subtitle Steven / AO Develop Logging
-    .index_links
-        nuxt-link(v-for="k in link_list"
-          :to="k.path"
-          class="linkListBtn"
-        ) {{k.display_name}}
+  .index_links
+    nuxt-link.linkListBtn(
+      v-for="k in link_list",
+      :to="k.path",
+      :key="k.display_name"
+    ) {{ k.display_name }}
 </template>
 
-<script>
+<script scope>
 // import Logo from '~/components/Logo.vue'
 import ImageBackground from "~/components/ImageBackground.vue";
 export default {
   components: {
-    ImageBackground
+    ImageBackground,
   },
+  transition: "page",
   data: () => ({
     link_list: [
       {
         display_name: "Home Page",
-        path: "/home"
+        path: "/home",
       },
       {
         display_name: "Technique Blog",
-        path: "/tech_log"
+        path: "/tech_log",
       },
       {
         display_name: "Topic",
-        path: "/topic"
+        path: "/topic",
       },
       {
         display_name: "Git Repo",
-        path: "/repo"
+        path: "/repo",
       },
       {
         display_name: "about me",
-        path: "/about_me"
-      }
-    ]
-  })
+        path: "/about_me",
+      },
+    ],
+  }),
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope >
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -61,8 +59,6 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
@@ -87,7 +83,7 @@ export default {
 
   position: fixed;
   bottom: 0px;
-  height: 150px;
+  height: 120px;
   width: 100%;
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -99,19 +95,51 @@ export default {
 
 .linkListBtn {
   width: 100%;
-
   font-size: 20pt;
   color: #fff;
-
   height: 50px;
   min-width: 120px;
   padding-top: 3px;
   padding-bottom: 3px;
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Copr";
+  text-align: center;
   &:hover {
     color: rgba(2, 0, 36, 1);
     background-color: rgba($color: #fefefe, $alpha: 0.7);
+    background: linear-gradient(
+      0deg,
+      rgba(9, 19, 121, 0.1) 0%,
+      rgba($color: #fefefe, $alpha: 0.7) 100%
+    );
+    // animation: linkListBtn-in 3s;
+  }
+
+  // transition: opacity 0.5s;
+}
+
+@keyframes linkListBtn-in {
+  0% {
+    transform: scale(0);
+    background: rgb(2, 0, 36);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+    color: rgba(2, 0, 36, 1);
+    background-color: rgba($color: #fefefe, $alpha: 0.7);
+  }
+}
+@keyframes linkListBtn-out {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(0);
   }
 }
 </style>
