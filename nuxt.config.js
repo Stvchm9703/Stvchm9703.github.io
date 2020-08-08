@@ -151,16 +151,16 @@ export default {
      */
     optimization: {
       splitChunks: {
-        chunks: 'all',
+        chunks: 'initial',
         automaticNameDelimiter: '.',
         name: undefined,
         cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            // cacheGroupKey here is `commons` as the key of the cacheGroup
-            name : 'common',
-            chunks: 'initial',
-          },
+          // commons: {
+          //   test: /[\\/]node_modules[\\/]/,
+          //   // cacheGroupKey here is `commons` as the key of the cacheGroup
+          //   name : 'common',
+          //   chunks: 'initial',
+          // },
           vendor :{
             test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
             name: 'vendor',
