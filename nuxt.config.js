@@ -136,8 +136,8 @@ export default {
       chunk: ({ isDev }) => '[name].js',
       css: ({ isDev }) => '[name].css',
       img: ({ isDev }) => 'img/[path][name].[ext]',
-      font: ({ isDev }) => 'fonts/[name:7].[ext]',
-      video: ({ isDev }) => 'videos/[name:7].[ext]'
+      font: ({ isDev }) => 'fonts/[name].[ext]',
+      video: ({ isDev }) => 'videos/[name].[ext]'
     },
     /** 
      * {
@@ -155,12 +155,12 @@ export default {
         automaticNameDelimiter: '.',
         name: undefined,
         cacheGroups: {
-          // commons: {
-          //   test: /[\\/]node_modules[\\/]/,
-          //   // cacheGroupKey here is `commons` as the key of the cacheGroup
-          //   name : 'common',
-          //   chunks: 'initial',
-          // },
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            // cacheGroupKey here is `commons` as the key of the cacheGroup
+            name : 'common',
+            chunks: 'initial',
+          },
           vendor :{
             test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
             name: 'vendor',
