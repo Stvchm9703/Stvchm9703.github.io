@@ -1,6 +1,7 @@
 
 export default {
   mode: 'spa',
+  target: 'static',
   /*
   ** Headers of the page
   */
@@ -110,6 +111,9 @@ export default {
   ** Build configuration
   */
   build: {
+    analyze: true,
+    minifyCSS: true,
+    minifyJS: true,
     postcss: {
       preset: {
         features: {
@@ -126,6 +130,44 @@ export default {
       });
     },
     extractCSS: true,
-    vendor: ['vuex', 'axios']
+    vendor: ['vuex', 'axios'],
+    filenames: {
+      app: ({ isDev }) => '[name].js',
+      chunk: ({ isDev }) => '[name].js',
+      css: ({ isDev }) => '[name].css',
+      img: ({ isDev }) => 'img/[path][name].[ext]',
+      font: ({ isDev }) => 'fonts/[name].[ext]',
+      video: ({ isDev }) => 'videos/[name].[ext]'
+    },
+    /** 
+     * {
+      app: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[contenthash].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
+    }
+     */
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+        automaticNameDelimiter: '.',
+        name: undefined,
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            // cacheGroupKey here is `commons` as the key of the cacheGroup
+            name : 'common',
+            chunks: 'initial',
+          },
+          vendor :{
+            test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
+            name: 'vendor',
+            chunks: 'initial',
+          }
+        }
+      }
+    }
   }
 }
