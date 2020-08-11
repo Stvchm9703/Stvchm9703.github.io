@@ -72,6 +72,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
+    // 'nuxt-payload-extractor',
   ],
   markdownit: {
     preset: 'default',
@@ -89,7 +90,10 @@ export default {
 
     ],
     injected: true
+    
   },
+  // router config
+  
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -128,6 +132,7 @@ export default {
         test: /\.md$/,
         use: ['raw-loader']
       });
+     
     },
     extractCSS: true,
     vendor: ['vuex', 'axios'],
