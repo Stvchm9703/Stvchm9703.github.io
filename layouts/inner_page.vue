@@ -1,9 +1,16 @@
 <template lang="pug">
   div 
-    //- navigation
+    navigation
     nuxt 
 </template>
-
+<script>
+import navigation from '~/components/navlink';
+export default {
+  components : {
+    navigation
+  }
+}
+</script>
 <style >
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

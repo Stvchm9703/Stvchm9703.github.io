@@ -52,7 +52,7 @@ export default {
   */
   plugins: [
     '~/plugins/axios',
-    '~/plugins/smooth_scoll',
+    '~/plugins/vue_native',
   ],
   /*
   ** Nuxt.js dev-modules
