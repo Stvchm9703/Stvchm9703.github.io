@@ -4,21 +4,27 @@
 </template>
 
 <script scoped>
+import _isArray from "lodash/isArray";
 export default {
   props: {
-    src: { type: String },
+    src: { type: String || Array },
   },
-  computed: {
-    css_rend: (self) => ({
-      background: "url(" + require(`~/static/images/${self.src}`) + ")",
-    }),
+  data: () => ({
+    css_rend: {},
+  }),
+  methods: {
+    css_on_change() {
+      if (_isArray(this.$props.src)) {
+      }
+    },
   },
-  created() {},
+  mouted() {},
 };
 </script>
 <style lang="scss" scoped>
 .backgournd {
   min-width: 100vw;
   min-height: 100vh;
+  // transaction :
 }
 </style>

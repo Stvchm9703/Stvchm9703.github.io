@@ -1,3 +1,5 @@
+const TerserPlugin = require('terser-webpack-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 
 export default {
   mode: 'spa',
@@ -52,8 +54,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/axios',
-    '~/plugins/vue_native',
+    { src: '~/plugins/axios', ssr: false },
+    { src: '~/plugins/vue_native', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -72,6 +74,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
+    '@nuxt/content',
     // 'nuxt-payload-extractor',
   ],
   markdownit: {
@@ -84,16 +87,31 @@ export default {
       'markdown-it-multimd-table',
       'markdown-it-task-lists',
       'markdown-it-github-headings',
-      // 'markdown-it-highlightjs',
+      'markdown-it-highlightjs',
       'markdown-it-github-preamble',
       'markdown-it-table-of-contents',
 
     ],
-    injected: true
-    
+    injected: true,
   },
   // router config
-  
+  router: {
+    routeNameSplitter: '/',
+    extendRoutes(routes, resolve) {
+      var proj_doc = {
+        path: '/doc/:project_name',
+        components: {
+          default: resolve(__dirname, 'pages/doc.vue'),
+          // modal: resolve(__dirname, 'pages/doc/_project_name.vue')
+        }
+      };
+      routes.push(
+        proj_doc
+      );
+    }
+  },
+
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -101,7 +119,11 @@ export default {
   axios: {
     proxy: true,
     baseUrl: "https://stvchm9703.github.io/"
+
   },
+
+  content: {},
+
   proxy: {
     '/api': { target: 'http://0.0.0.0:8080', },
     // '/md': { target: 'http://0.0.0.0:3000' },
@@ -110,6 +132,12 @@ export default {
       pathRewrite: { '^/host_md/': '' }
     },
     '/projMD': { target: 'https://raw.githubusercontent.com/Stvchm9703/' }
+  },
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: isDev,
+    }
   },
   /*
   ** Build configuration
@@ -132,7 +160,7 @@ export default {
         test: /\.md$/,
         use: ['raw-loader']
       });
-     
+
     },
     extractCSS: true,
     vendor: ['vuex', 'axios'],
@@ -154,7 +182,10 @@ export default {
       video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
     }
      */
+
+    transpile: ['@stylelib', 'swiper', 'dom7',],
     optimization: {
+      minimize: true,
       splitChunks: {
         chunks: 'initial',
         automaticNameDelimiter: '.',
@@ -163,16 +194,61 @@ export default {
           commons: {
             test: /[\\/]node_modules[\\/]/,
             // cacheGroupKey here is `commons` as the key of the cacheGroup
-            name : 'common',
+            name: 'common',
             chunks: 'initial',
           },
-          vendor :{
+          vendor: {
             test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
             name: 'vendor',
             chunks: 'initial',
           }
         }
-      }
-    }
-  }
+      },
+      minimizer: [
+        new TerserPlugin({
+          sourceMap: false, // Must be set to true if using source-maps in production
+          terserOptions: {
+            output: {
+              comments: /@license/i,
+            },
+            compress: {
+              drop_console: true,
+            },
+          },
+        }),
+      ],
+    },
+
+  },
+  buildModules: [
+    // With options
+    ['@nuxtjs/imagemin', {
+      /* module options */
+      imageminOptions: {
+        plugins: [
+          // Name
+          ['gifsicle', { interlaced: true }],
+          // Name with options
+          ["mozjpeg", { quality: 80 }],
+          ['jpegtran', { progressive: true }],
+          ['optipng', { optimizationLevel: 5 }],
+          ['svgo', { plugins: [{ removeViewBox: false }] }],
+          // Full package name
+          ["imagemin-svgo",
+            { plugins: [{ removeViewBox: false, },], },
+          ],
+        ],
+      },
+    }]
+  ],
+  generate: {
+    exclude: [
+      /^\/test/,
+      /^\/example/
+    ],
+  },
+
+  ignoreOptions: {
+    ignorecase: false
+  },
 }

@@ -1,0 +1,3 @@
+pages/test/*.vue
+pages/example.vue
+**/*.test.*

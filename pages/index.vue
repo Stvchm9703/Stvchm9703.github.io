@@ -12,7 +12,7 @@ div
     ) {{ k.display_name }}
 </template>
 
-<script scope>
+<script>
 // import Logo from '~/components/Logo.vue'
 import ImageBackground from "~/components/ImageBackground.vue";
 export default {
@@ -20,34 +20,23 @@ export default {
     ImageBackground,
   },
   transition: "page",
-  data: () => ({
-    link_list: [
-      {
-        display_name: "Home Page",
-        path: "/home",
-      },
-      {
-        display_name: "Technique Blog",
-        path: "/tech_log",
-      },
-      {
-        display_name: "Topic",
-        path: "/topic",
-      },
-      {
-        display_name: "Git Repo",
-        path: "/repo",
-      },
-      {
-        display_name: "about me",
-        path: "/about_me",
-      },
-    ],
-  }),
+  computed: {
+    link_list: (self) => {
+      return self.$router.options.routes
+        .filter((e) => !e.path.includes("/:"))
+        .map((e) => {
+          return {
+            path: e.path,
+            display_name: e.name,
+          };
+        });
+    },
+  },
+  data: () => ({}),
 };
 </script>
 
-<style lang="scss" scope >
+<style lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -103,6 +92,7 @@ export default {
   padding-bottom: 3px;
   font-family: "Copr";
   text-align: center;
+
   &:hover {
     color: rgba(2, 0, 36, 1);
     background-color: rgba($color: #fefefe, $alpha: 0.7);
@@ -122,22 +112,27 @@ export default {
     transform: scale(0);
     background: rgb(2, 0, 36);
   }
+
   50% {
     transform: scale(1.25);
   }
+
   100% {
     transform: scale(1);
     color: rgba(2, 0, 36, 1);
     background-color: rgba($color: #fefefe, $alpha: 0.7);
   }
 }
+
 @keyframes linkListBtn-out {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.25);
   }
+
   100% {
     transform: scale(0);
   }

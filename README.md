@@ -20,3 +20,7 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+#### for the doc (DocMDRenderPage)
+http://localhost:3000/doc/#projMD/unlight-zwei-game-duel-service/master/README.md
