@@ -1,0 +1,28 @@
+.page {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.5s;
+  }
+  &-enter,
+  &-leave-active {
+    opacity: 0;
+  }
+}
+
+.slice {
+  &-left-enter,
+  &-right-leave-active {
+    opacity: 0;
+    transform: translate(30px, 0);
+  }
+
+  &-left-leave-active,
+  &-right-enter {
+    opacity: 0;
+    transform: translate(-30px, 0);
+  }
+}
+
+// .image-background{
+//   &
+// }

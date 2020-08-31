@@ -1,30 +1,29 @@
+  
 <template lang="pug">
 .backgournd(:style="css_rend")
   slot
 </template>
 
 <script scoped>
-import _isArray from "lodash/isArray";
 export default {
   props: {
-    src: { type: String || Array },
+    src: { type: String },
   },
-  data: () => ({
-    css_rend: {},
-  }),
-  methods: {
-    css_on_change() {
-      if (_isArray(this.$props.src)) {
-      }
-    },
+  computed: {
+    css_rend: (self) => ({
+      'background-image': "url(" + require(`~/static/images/${self.src}`) + ")",
+    }),
   },
-  mouted() {},
+  created() {},
 };
 </script>
 <style lang="scss" scoped>
 .backgournd {
   min-width: 100vw;
   min-height: 100vh;
-  // transaction :
+  background-repeat: no-repeat no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 </style>

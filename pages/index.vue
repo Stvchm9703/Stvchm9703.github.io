@@ -1,7 +1,7 @@
 <template lang="pug">
 div
-  ImageBackground.container(src="trialScene4.png")
-    transition
+  ImageBackground.container(:src="image_list")
+    div 
       h1.title Hey Steven
       h2.subtitle Steven / AO Develop Logging
   .index_links
@@ -32,7 +32,11 @@ export default {
         });
     },
   },
-  data: () => ({}),
+  data: () => ({
+    // image_list : ['trialScene4.png' , 'logo-128x128.png']
+    image_list : 'trialScene4.png' 
+    // image_list : 'logo-128x128.png'
+  }),
 };
 </script>
 

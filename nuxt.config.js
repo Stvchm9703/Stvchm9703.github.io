@@ -31,7 +31,7 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/css/page_trans.css',
+    '~/assets/css/page_trans.scss',
     '~/assets/css/mbr/mbr-additional.css',
     '~/assets/css/mbr/style.css',
     '~/assets/css/mbr/mobirise-icons.css',
@@ -209,10 +209,10 @@ export default {
           sourceMap: false, // Must be set to true if using source-maps in production
           terserOptions: {
             output: {
-              comments: /@license/i,
+              comments:  /@license/i,
             },
             compress: {
-              drop_console: true,
+              drop_console: false,
             },
           },
         }),
