@@ -1,52 +1,76 @@
   
 <template lang="pug">
-div 
-  VueSlickCarousel(v-bind="settings")
-    .background(v-for="f in src", :style="css_func(f)")
-  slot
-  // div(v-for="f in src")
-  //   span {{f}}
+b-carousel.background(
+  :indicator="indicator",
+  :indicator-background="indicatorBackground",
+  :indicator-inside="indicatorInside",
+  :indicator-mode="indicatorMode",
+  :indicator-position="indicatorPosition",
+  :indicator-style="indicatorStyle",
+  :pause-hover="false",
+  :pause-info="false"
+)
+  b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
+    section.hero.is-medium(:style="carousel.style")
+      .hero-body.has-text-centered
+        h1.title {{ carousel.title }}
 </template>
 
 <script scoped>
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import _isArray from "lodash/isArray";
+import _isEmpty from "lodash/isEmpty";
 export default {
   props: {
     src: {},
   },
   data: () => ({
-    settings: {
-      dots: true,
-      lazyLoad: "ondemand",
-      dotsClass: "slick-dots custom-dot-class",
-      edgeFriction: 0.35,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    },
+    indicator: true,
+    indicatorBackground: true,
+    indicatorInside: true,
+    indicatorMode: "hover",
+    indicatorPosition: "is-top",
+    indicatorStyle: "is-lines",
+    carousels: [],
   }),
-  components: { VueSlickCarousel },
-  computed: {
-    isArray() {
-      return _isArray(this.src);
-    },
-    css_rend: (self) => ({
-      "background-image": "url(" + require(`~/static/images/${self.src}`) + ")",
-    }),
-  },
   methods: {
-    css_func(s) {
-      return {
-        "background-image": "url(" + require(`~/static/images/${s}`) + ")",
-      };
+    init_set_list() {
+      if (_isArray(this.src)) {
+        try {
+          this.carousels = this.src.map((e) => ({
+            title: e.title,
+            style: !_isEmpty(e.image)
+              ? {
+                  "background-image":
+                    "url(" + require(`~/static/images/${e.image}`) + ")",
+                }
+              : { "background-color": "rgba(" + e.color + ")" },
+          }));
+        } catch (e) {
+          console.warn(e);
+        }
+      } else {
+        try {
+          this.carousels = [
+            {
+              title: this.src.title,
+              style: !_isEmpty(this.src.image)
+                ? {
+                    "background-image":
+                      "url(" +
+                      require(`~/static/images/${this.src.image}`) +
+                      ")",
+                  }
+                : { "background-color": "rgba(" + this.src.color + ")" },
+            },
+          ];
+        } catch (e) {
+          console.warn(e);
+        }
+      }
     },
-    img_src(s) {
-      return `/static/images/${s}`;
-    },
+  },
+  mounted() {
+    this.init_set_list();
   },
 };
 </script>
@@ -58,5 +82,8 @@ export default {
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+  .carousel-item section {
+    height: 100vh;
+  }
 }
 </style>

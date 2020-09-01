@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  ImageBackground.container(:src="image_list")
+  ImageBackground.container(:src="title_list")
     div 
       h1.title Hey Steven
       h2.subtitle Steven / AO Develop Logging
@@ -14,7 +14,7 @@ div
 
 <script>
 // import Logo from '~/components/Logo.vue'
-import ImageBackground from "~/components/ImageBackground.vue";
+import ImageBackground from "~/components/ImageBackground copy.vue";
 export default {
   components: {
     ImageBackground,
@@ -34,8 +34,12 @@ export default {
   },
   data: () => ({
     // image_list : ['trialScene4.png' , 'logo-128x128.png']
-    image_list : 'trialScene4.png' 
+    image_list: "trialScene4.png",
     // image_list : 'logo-128x128.png'
+    title_list: [
+      { title: "Blender - test for render !", color: "2,0,36,0.7", image: "trialScene4.png" },
+      { title: "Icon image", color: "63,81,181,0.7", image: "03.jpg" },
+    ],
   }),
 };
 </script>

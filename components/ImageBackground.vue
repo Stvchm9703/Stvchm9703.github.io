@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     css_rend: (self) => ({
-      'background-image': "url(" + require(`~/static/images/${self.src}`) + ")",
+      "background-image": "url(" + require(`~/static/images/${self.src}`) + ")",
     }),
   },
   created() {},

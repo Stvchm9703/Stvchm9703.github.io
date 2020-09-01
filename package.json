@@ -22,7 +22,6 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "nuxt": "^2.14.0",
     "nuxt-buefy": "^0.3.31",
-    "vue-slick-carousel": "^1.0.6",
     "vue-svg-transition": "^0.2.1"
   },
   "devDependencies": {
