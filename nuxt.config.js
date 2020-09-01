@@ -1,6 +1,6 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 export default {
   mode: 'spa',
   target: 'static',
@@ -47,7 +47,9 @@ export default {
   rules: [
     {
       test: /\.s[ac]ss$/i,
-      use: ['style-loader', 'css-loader', 'sass-loader',],
+      use: [
+        isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+        'css-loader', 'sass-loader',],
     },
   ],
   /*
@@ -209,10 +211,10 @@ export default {
           sourceMap: false, // Must be set to true if using source-maps in production
           terserOptions: {
             output: {
-              comments:  /@license/i,
+              comments: /@license/i,
             },
             compress: {
-              drop_console: false,
+              drop_console: !isDev,
             },
           },
         }),

@@ -45,6 +45,7 @@ export default {
                 }
               : { "background-color": "rgba(" + e.color + ")" },
           }));
+          console.log(this.carousels);
         } catch (e) {
           console.warn(e);
         }
@@ -74,7 +75,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .background {
   min-width: 100vw;
   min-height: 100vh;
@@ -82,8 +83,8 @@ export default {
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  .carousel-item section {
-    height: 100vh;
-  }
+}
+.background .carousel-item section {
+  height: 100vh;
 }
 </style>
