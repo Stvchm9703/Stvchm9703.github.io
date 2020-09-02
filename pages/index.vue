@@ -1,12 +1,10 @@
 <template lang="pug">
-div
-  ImageBackground.container(:src="title_list")
-    div 
-      h1.title Hey Steven
-      h2.subtitle Steven / AO Develop Logging
+.container
+  ImageBackground(:src="title_list")
   .index_links
     nuxt-link.linkListBtn(
       v-for="k in link_list",
+      prefetch,
       :to="k.path",
       :key="k.display_name"
     ) {{ k.display_name }}
@@ -15,10 +13,10 @@ div
 <script>
 // import Logo from '~/components/Logo.vue'
 import ImageBackground from "~/components/ImageBackground.vue";
+// import ImageBackground from "~/pages/test/carousel.vue";
 export default {
-  components: {
-    ImageBackground,
-  },
+  name: "index-page",
+  components: { ImageBackground },
   transition: "page",
   computed: {
     link_list: (self) => {
@@ -37,15 +35,43 @@ export default {
     image_list: "trialScene4.png",
     // image_list : 'logo-128x128.png'
     title_list: [
-      { title: "Blender - test for render !", color: "2,0,36,0.7", image: "trialScene4.png" },
+      {
+        title: "Blender - test for render !",
+        color: "2,0,36,0.7",
+        image: "trialScene4.png",
+      },
       { title: "Icon image", color: "63,81,181,0.7", image: "03.jpg" },
     ],
+    post: {},
   }),
+  async fetch() {
+    let y = await this.$axios.get("https://jsonplaceholder.typicode.com/posts");
+    this.post = y.data;
+    console.log(post);
+  },
+  activated() {
+    // Call fetch again if last fetch more than 30 sec ago
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch();
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$root.$loading.start();
+      //  this.$fetch();
+      setTimeout(() => this.$root.$loading.finish(), 500);
+    });
+  },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 .container {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

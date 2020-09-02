@@ -24,8 +24,13 @@ export default {
   */
   // loading: { color: '#fff' },
   loading: {
-    color: '#FF8C00',
+    color: '#3273dc',
     height: '5px'
+  },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#3273dc',
+    background: 'white'
   },
   /*
   ** Global CSS
@@ -138,7 +143,7 @@ export default {
   vue: {
     config: {
       productionTip: false,
-      devtools: isDev,
+      devtools: true,
     }
   },
   /*
@@ -244,7 +249,7 @@ export default {
     }]
   ],
   generate: {
-    exclude: [
+    exclude:  [
       /^\/test/,
       /^\/example/
     ],

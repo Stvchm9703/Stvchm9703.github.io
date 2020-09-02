@@ -27,6 +27,7 @@
   "devDependencies": {
     "@nuxtjs/imagemin": "^0.2.0",
     "babel-eslint": "^10.1.0",
+    "bulma-css-vars": "^0.5.1",
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-plugin-nuxt": "^1.0.0",

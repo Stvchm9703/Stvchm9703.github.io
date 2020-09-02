@@ -23,6 +23,28 @@
   }
 }
 
-// .image-background{
-//   &
-// }
+html,
+body {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+element.style {
+  --mouse-x: 0;
+  --mouse-y: 398;
+}
+<style > .moving-gradient[data-v-0f21cde2] {
+  background: transparent
+    radial-gradient(
+      at calc((500 - var(--mouse-x, 0)) * 1%)
+        calc((500 - var(--mouse-y, 0)) * 1%),
+      #12c2e9,
+      #c471ed,
+      #f64f6d,
+      #ffcb56
+    )
+    no-repeat 0 0;
+}

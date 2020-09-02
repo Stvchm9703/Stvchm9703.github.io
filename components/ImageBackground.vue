@@ -1,19 +1,22 @@
   
 <template lang="pug">
-b-carousel.background(
-  :indicator="indicator",
-  :indicator-background="indicatorBackground",
-  :indicator-inside="indicatorInside",
-  :indicator-mode="indicatorMode",
-  :indicator-position="indicatorPosition",
-  :indicator-style="indicatorStyle",
-  :pause-hover="false",
-  :pause-info="false"
-)
-  b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
-    section.hero.is-medium(:style="carousel.style")
-      .hero-body.has-text-centered
-        h1.title {{ carousel.title }}
+.bgContainer
+  b-carousel.background(
+    :indicator-inside="true",
+    :indicator-background="true",
+    indicator-mode="click",
+    indicator-position="is-top",
+    :pause-hover="false",
+    :pause-info="false",
+    :arrow-hover="false"
+  )
+    b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
+      section.hero.background_layer.is-medium(:style="carousel.style")
+        .hero-body.has-text-centered
+          h1.title {{ carousel.title }}
+
+    template(slot="indicators", slot-scope="props")
+      span.al.image(:style="carousels[props.i].style")
 </template>
 
 <script scoped>
@@ -24,12 +27,6 @@ export default {
     src: {},
   },
   data: () => ({
-    indicator: true,
-    indicatorBackground: true,
-    indicatorInside: true,
-    indicatorMode: "hover",
-    indicatorPosition: "is-top",
-    indicatorStyle: "is-lines",
     carousels: [],
   }),
   methods: {
@@ -44,6 +41,10 @@ export default {
                     "url(" + require(`~/static/images/${e.image}`) + ")",
                 }
               : { "background-color": "rgba(" + e.color + ")" },
+            filter_style: {
+              background: `linear-gradient(0.25turn, rgba(${e.color}) 12.5%, rgba(#ebf8e1,0.1), #f69d3c)`,
+            },
+            _image: e.image,
           }));
           console.log(this.carousels);
         } catch (e) {
@@ -75,16 +76,65 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.background {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-repeat: no-repeat no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+<style lang="scss" >
+.bgContainer {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.carousel.background {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+
   .carousel-item section {
     height: 100vh;
+    &.filter_layer {
+    }
+    &.background_layer {
+      background-repeat: no-repeat no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  }
+  .carousel-indicator.is-inside {
+    transition-delay: 0.3s;
+    transition-timing-function: ease-in-out;
+    .indicator-item {
+      .al {
+        height: 100px;
+        width: 200px;
+        background-repeat: no-repeat no-repeat;
+        background-position: center;
+        background-attachment: scroll;
+        background-size: cover;
+        img {
+          filter: grayscale(100%);
+        }
+      }
+      &.is-active {
+        .al img {
+          filter: grayscale(0%);
+        }
+      }
+    }
+    &.is-bottom {
+      transition: bottom 0.7s;
+      bottom: -70px;
+      &:hover {
+        bottom: 0px;
+      }
+    }
+    &.is-top {
+      transition: top 0.7s;
+      top: -70px;
+      &:hover {
+        top: 0px;
+      }
+    }
   }
 }
 </style>
