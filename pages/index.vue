@@ -14,7 +14,7 @@ div
 
 <script>
 // import Logo from '~/components/Logo.vue'
-import ImageBackground from "~/components/ImageBackground copy.vue";
+import ImageBackground from "~/components/ImageBackground.vue";
 export default {
   components: {
     ImageBackground,

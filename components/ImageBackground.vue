@@ -1,19 +1,19 @@
   
 <template lang="pug">
-  b-carousel.background(
-    :indicator="indicator",
-    :indicator-background="indicatorBackground",
-    :indicator-inside="indicatorInside",
-    :indicator-mode="indicatorMode",
-    :indicator-position="indicatorPosition",
-    :indicator-style="indicatorStyle",
-    :pause-hover="false",
-    :pause-info="false"
-  )
-    b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
-      section.hero.is-medium(:style="carousel.style")
-        .hero-body.has-text-centered
-          h1.title {{ carousel.title }}
+b-carousel.background(
+  :indicator="indicator",
+  :indicator-background="indicatorBackground",
+  :indicator-inside="indicatorInside",
+  :indicator-mode="indicatorMode",
+  :indicator-position="indicatorPosition",
+  :indicator-style="indicatorStyle",
+  :pause-hover="false",
+  :pause-info="false"
+)
+  b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
+    section.hero.is-medium(:style="carousel.style")
+      .hero-body.has-text-centered
+        h1.title {{ carousel.title }}
 </template>
 
 <script scoped>
@@ -83,8 +83,8 @@ export default {
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-.carousel-item section {
-  height: 100vh;
-}
+  .carousel-item section {
+    height: 100vh;
+  }
 }
 </style>
