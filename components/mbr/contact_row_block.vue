@@ -39,10 +39,7 @@ section.maps4.mbr-parallax-background
             span.info-title.mbr-fonts-style
               | E-mail:
             span.info-value.mbr-fonts-style
-              a.__cf_email__(
-                href="/cdn-cgi/l/email-protection",
-                data-cfemail="24575154544b565064494b464d564d57410a474b49"
-              ) [email protected]
+              | st.ch.inwork@gmail.com
 </template>
 
 <style lang="scss" scoped>
