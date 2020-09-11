@@ -1,5 +1,6 @@
 <template lang="pug">
-nuxt
+.hero
+  span.title.is-center hero
 </template>
 
 <script>

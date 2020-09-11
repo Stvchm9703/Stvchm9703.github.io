@@ -40,8 +40,11 @@ export default {
     '~/assets/css/mbr/mbr-additional.css',
     '~/assets/css/mbr/style.css',
     '~/assets/css/mbr/mobirise-icons.css',
-    '~/assets/css/fonts/font_face.css'
+    '~/assets/css/fonts/font_face.css',
   ],
+  styleResources: {
+    // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
+  },
   pageTransition: {
     name: 'page',
     mode: 'out-in',
@@ -106,15 +109,14 @@ export default {
     routeNameSplitter: '/',
     extendRoutes(routes, resolve) {
       var proj_doc = {
+        name: "doc-proj",
         path: '/doc/:project_name',
         components: {
           default: resolve(__dirname, 'pages/doc.vue'),
           // modal: resolve(__dirname, 'pages/doc/_project_name.vue')
         }
       };
-      routes.push(
-        proj_doc
-      );
+      routes.push( proj_doc );
     }
   },
 
@@ -132,7 +134,7 @@ export default {
   content: {},
 
   proxy: {
-    '/api': { target: 'http://0.0.0.0:8080', },
+    // '/api': { target: 'http://0.0.0.0:8080', },
     // '/md': { target: 'http://0.0.0.0:3000' },
     '/host_md/': {
       target: 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io/master/',
@@ -246,15 +248,15 @@ export default {
           ],
         ],
       },
-    }]
+    }, '@nuxtjs/style-resources']
   ],
   generate: {
-    exclude:  [
+    exclude: [
       /^\/test/,
       /^\/example/
     ],
   },
-
+  // ignorePrefix: isDev ? [] : ['**/*.test.*','pages/test/*.vue'],
   ignoreOptions: {
     ignorecase: false
   },

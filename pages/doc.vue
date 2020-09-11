@@ -1,10 +1,11 @@
 <template lang="pug">
-.section
-  .content.is-1.disp_dark(
-    v-if="!fail_load && !in_loading",
-    v-html="$md.render(md_content)"
-  )
-  .footer
+client-only
+  .section
+    .content.is-1.disp_dark(
+      v-if="!fail_load && !in_loading",
+      v-html="$md.render(md_content)"
+    )
+    .footer
 </template>
 
 <script>
@@ -18,20 +19,6 @@ export default {
     in_loading: true,
     md_content: "#Hello World",
   }),
-  computed: {
-    // topic() {
-    //   // return this.$route.hash;
-    //   let a = this.$route.hash ? this.$route.hash.replace("#", "") : "";
-    //   let b = this.$route.hash ? a.split("/") : [];
-    //   let c = a.includes("https://") ? a : b;
-    //   return c;
-    // },
-  },
-  watch: {
-    // topic() {
-    //   this.fetchPost();
-    // },
-  },
   methods: {
     async fetchPost() {
       try {
@@ -72,12 +59,7 @@ export default {
 
 <style lang="scss" >
 .content.disp_dark {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     color: #98b9dc;
   }
   span,
@@ -85,13 +67,13 @@ export default {
     color: #ffffff;
   }
   pre {
-    background : #4a4a4a;
-    code[class*="language-"], pre[class*="language-"] {
-      color : white;
+    background: #4a4a4a;
+    code[class*="language-"],
+    pre[class*="language-"] {
+      color: white;
       text-shadow: none;
     }
   }
-  
 }
 </style>
 

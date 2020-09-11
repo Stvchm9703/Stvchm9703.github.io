@@ -1,10 +1,5 @@
 <template lang="pug">
-b-navbar.sv_navbar(
-  fixed-bottom,
-  is-centered,
-  type="is-home-set",
-  @toggleActive="isToogledActive()"
-)
+b-navbar.sv_navbar(active, fixed-bottom, is-centered, type="is-home-set")
   template(slot="start", is-centered)
     b-navbar-item.linkListItem(
       v-for="k in link_list",
@@ -62,19 +57,10 @@ export default {
       return o;
     },
   },
-  data: () => ({
-    isOpened: false,
-  }),
-  methods: {
-    isToogledActive(event) {
-      console.log(event);
-      console.log("is toogle active");
-    },
-  },
 };
 </script>
-<style lang="scss">
-@import "~assets/css/media_rule.scss";
+<style lang="scss" >
+@import '~assets/css/media_rule.scss';
 .sv_navbar {
   background: linear-gradient(
     0deg,
@@ -84,10 +70,8 @@ export default {
   max-height: 70px;
   height: 10%;
 }
-// resolve is-fix-bottom
 .navbar.is-fixed-bottom {
   .navbar-menu {
-    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     .navbar-start {
       .navbar-item.has-dropdown.is-active {
         .navbar-dropdown {
@@ -95,9 +79,6 @@ export default {
           border-radius: 2px !important ;
         }
       }
-    }
-    @include when-mobile {
-      position: absolute;
     }
   }
 }
@@ -109,7 +90,6 @@ export default {
   font-family: "Copr";
   text-align: center;
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-
   &:hover {
     color: rgba(2, 0, 36, 1);
     background-color: rgba($color: #fefefe, $alpha: 0.7);
@@ -132,20 +112,6 @@ export default {
     }
   }
 }
-.navbar-link {
-  color: #ffffff;
-  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-  &::after {
-    border-color: #ffffff;
-    &:hover {
-      color: #7957d5;
-    }
-  }
-  &:hover {
-    color: #7957d5;
-  }
-}
-
-// @media screen and (max-width: 1023px)
 // @import '~assets/css/theme.scss';
+
 </style>

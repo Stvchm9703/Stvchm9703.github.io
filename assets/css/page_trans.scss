@@ -36,7 +36,7 @@ element.style {
   --mouse-x: 0;
   --mouse-y: 398;
 }
-<style > .moving-gradient[data-v-0f21cde2] {
+.moving-gradient[data-v-0f21cde2] {
   background: transparent
     radial-gradient(
       at calc((500 - var(--mouse-x, 0)) * 1%)
@@ -48,3 +48,5 @@ element.style {
     )
     no-repeat 0 0;
 }
+
+

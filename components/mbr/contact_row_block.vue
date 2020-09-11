@@ -43,9 +43,7 @@ section.maps4.mbr-parallax-background
 </template>
 
 <style lang="scss" scoped>
-// @import "assets/css/mbr/mbr-additional.css";
-// @import "assets/css/mbr/mobirise-icons.css";
-// @import "assets/css/mbr/style.css";
+
 .maps4 {
   padding-top: 60px;
   padding-bottom: 60px;

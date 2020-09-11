@@ -1,0 +1,13 @@
+@import "~bulma/sass/utilities/_all";
+
+@mixin when-mobile {
+  @meida screen and (max-width: $desktop ) {
+    @content;
+  }
+}
+
+@mixin when-not-mobile {
+  @meida screen and (min-width: $desktop ) {
+    @content;
+  }
+}
