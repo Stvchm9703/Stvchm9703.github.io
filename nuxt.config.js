@@ -140,7 +140,7 @@ export default {
   ** Build configuration
   */
   build: {
-    analyze: true,
+    analyze: false,
     minifyCSS: true,
     minifyJS: true,
     postcss: {
