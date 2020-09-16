@@ -2,7 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 export default {
-  // mode: 'spa',
+  mode: 'spa',
   target: 'static',
   /*
   ** Headers of the page
