@@ -37,8 +37,9 @@ export default {
             title: e.title,
             style: !_isEmpty(e.image)
               ? {
-                  "background-image":
-                    "url(" + require(`~/static/images/${e.image}`) + ")",
+                  "background-image": !e.image.includes("http")
+                    ? "url(" + require(`~/static/images/${e.image}`) + ")"
+                    : "url(" + e.image + ")",
                 }
               : { "background-color": "rgba(" + e.color + ")" },
             filter_style: {
@@ -76,30 +77,14 @@ export default {
   },
 };
 </script>
-<style lang="scss" >
-@import "~assets/css/theme.scss";
+<style lang="scss" scope>
+// @import "~assets/css/theme.scss";
 .bgContainer {
   &::-webkit-scrollbar {
     display: none;
   }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-}
-
-.title {
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #eee;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #ddd;
-  word-spacing: 5px;
-  padding-bottom: 15px;
 }
 
 .carousel.background {

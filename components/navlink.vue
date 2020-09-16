@@ -1,7 +1,6 @@
 <template lang="pug">
 b-navbar.sv_navbar(
   fixed-bottom,
-  is-centered,
   type="is-home-set",
   @toggleActive="isToogledActive()"
 )
@@ -45,7 +44,7 @@ export default {
     },
     link_set: (self) => {
       let list_b = self.$router.options.routes
-        .filter((e) => /[\w]+\//.test(e.name))
+        .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
         .map((e) => ({
           path: e.path,
           name: e.name,
@@ -73,8 +72,9 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 @import "~assets/css/media_rule.scss";
+@import "~bulma/sass/utilities/_all";
 .sv_navbar {
   background: linear-gradient(
     0deg,
@@ -83,9 +83,15 @@ export default {
   );
   max-height: 70px;
   height: 10%;
+ 
 }
 // resolve is-fix-bottom
 .navbar.is-fixed-bottom {
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+   @include when-mobile {
+    display : none !important;
+  }
+  
   .navbar-menu {
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     .navbar-start {

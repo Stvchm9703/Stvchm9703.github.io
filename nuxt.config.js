@@ -2,7 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 export default {
-  mode: 'spa',
+  // mode: 'spa',
   target: 'static',
   /*
   ** Headers of the page
@@ -37,10 +37,8 @@ export default {
   */
   css: [
     '~/assets/css/page_trans.scss',
-    '~/assets/css/mbr/mbr-additional.css',
-    '~/assets/css/mbr/style.css',
-    '~/assets/css/mbr/mobirise-icons.css',
     '~/assets/css/fonts/font_face.css',
+    '~assets/css/theme.scss',
   ],
   styleResources: {
     // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
@@ -107,17 +105,7 @@ export default {
   // router config
   router: {
     routeNameSplitter: '/',
-    extendRoutes(routes, resolve) {
-      var proj_doc = {
-        name: "doc-proj",
-        path: '/doc/:project_name',
-        components: {
-          default: resolve(__dirname, 'pages/doc.vue'),
-          // modal: resolve(__dirname, 'pages/doc/_project_name.vue')
-        }
-      };
-      routes.push( proj_doc );
-    }
+
   },
 
 
@@ -251,6 +239,10 @@ export default {
     }, '@nuxtjs/style-resources']
   ],
   generate: {
+    generate: {
+      fallback: true, // if you want to use '404.html' instead of the default '200.html'
+      // fallback: 'my-fallback/file.html' // if your hosting needs a custom location
+    },
     exclude: [
       /^\/test/,
       /^\/example/

@@ -1,5 +1,5 @@
 <template lang="pug">
-client-only
+no-ssr
   .section
     .content.is-1.disp_dark(
       v-if="!fail_load && !in_loading",
@@ -13,7 +13,7 @@ import _isEmpty from "lodash/isEmpty";
 import "highlight.js/scss/atom-one-dark.scss";
 
 export default {
-  name: "docMDRender",
+  name: "docMDRender_old",
   data: () => ({
     fail_load: false,
     in_loading: true,
@@ -30,8 +30,9 @@ export default {
           request_url = `https://raw.githubusercontent.com/Stvchm9703/${this.$route.params["project_name"]}/master/readme.md`;
         }
         this.in_loading = true;
-        let lip = await this.$axios.$get(request_url);
 
+        let lip = await this.$axios.$get(request_url);
+        
         if (lip == "") {
           this.md_content = ip;
           this.in_loading = false;
@@ -45,25 +46,22 @@ export default {
         // ** show the missing layout
         this.fail_load = true;
         this.in_loading = false;
-        // this.$router.push({
-        //   path: "/doc",
-        // });
       }
     },
   },
-  created() {
+  // life-cycle
+  beforeMount() {
     this.fetchPost();
   },
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss" scope>
 .content.disp_dark {
   h1, h2, h3, h4, h5, h6 {
     color: #98b9dc;
   }
-  span,
-  p {
+  span, p {
     color: #ffffff;
   }
   pre {
@@ -76,4 +74,3 @@ export default {
   }
 }
 </style>
-

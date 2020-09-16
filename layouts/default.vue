@@ -1,13 +1,3 @@
 <template lang="pug">
-.container
-  Nuxt 
-  NavLink
+Nuxt 
 </template>
-<script>
-import NavLink from "~/components/navlink.vue";
-
-export default {
-  name : 'default-page-layout',
-  components: { NavLink },
-};
-</script>

@@ -1,13 +1,19 @@
 <template lang="pug">
-.containerBlock
-  ImageBackground(:src="title_list")
+div.container
+  .containerBlock
+    ImageBackground(:src="title_list")
+  NavLink.is-hidden-touch
+  // NavLinkMob.is-hidden-desktop
+  // NavLinkMob
 </template>
 
 <script>
 import ImageBackground from "~/components/ImageBackground.vue";
+import NavLink from "~/components/navlink.vue";
+import NavLinkMob from "~/components/navlink_mobile.vue";
 export default {
   name: "index-page",
-  components: { ImageBackground },
+  components: { ImageBackground ,NavLink,NavLinkMob},
   transition: "page",
   layout: "default",
   computed: {
@@ -43,12 +49,9 @@ export default {
       this.post = y.data;
     },
   },
-  async fetch() {
-  },
-  activated() {
-  },
-  mounted() {
-  },
+  async fetch() {},
+  activated() {},
+  mounted() {},
 };
 </script>
 
@@ -67,5 +70,8 @@ export default {
   text-align: center;
   background: rgba(100, 100, 121, 0.5);
 }
-
+body {
+  position: relative;
+  max-height: 100vh;
+}
 </style>

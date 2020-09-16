@@ -5,6 +5,7 @@ div
 </template>
 
 <script scope>
+//this page is for introduce self 
 import header_row_block from "~/components/mbr/header_row_block";
 import contact_row_block from "~/components/mbr/contact_row_block";
 export default {
@@ -13,4 +14,7 @@ export default {
     contact_row_block,
   },
 };
+
 </script>
+<data>
+</data>
