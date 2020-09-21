@@ -3,7 +3,7 @@
   NavLinkMob
 </template>
 <script>
-import NavLinkMob from "~/components/navlink_mobile.vue";
+import NavLinkMob from "~/components/navlink/IndexMobile.vue";
 export default {
   components: { NavLinkMob },
 };

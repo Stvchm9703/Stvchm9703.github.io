@@ -5,6 +5,9 @@
 
 <script>
 export default {};
+// TODO 
+// 1. tag list fetching from .io.page
+// 2. tag render-graph
 </script>
 
 <style>

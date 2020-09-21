@@ -1,5 +1,5 @@
 <template lang="pug">
-div.container
+.container
   .containerBlock
     ImageBackground(:src="title_list")
   NavLink.is-hidden-touch
@@ -9,8 +9,8 @@ div.container
 
 <script>
 import ImageBackground from "~/components/ImageBackground.vue";
-import NavLink from "~/components/navlink.vue";
-import NavLinkMob from "~/components/navlink_mobile.vue";
+import NavLink from "~/components/navlink/IndexPage.vue";
+import NavLinkMob from "~/components/navlink/IndexMobile.vue";
 export default {
   name: "index-page",
   components: { ImageBackground ,NavLink,NavLinkMob},
@@ -29,30 +29,27 @@ export default {
     },
   },
   data: () => ({
-    image_list: "trialScene4.png",
     title_list: [
-      {
-        title: "Blender - test for render !",
-        color: "2,0,36,0.7",
-        image: "trialScene4.png",
-      },
+      { title: "Blender - test for render !", color: "2,0,36,0.7", image: "trialScene4.png", },
       { title: "Icon image", color: "63,81,181,0.7", image: "03.jpg" },
     ],
-    post: {},
+    // post: {},
   }),
   methods: {
     async fetchPost() {
       let y = await this.$axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
+        "/static/page_config.json"
       );
-      console.log(y.data);
-      this.post = y.data;
+      console.log(y);
     },
   },
-  async fetch() {},
+  async fetch() {
+    await this.fetchPost();
+  },
   activated() {},
   mounted() {},
 };
+
 </script>
 
 <style lang="scss" >

@@ -47,6 +47,8 @@
 </template>
 
 <script>
+// TODO 
+// 1. merge the innerPage into this nav-bar
 export default {
   data() {
     return {

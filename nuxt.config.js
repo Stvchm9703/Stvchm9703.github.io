@@ -2,7 +2,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 export default {
-  mode: 'spa',
+  // mode: 'spa',
+  ssr : true,
   target: 'static',
   /*
   ** Headers of the page
@@ -105,7 +106,13 @@ export default {
   // router config
   router: {
     routeNameSplitter: '/',
-
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'doc_proj_md',
+        path: '/doc/:user/:project_name', 
+        component: resolve(__dirname, 'pages/doc/_project_name.vue')
+      })
+    }
   },
 
 

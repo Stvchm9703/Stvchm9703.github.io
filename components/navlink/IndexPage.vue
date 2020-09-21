@@ -1,6 +1,6 @@
 <template lang="pug">
 b-navbar.sv_navbar(
-  fixed-bottom,
+  :fixed-bottom="true",
   type="is-home-set",
   @toggleActive="isToogledActive()"
 )
@@ -72,7 +72,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scope>
+<style lang="scss" >
 @import "~assets/css/media_rule.scss";
 @import "~bulma/sass/utilities/_all";
 .sv_navbar {
@@ -83,15 +83,14 @@ export default {
   );
   max-height: 70px;
   height: 10%;
- 
 }
 // resolve is-fix-bottom
 .navbar.is-fixed-bottom {
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-   @include when-mobile {
-    display : none !important;
+  @include when-mobile {
+    display: none !important;
   }
-  
+
   .navbar-menu {
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     .navbar-start {
@@ -110,9 +109,9 @@ export default {
 
 .linkListItem {
   font-size: 20pt;
+  font-family: "Copr";
   color: #fff;
   height: 50px;
-  font-family: "Copr";
   text-align: center;
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 

@@ -5,7 +5,6 @@ no-ssr
       v-if="!fail_load && !in_loading",
       v-html="$md.render(md_content)"
     )
-    .footer
 </template>
 
 <script>
@@ -23,10 +22,9 @@ export default {
     async fetchPost() {
       try {
         // console.log(this.topic);
-        let ip = await this.$axios.$get("/host_md/README.md");
         let request_url = "";
 
-        if (!_isEmpty(this.$route.params["project_name"])) {
+        if (!_isEmpty(this.$route.params["project_name"]) && !_isEmpty(this.$route.params["user"]) ) {
           request_url = `https://raw.githubusercontent.com/Stvchm9703/${this.$route.params["project_name"]}/master/readme.md`;
         }
         this.in_loading = true;

@@ -1,28 +1,73 @@
 <template lang="pug">
-no-ssr
-  .section
-    .content.is-1.disp_dark(
-      v-if="!fail_load && !in_loading",
-      v-html="$md.render(md_content)"
-    )
-    .footer
+client-only
+  div
+    b-navbar.search-bar(fixed-top, :burger="false")
+      template(slot="brand")
+        button.button(@click="$store.commit('open_menu', true)") Menu
+
+    .container.search-contain(v-if="!in_loading&&!fail_load")
+      .section
+        .columns.is-multiline
+          ProjectCard(
+            v-for="post in post_list",
+            :project_id="post.id",
+            :project_name="post.name",
+            :project_full_name="post.full_name",
+            :fork="post.fork",
+            :is_self_hosted="isSelfHosted(post)",
+            :star_counted="post.stargazers_count",
+            :forked_counted="post.forks_count",
+            :language="post.language",
+            :created_at="post.created_at",
+            :updated_at="post.updated_at"
+          )
+
+    .container.empty-contain(v-if="in_loading||fail_load")
+
+    
 </template>
 
 <script>
 import _isEmpty from "lodash/isEmpty";
-import "highlight.js/scss/atom-one-dark.scss";
-
+import ProjectCard from "~/components/docMD/ProjectCard.vue";
 export default {
-  name: "docMDRender",
+  name: "doc-list",
+  components: { ProjectCard },
+  layout: "inner_page",
   data: () => ({
     fail_load: false,
     in_loading: true,
     md_content: "#Hello World",
+    post_list: [],
+    raw_data: [],
   }),
-  mode : 'spa',
   methods: {
-    async fetchPorjectList(){
-
+    async fetchPorjectList() {
+      this.in_loading = true;
+      try {
+        //
+        this.post_list = await this.$axios.$get(
+          "https://api.github.com/users/Stvchm9703/repos"
+        );
+        this.$store.commit("project_list/set_list", this.post_list);
+      } catch (e) {
+        console.warn("axios:", e);
+        this.fail_load = true;
+      } finally {
+        this.in_loading = false;
+      }
+    },
+    async fetchColorIndex() {
+      try {
+        //
+        let colorIndex = await this.$axios.$get(
+          "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
+        );
+        this.$store.commit("project_list/set_color_index", colorIndex);
+      } catch (e) {
+        console.warn("axios:", e);
+        this.fail_load = true;
+      }
     },
     async fetchPost() {
       try {
@@ -53,11 +98,30 @@ export default {
         // });
       }
     },
+    isSelfHosted(post) {
+      return post.owner.login === "Stvchm9703";
+    },
   },
-  beforeMount() {
-    // this.fetchPost();
+  async fetch() {
+    await Promise.all([this.fetchPorjectList(), this.fetchColorIndex()]);
   },
 };
+// TODO:
+// 1. add fail-load component
+// 2. add footer remark (flex? to page bottom)
 </script>
 
 
+<style lang="scss" scoped>
+.empty-contain{
+  height : 80vh;
+  display:block;
+  
+}
+.search-bar.navbar.is-fixed-top {
+  // top: 50px;
+}
+.container.search-contain {
+  // padding-top: 50px;
+}
+</style>

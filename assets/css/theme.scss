@@ -65,11 +65,7 @@ html {
   word-spacing: 5px;
   padding-bottom: 15px;
 }
-@mixin when-mobile {
-  @meida only screen and (max-width: $desktop ) {
-    @content;
-  }
-}
+
 
 // @import "~bulma";
 // @import "~buefy/src/scss/buefy";
