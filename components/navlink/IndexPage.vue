@@ -16,10 +16,12 @@ b-navbar.sv_navbar(
     b-navbar-dropdown.linkListItem(
       tag="div",
       v-for="k in link_set",
-      :label="k.name"
+      :label="k.name",
+      :key="k.name"
     )
       b-navbar-item(
         v-for="item in k.sub_path",
+        key="item.name",
         tag="nuxt-link",
         prefetch,
         :to="item.path",
@@ -39,7 +41,9 @@ export default {
         .map((e) => ({
           path: e.path,
           name: e.name,
-        }));
+        }))
+        .sort((a, b) => a.path.length - b.path.length);
+
       return list_a;
     },
     link_set: (self) => {
@@ -64,12 +68,7 @@ export default {
   data: () => ({
     isOpened: false,
   }),
-  methods: {
-    isToogledActive(event) {
-      console.log(event);
-      console.log("is toogle active");
-    },
-  },
+  methods: {},
 };
 </script>
 <style lang="scss" >

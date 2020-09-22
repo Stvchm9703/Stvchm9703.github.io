@@ -47,7 +47,7 @@ export default {
             },
             _image: e.image,
           }));
-          console.log(this.carousels);
+          // console.log(this.carousels);
         } catch (e) {
           console.warn(e);
         }

@@ -29,6 +29,7 @@ export default {
     },
   },
   data: () => ({
+    // it will change as default-layout image
     title_list: [
       { title: "Blender - test for render !", color: "2,0,36,0.7", image: "trialScene4.png", },
       { title: "Icon image", color: "63,81,181,0.7", image: "03.jpg" },
@@ -38,9 +39,10 @@ export default {
   methods: {
     async fetchPost() {
       let y = await this.$axios.get(
-        "/static/page_config.json"
+        "https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master/page/index.config.json"
       );
-      console.log(y);
+      this.title_list = y.data.title_list;
+      console.log(y.data.title_list);
     },
   },
   async fetch() {

@@ -4,5 +4,8 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:"post-list",
+  layout: "inner_page",
+};
 </script>

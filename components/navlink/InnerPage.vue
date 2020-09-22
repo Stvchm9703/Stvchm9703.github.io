@@ -5,25 +5,40 @@ section
       b-menu
         b-menu-list(label="Menu")
           b-menu-item.menu-item(
-            tag="nuxt-link",
             v-for="k in link_list",
+            tag="nuxt-link",
             prefetch,
             :label="k.name",
             :to="k.path",
             :key="k.name"
-          ) {{ k.name }}
+          )
+
       hr.navbar-divider
-      slot
+      b-menu(v-for="routeSet in extraRouteMap", :key="routeSet.title")
+        b-menu-list(:label="routeSet.title")
+          b-menu-item.menu-item(
+            v-for="k in listDocOnly(routeSet.itemList, showDocOnly)",
+            tag="nuxt-link",
+            :label="k.name",
+            :key="k.name",
+            :to="hrefPath(k)"
+          ) 
 </template>
 
 <script>
 import _groupBy from "lodash/groupBy";
 import _value from "lodash/values";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
-  layout: "inner_page",
+  name: "inner-page-nav",
   computed: {
-    menuOnOpen: (self) => self.$store.state.menu_on_open,
+    ...mapState({
+      menuOnOpen: (state) => state.menu_on_open,
+      extraRouteMap: (state) => state.extra_route_map,
+      showDocOnly: (state) => state.file_list.showMdOnly,
+      currentPath: (state) => state.file_list.current_path,
+    }),
+    // ...mapGetters(["mdFileList"]),
     link_list: (self) => {
       // console.log(self.$router.options.routes);
       let list_a = self.$router.options.routes
@@ -54,17 +69,24 @@ export default {
       return o;
     },
   },
-  data: () => ({
-    isOpened: false,
-  }),
+  data: () => ({ isOpened: false }),
   methods: {
-    isToogledActive(event) {
-      console.log(event);
-      console.log("is toogle active");
-    },
-    set_slot() {},
     onCancel() {
       this.$store.commit("open_menu", false);
+    },
+    listDocOnly: (list, showDocOnly) =>
+      showDocOnly
+        ? list.filter((e) => {
+            if (e._type === "file") {
+              return e.name.includes(".md");
+            } else {
+              return true;
+            }
+          })
+        : list,
+
+    hrefPath(set) {
+      return `/doc/${this.$store.state.file_list.project_name}/#${set.path}`;
     },
   },
   created() {},

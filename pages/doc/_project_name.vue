@@ -1,16 +1,21 @@
 <template lang="pug">
-no-ssr
-  .section
-    .content.is-1.disp_dark(
-      v-if="!fail_load && !in_loading",
-      v-html="$md.render(md_content)"
-    )
+client-only
+  div 
+    b-navbar.search-bar(fixed-top, :burger="false")
+      template(slot="brand")
+        button.button(@click="$store.commit('open_menu', true)") Menu
+    .container(:class="{ 'empty-contain': in_loading || fail_load }")
+      .section
+        .content.is-1.disp_dark.docMD(
+          v-if="!fail_load && !in_loading",
+          v-html="$md.render(md_content)"
+        )
 </template>
 
 <script>
 import _isEmpty from "lodash/isEmpty";
 import "highlight.js/scss/atom-one-dark.scss";
-
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "docMDRender_old",
   data: () => ({
@@ -18,57 +23,73 @@ export default {
     in_loading: true,
     md_content: "#Hello World",
   }),
+  layout: "inner_page",
+  computed: {
+    reqFileList: (self) => self.$route.query["filePath"],
+    ...mapGetters({
+      mdFileList: "file_list/mdFileList",
+    }),
+  },
   methods: {
     async fetchPost() {
-      try {
-        // console.log(this.topic);
-        let request_url = "";
-
-        if (!_isEmpty(this.$route.params["project_name"]) && !_isEmpty(this.$route.params["user"]) ) {
-          request_url = `https://raw.githubusercontent.com/Stvchm9703/${this.$route.params["project_name"]}/master/readme.md`;
-        }
-        this.in_loading = true;
-
-        let lip = await this.$axios.$get(request_url);
-        
-        if (lip == "") {
-          this.md_content = ip;
-          this.in_loading = false;
-          this.fail_load = true;
-        } else {
-          this.md_content = lip;
-          this.in_loading = false;
-        }
-      } catch (e) {
-        console.warn(e);
-        // ** show the missing layout
-        this.fail_load = true;
-        this.in_loading = false;
+      let readme_url = this.mdFileList.filter(
+        (e) =>
+          e.name.toLowerCase().includes("readme") ||
+          e.name.toLowerCase().includes("read_me")
+      );
+      let lip = "";
+      if (readme_url.length > 0) {
+        lip = await this.$axios.$get(readme_url[0].download_url);
       }
+      this.md_content = lip;
+    },
+    async fetchFileList() {
+      let request_url = "";
+      if (
+        !_isEmpty(this.$route.params["project_name"]) &&
+        !_isEmpty(this.$route.params["user"])
+      ) {
+        request_url = `https://api.github.com/repos/${this.$route.params["user"]}/${this.$route.params["project_name"]}/contents/`;
+      } else {
+        throw "Unknown Repo";
+      }
+      let lip = await this.$axios.$get(request_url);
+      this.$store.commit("reset_route_map");
+      this.$store.commit("file_list/set_list", lip);
+      // this.$store.commit("set_route_file_list", lip);
+      let redList = lip.map((e) => ({
+        name: e.name,
+        path: e.path,
+        _type: e.type,
+      }));
+      let pathList = redList[0].path.split("/");
+      this.$store.commit("set_route_map", [
+        {
+          title: "Sub-Directory",
+          subtitle:
+            pathList.length > 1 ? pathList[pathList.length - 1] : "root",
+          itemList: redList.filter((e) => e._type === "dir"),
+        },
+        {
+          title: "Recent-Directory-File",
+          subtitle:
+            pathList.length > 1 ? pathList[pathList.length - 1] : "root",
+          itemList: redList.filter((e) => e._type === "file"),
+        },
+      ]);
+      this.$store.commit(
+        "file_list/set_project_name",
+        `${this.$route.params["user"]}/${this.$route.params["project_name"]}`
+      );
     },
   },
   // life-cycle
-  beforeMount() {
-    this.fetchPost();
+  async beforeMount() {
+    this.in_loading = true;
+    console.log("fetch-up");
+    await this.fetchFileList();
+    await this.fetchPost();
+    this.in_loading = false;
   },
 };
 </script>
-
-<style lang="scss" scope>
-.content.disp_dark {
-  h1, h2, h3, h4, h5, h6 {
-    color: #98b9dc;
-  }
-  span, p {
-    color: #ffffff;
-  }
-  pre {
-    background: #4a4a4a;
-    code[class*="language-"],
-    pre[class*="language-"] {
-      color: white;
-      text-shadow: none;
-    }
-  }
-}
-</style>
