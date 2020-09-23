@@ -168,6 +168,7 @@
 import { mapState } from "vuex";
 import _isEmpty from "lodash/isEmpty";
 export default {
+  header: {},
   name: "Project-info-modal",
   computed: {
     ...mapState({
@@ -262,9 +263,6 @@ export default {
     },
   },
   async mounted() {
-    if (!_isEmpty(this.$route.query["tab"])) {
-      this.tagPage = this.$route.query["tab"];
-    }
     this.is_loading = true;
     try {
       await this.fetchFullContent();
@@ -318,5 +316,8 @@ export default {
     margin-bottom: 2px;
     margin-left: 3px;
   }
+}
+pre {
+  background-color: #282c34;
 }
 </style>

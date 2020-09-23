@@ -13,7 +13,7 @@
     b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
       section.hero.background_layer.is-medium(:style="carousel.style")
         .hero-body.has-text-centered
-          h1.title {{ carousel.title }}
+          h1.title.is-shadow {{ carousel.title }}
 
     template(slot="indicators", slot-scope="props")
       span.al.image(:style="carousels[props.i].style")
@@ -37,9 +37,7 @@ export default {
             title: e.title,
             style: !_isEmpty(e.image)
               ? {
-                  "background-image": !e.image.includes("http")
-                    ? "url(" + require(`~/static/images/${e.image}`) + ")"
-                    : "url(" + e.image + ")",
+                  "background-image": "url(" + e.image + ")",
                 }
               : { "background-color": "rgba(" + e.color + ")" },
             filter_style: {
@@ -58,10 +56,7 @@ export default {
               title: this.src.title,
               style: !_isEmpty(this.src.image)
                 ? {
-                    "background-image":
-                      "url(" +
-                      require(`~/static/images/${this.src.image}`) +
-                      ")",
+                    "background-image": "url(" + this.src.image + ")",
                   }
                 : { "background-color": "rgba(" + this.src.color + ")" },
             },
@@ -86,7 +81,9 @@ export default {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
+.title.is-shadow {
+  text-shadow: #1e1e1e 0 0 15px;
+}
 .carousel.background {
   overflow: hidden;
   width: 100vw;

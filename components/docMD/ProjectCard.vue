@@ -36,7 +36,7 @@
           time(:datetime="updated_at") {{ updated_at }}
     footer.card-footer
       a.card-footer-item.has-background-primary.has-text-light(
-        href="javascript:void(0)"
+        href="javascript:void(0)",
         @click="open_info_modal()"
       ) Project Detail
       nuxt-link.card-footer-item.has-text-info(
@@ -67,6 +67,7 @@ export default {
   methods: {
     open_info_modal() {
       this.$store.commit("project_list/set_showed_project", this.project_id);
+      // this.$router.push({ hash: this.project_id });
       this.$buefy.modal.open({
         parent: this.$parent,
         component: ProjectInfoModal,
@@ -87,6 +88,6 @@ button.card-footer-item {
   font-size: 16px;
 }
 .card-header-title .mdi {
-  margin-right : 12px;
+  margin-right: 12px;
 }
 </style>

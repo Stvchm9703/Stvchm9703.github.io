@@ -1,9 +1,10 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LodashPlugin = require('lodash-webpack-plugin');
 export default {
   // mode: 'spa',
-  ssr : true,
+  ssr: true,
   target: 'static',
   /*
   ** Headers of the page
@@ -109,12 +110,14 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'doc_proj_md',
-        path: '/doc/:user/:project_name', 
+        path: '/doc/:user/:project_name',
         component: resolve(__dirname, 'pages/doc/_project_name.vue')
       })
     }
   },
-
+  static: {
+    prefix: false
+  },
 
   /*
   ** Axios module configuration
@@ -147,7 +150,7 @@ export default {
   ** Build configuration
   */
   build: {
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     postcss: {
@@ -157,7 +160,7 @@ export default {
         }
       }
     },
-    publicPath: '/static/',
+    publicPath: '/_nxt_mod/',
     indicator: false,
     extend(config, ctx) {
       config.module.rules.push({
@@ -222,7 +225,11 @@ export default {
         }),
       ],
     },
-
+    plugins: [
+      new LodashPlugin({
+        'cloning': true
+      })
+    ]
   },
   buildModules: [
     // With options
@@ -233,15 +240,20 @@ export default {
           // Name
           ['gifsicle', { interlaced: true }],
           // Name with options
-          ["mozjpeg", { quality: 80 }],
+          ["mozjpeg", { quality: 60 }],
           ['jpegtran', { progressive: true }],
-          ['optipng', { optimizationLevel: 5 }],
-          ['svgo', { plugins: [{ removeViewBox: false }] }],
+          ['optipng', { optimizationLevel: 4 }],
+          ['svgo', { plugins: [{ removeViewBox: true }] }],
           // Full package name
           ["imagemin-svgo",
             { plugins: [{ removeViewBox: false, },], },
           ],
         ],
+        compress: {
+          // This will transform your png/jpg into webp.
+          webp: true,
+          disableOnDevelopment: true,
+        },
       },
     }, '@nuxtjs/style-resources']
   ],

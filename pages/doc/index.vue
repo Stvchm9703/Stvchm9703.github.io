@@ -1,10 +1,9 @@
 <template lang="pug">
-client-only
-  div
-    b-navbar.search-bar(fixed-top, :burger="false")
-      template(slot="brand")
-        button.button(@click="$store.commit('open_menu', true)") Menu
-
+div
+  b-navbar.search-bar(fixed-top, :burger="false")
+    template(slot="brand")
+      button.button(@click="$store.commit('open_menu', true)") Menu
+  client-only
     .container(:class="{ 'empty-contain': in_loading || fail_load }")
       .section
         .columns.is-multiline(v-if="!in_loading && !fail_load")
@@ -35,75 +34,52 @@ export default {
   name: "doc-list",
   components: { ProjectCard, ProjectEmptyCard },
   layout: "inner_page",
+  head: (self) => ({
+    title: `Document List - Stvchm9703`,
+    meta: [],
+  }),
   data: () => ({
     fail_load: false,
     in_loading: true,
-    md_content: "#Hello World",
     post_list: [],
     raw_data: [],
+    hash_project: "",
   }),
   methods: {
     async fetchPorjectList() {
-      this.in_loading = true;
-      try {
-        //
-        this.post_list = await this.$axios.$get(
-          "https://api.github.com/users/Stvchm9703/repos"
-        );
-        this.$store.commit("project_list/set_list", this.post_list);
-      } catch (e) {
-        console.warn("axios:", e);
-        this.fail_load = true;
-      } finally {
-        this.in_loading = false;
-      }
+      //
+      this.post_list = await this.$axios.$get(
+        "https://api.github.com/users/Stvchm9703/repos"
+      );
+      this.$store.commit("project_list/set_list", this.post_list);
     },
     async fetchColorIndex() {
-      try {
-        //
-        let colorIndex = await this.$axios.$get(
-          "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
-        );
-        this.$store.commit("project_list/set_color_index", colorIndex);
-      } catch (e) {
-        this.fail_load = true;
-      }
-    },
-    async fetchPost() {
-      try {
-        // console.log(this.topic);
-        let ip = await this.$axios.$get("/host_md/README.md");
-        let request_url = "";
-
-        if (!_isEmpty(this.$route.params["project_name"])) {
-          request_url = `https://raw.githubusercontent.com/Stvchm9703/${this.$route.params["project_name"]}/master/readme.md`;
-        }
-        this.in_loading = true;
-        let lip = await this.$axios.$get(request_url);
-        if (lip == "") {
-          this.md_content = ip;
-          this.in_loading = false;
-          this.fail_load = true;
-        } else {
-          this.md_content = lip;
-          this.in_loading = false;
-        }
-      } catch (e) {
-        console.warn(e);
-        // ** show the missing layout
-        this.fail_load = true;
-        this.in_loading = false;
-        // this.$router.push({
-        //   path: "/doc",
-        // });
-      }
+      let colorIndex = await this.$axios.$get(
+        "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
+      );
+      this.$store.commit("project_list/set_color_index", colorIndex);
     },
     isSelfHosted(post) {
       return post.owner.login === "Stvchm9703";
     },
   },
-  async fetch() {
-    await Promise.all([this.fetchPorjectList(), this.fetchColorIndex()]);
+  async beforeMount() {
+    this.in_loading = true;
+    if (!_isEmpty(this.$route.hash)) {
+      let ytmp = this.$route.hash.split("/");
+      if (ytmp.length > 1) {
+        this.hash_project = ytmp[1];
+      }
+    }
+
+    try {
+      await Promise.all([this.fetchPorjectList(), this.fetchColorIndex()]);
+    } catch (e) {
+      console.warn("axios:", e);
+      this.fail_load = true;
+    } finally {
+      this.in_loading = false;
+    }
   },
 };
 // TODO:
@@ -114,10 +90,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.empty-contain {
-  height: 80vh;
-  width: 100%;
-}
 .search-bar.navbar.is-fixed-top {
   // top: 50px;
 }

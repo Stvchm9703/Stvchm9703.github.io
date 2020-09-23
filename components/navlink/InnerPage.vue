@@ -16,12 +16,13 @@ section
       hr.navbar-divider
       b-menu(v-for="routeSet in extraRouteMap", :key="routeSet.title")
         b-menu-list(:label="routeSet.title")
-          b-menu-item.menu-item(
+          span {{ routeSet.subtitle }}
+          b-menu-item.menu-item.extraRouteMap(
             v-for="k in listDocOnly(routeSet.itemList, showDocOnly)",
-            tag="nuxt-link",
+            tag="router-link",
             :label="k.name",
             :key="k.name",
-            :to="hrefPath(k)"
+            :to="k.routerPath"
           ) 
 </template>
 
@@ -38,7 +39,9 @@ export default {
       showDocOnly: (state) => state.file_list.showMdOnly,
       currentPath: (state) => state.file_list.current_path,
     }),
-    // ...mapGetters(["mdFileList"]),
+    ...mapGetters({
+      mdFileList: "file_list/mdFileList",
+    }),
     link_list: (self) => {
       // console.log(self.$router.options.routes);
       let list_a = self.$router.options.routes
@@ -84,10 +87,6 @@ export default {
             }
           })
         : list,
-
-    hrefPath(set) {
-      return `/doc/${this.$store.state.file_list.project_name}/#${set.path}`;
-    },
   },
   created() {},
 };
@@ -110,6 +109,9 @@ export default {
       }
       a {
         font-size: 24px;
+      }
+      &.extraRouteMap a {
+        font-size: 20px;
       }
     }
   }

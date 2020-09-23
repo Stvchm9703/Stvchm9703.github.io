@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .containerBlock
-    ImageBackground(:src="title_list")
+    ImageBackground(v-if="!in_loading", :src="title_list")
   NavLink.is-hidden-touch
   // NavLinkMob.is-hidden-desktop
   // NavLinkMob
@@ -13,7 +13,7 @@ import NavLink from "~/components/navlink/IndexPage.vue";
 import NavLinkMob from "~/components/navlink/IndexMobile.vue";
 export default {
   name: "index-page",
-  components: { ImageBackground ,NavLink,NavLinkMob},
+  components: { ImageBackground, NavLink, NavLinkMob },
   transition: "page",
   layout: "default",
   computed: {
@@ -30,9 +30,18 @@ export default {
   },
   data: () => ({
     // it will change as default-layout image
+    in_loading: true,
     title_list: [
-      { title: "Blender - test for render !", color: "2,0,36,0.7", image: "trialScene4.png", },
-      { title: "Icon image", color: "63,81,181,0.7", image: "03.jpg" },
+      {
+        title: "Blender - test for render !",
+        color: "2,0,36,0.7",
+        image: "/images/trailScence4.png",
+      },
+      {
+        title: "Icon image",
+        color: "63,81,181,0.7",
+        image: "/images/03.jpg",
+      },
     ],
     // post: {},
   }),
@@ -45,13 +54,13 @@ export default {
       console.log(y.data.title_list);
     },
   },
-  async fetch() {
-    await this.fetchPost();
+  async created() {
+    try {
+      await this.fetchPost();
+      this.in_loading = false;
+    } catch (e) {}
   },
-  activated() {},
-  mounted() {},
 };
-
 </script>
 
 <style lang="scss" >
