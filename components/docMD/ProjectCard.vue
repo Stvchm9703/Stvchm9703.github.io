@@ -41,6 +41,7 @@
       ) Project Detail
       nuxt-link.card-footer-item.has-text-info(
         :to="'/doc/' + project_full_name"
+        no-prefetch
       ) Show Document
 </template>
 <script>

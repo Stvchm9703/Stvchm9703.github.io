@@ -85,6 +85,7 @@ export default {
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
     '@nuxt/content',
+    "@nuxtjs/svg",
     // 'nuxt-payload-extractor',
   ],
   markdownit: {
@@ -258,10 +259,8 @@ export default {
     }, '@nuxtjs/style-resources']
   ],
   generate: {
-    generate: {
-      fallback: true, // if you want to use '404.html' instead of the default '200.html'
-      // fallback: 'my-fallback/file.html' // if your hosting needs a custom location
-    },
+    fallback: '404.html', // if you want to use '404.html' instead of the default '200.html'
+    // fallback: 'my-fallback/file.html' // if your hosting needs a custom location
     exclude: [
       /^\/test/,
       /^\/example/
