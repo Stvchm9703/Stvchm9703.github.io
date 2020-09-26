@@ -5,6 +5,11 @@ export const state = () => ({
   menu_on_open: false,
   extra_route_map: [],
   // show_doc_only: false,
+  // doc-page-config
+  project_name: "",
+  current_path: "",
+  current_branch: "",
+  showMdOnly: true,
 })
 
 export const getters = {}

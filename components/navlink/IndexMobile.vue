@@ -1,130 +1,85 @@
 <template lang="pug">
-.sidebar-page
-  section.sidebar-layout
-    b-sidebar(
-      position="static",
-      :mobile="mobile",
-      :expand-on-hover="expandOnHover",
-      :reduce="reduce",
-      open
+nav.navbar.sv_navbar_mob.is-fixed-bottom(
+  role="navigation",
+  aria-label="main navigation"
+)
+  .navbar-brand
+    a.navbar-burger.burger(
+      role="button",
+      aria-label="menu",
+      aria-expanded="false",
+      :class="{ 'is-active': menuOnOpen }",
+      @click="$store.commit('open_menu', true)"
     )
-      .p-1
-        .block
-          img(
-            src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png",
-            alt="Lightweight UI components for Vue.js based on Bulma"
-          )
-        b-menu.is-custom-mobile
-          b-menu-list(label="Menu")
-            b-menu-item(icon="information-outline", label="Info")
-            b-menu-item(
-              active,
-              expanded,
-              icon="settings",
-              label="Administrator"
-            )
-              b-menu-item(icon="account", label="Users")
-              b-menu-item(icon="cellphone-link", label="Devices")
-              b-menu-item(icon="cash-multiple", label="Payments", disabled)
-            b-menu-item(icon="account", label="My Account")
-              b-menu-item(icon="account-box", label="Account data")
-              b-menu-item(icon="home-account", label="Addresses")
-          b-menu-list
-            b-menu-item(label="Expo", icon="link")
-          b-menu-list(label="Actions")
-            b-menu-item(icon="logout", label="Logout")
-    .p-1
-      b-field
-        b-switch(v-model="reduce") Reduced
-      b-field
-        b-switch(v-model="expandOnHover") Expand on hover
-      b-field(label="Mobile Layout")
-        b-select(v-model="mobile")
-          option(:value="null")
-          option(value="reduce") Reduced
-          option(value="hide") Hidden
-          option(value="fullwidth") Fullwidth
-</template>
+      span(aria-hidden="true")
+      span(aria-hidden="true") 
+      span(aria-hidden="true")
+  slot
 
+  navigationHeader
+</template>
 <script>
-// TODO 
-// 1. merge the innerPage into this nav-bar
+import navigationHeader from "~/components/navlink/InnerPage.vue";
+import _groupBy from "lodash/groupBy";
+import _value from "lodash/values";
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      expandOnHover: false,
-      mobile: "reduce",
-      reduce: false,
-    };
+  name: "inner_mob",
+  components: { navigationHeader },
+  props: {
+    "hide-in-desktop": {
+      type: Boolean,
+      default: true,
+    },
   },
+  computed: {
+    ...mapState({
+      menuOnOpen: (state) => state.menu_on_open,
+    }),
+    link_list: (self) => {
+      // console.log(self.$router.options.routes);
+      let list_a = self.$router.options.routes
+        .filter((e) => !e.path.includes("/:") && !/[\w]+\//.test(e.name))
+        .map((e) => ({
+          path: e.path,
+          name: e.name,
+        }))
+        .sort((a, b) => a.path.length - b.path.length);
+
+      return list_a;
+    },
+    link_set: (self) => {
+      let list_b = self.$router.options.routes
+        .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
+        .map((e) => ({
+          path: e.path,
+          name: e.name,
+          header: e.name.replace(/\/[\w]+/, ""),
+        }));
+      list_b = _groupBy(list_b, "header");
+      let o = [];
+      for (let key in list_b) {
+        o.push({
+          name: key,
+          sub_path: list_b[key],
+        });
+      }
+      return o;
+    },
+  },
+  data: () => ({
+    isOpened: false,
+  }),
 };
 </script>
+ <style lang="scss">
+@import "~assets/css/media_rule.scss";
 
-<style lang="scss">
-.p-1 {
-  padding: 1em;
-}
-.sidebar-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100%;
-  // min-height: 100vh;
-  .sidebar-layout {
-    display: flex;
-    flex-direction: row;
-    min-height: 100%;
-    // min-height: 100vh;
-  }
-}
-@media screen and (max-width: 1023px) {
-  .b-sidebar .sidebar-content {
-    &.is-mini-mobile {
-      &:not(.is-mini-expand),
-      &.is-mini-expand:not(:hover) {
-        .menu-list {
-          li {
-            a span:nth-child(2) {
-              display: none;
-            }
-            ul {
-              padding-left: 0;
-              li a {
-                display: inline-block;
-              }
-            }
-          }
-        }
-        .menu-label:not(:last-child) {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-}
-@media screen and (min-width: 1024px) {
-  .b-sidebar .sidebar-content {
-    &.is-mini {
-      &:not(.is-mini-expand),
-      &.is-mini-expand:not(:hover) {
-        .menu-list {
-          li {
-            a span:nth-child(2) {
-              display: none;
-            }
-
-            ul {
-              padding-left: 0;
-              li a {
-                display: inline-block;
-              }
-            }
-          }
-        }
-        .menu-label:not(:last-child) {
-          margin-bottom: 0;
-        }
-      }
+.sv_navbar_mob {
+  a.navbar-burger.burger {
+    margin-left: 0;
+    @include when-not-mobile {
+      display: block;
     }
   }
 }

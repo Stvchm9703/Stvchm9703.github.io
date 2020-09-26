@@ -1,0 +1,148 @@
+@import "~bulma/sass/utilities/_all";
+@import "media_rule.scss";
+// change
+
+html {
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  background-color: #35495e;
+  height: 100vh;
+  width: 100vw;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+
+  &--green {
+    border: 1px solid #3b8070;
+    color: #3b8070;
+    &:hover {
+      color: #fff;
+      background-color: #3b8070;
+    }
+  }
+
+  &--grey {
+    border: 1px solid #35495e;
+    color: #35495e;
+    &:hover {
+      color: #fff;
+      background-color: #35495e;
+    }
+  }
+}
+
+.title {
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #eee;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #ddd;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+// scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #35495e rgba(200, 200, 230, 0.7);
+  scroll-padding: 0px 8px 8px 0px;
+  /* Works on Chrome/Edge/Safari */
+  &::-webkit-scrollbar {
+    width: 5px;
+    &-track {
+      background-color: rgba(200, 200, 230, 0.4);
+    }
+    &-thumb {
+      background-color: #35495e;
+    }
+  }
+}
+//
+.docMD {
+  &.disp_dark {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #98b9dc;
+    }
+    span,
+    p,
+    ul,
+    li,
+    th,
+    tr,
+    td,
+    strong {
+      color: #ffffff;
+    }
+    pre {
+      background-color: rgb(40, 44, 52);
+      code {
+        text-shadow: none;
+        color: #abb2bf;
+        &.language-cmd,
+        &.language-bash {
+          color: #abb2bf;
+        }
+      }
+    }
+    blockquote p {
+      color: rgb(40, 44, 52);
+    }
+  }
+}
+
+.empty-contain {
+  min-height: 80vh;
+  width: 100%;
+}
+//docMD-render
+
+// @import "~bulma";
+// @import "~buefy/src/scss/buefy";
+.github-header {
+  background: linear-gradient(60deg, #24292e, #4e277b, #8241f9);
+  color: #fff;
+}
+.background_layer {
+  background-repeat: no-repeat no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.front-layer {
+  color: #98b9dc;
+  .aboutBlockMod .hero-body {
+    background: rgba(#24292e, 0.5);
+  }
+ 
+}

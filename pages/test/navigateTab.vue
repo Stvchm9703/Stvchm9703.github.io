@@ -112,6 +112,5 @@ export default {
     }
   }
 }
-// @import '~assets/css/theme.scss';
 
 </style>

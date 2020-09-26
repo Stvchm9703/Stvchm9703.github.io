@@ -21,6 +21,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  pwa: {
+
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -32,15 +36,17 @@ export default {
   loadingIndicator: {
     name: 'circle',
     color: '#3273dc',
-    background: 'white'
+    background: '#4a5568'
   },
   /*
   ** Global CSS
   */
   css: [
-    '~/assets/css/page_trans.scss',
     '~/assets/css/fonts/font_face.css',
+    '~/assets/css/page_trans.scss',
     '~assets/css/theme.scss',
+    '~assets/css/color.scss',
+    '~assets/css/custom_layout.scss',
   ],
   styleResources: {
     // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
@@ -78,14 +84,14 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     'nuxt-buefy',
     '@nuxtjs/bulma',
-    // 'bootstrap-vue/nuxt',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
     '@nuxt/content',
     "@nuxtjs/svg",
+    '@nuxtjs/onesignal',
+    '@nuxtjs/pwa'
     // 'nuxt-payload-extractor',
   ],
   markdownit: {
@@ -101,7 +107,6 @@ export default {
       'markdown-it-highlightjs',
       'markdown-it-github-preamble',
       'markdown-it-table-of-contents',
-
     ],
     injected: true,
   },
@@ -114,7 +119,8 @@ export default {
         path: '/doc/:user/:project_name',
         component: resolve(__dirname, 'pages/doc/_project_name.vue')
       })
-    }
+    },
+    
   },
   static: {
     prefix: false
@@ -259,8 +265,7 @@ export default {
     }, '@nuxtjs/style-resources']
   ],
   generate: {
-    fallback: '404.html', // if you want to use '404.html' instead of the default '200.html'
-    // fallback: 'my-fallback/file.html' // if your hosting needs a custom location
+    fallback: '404.html',
     exclude: [
       /^\/test/,
       /^\/example/

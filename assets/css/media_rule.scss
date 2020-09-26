@@ -1,13 +1,19 @@
 @import "~bulma/sass/utilities/_all";
+// lazy mixin
+@mixin when-small-mobile {
+  @media only screen and (max-width: $tablet - 1px) {
+    @content;
+  }
+}
 
 @mixin when-mobile {
-  @meida only screen and (max-width: $desktop) {
+  @media only screen and (max-width: $desktop - 1px) {
     @content;
   }
 }
 
 @mixin when-not-mobile {
-  @meida only screen and (min-width: $desktop) {
+  @media only screen and (min-width: $desktop) {
     @content;
   }
 }

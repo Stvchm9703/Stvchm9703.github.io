@@ -94,7 +94,6 @@ export default {
 
 
 <style lang="scss" >
-@import "~assets/css/theme.scss";
 
 .innerNav {
   padding: 15px;
@@ -102,7 +101,6 @@ export default {
   .menu-list {
     .menu-item {
       transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-      &:hover,
       a:hover {
         color: #fff;
         background-color: #7957d5;

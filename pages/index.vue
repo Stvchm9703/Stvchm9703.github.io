@@ -3,8 +3,7 @@
   .containerBlock
     ImageBackground(v-if="!in_loading", :src="title_list")
   NavLink.is-hidden-touch
-  // NavLinkMob.is-hidden-desktop
-  // NavLinkMob
+  NavLinkMob.is-hidden-desktop
 </template>
 
 <script>
@@ -33,13 +32,15 @@ export default {
     in_loading: true,
     title_list: [
       {
-        title: "Blender - test for render !",
+        title: "Blender v2.8",
+        subtitle : "test for render !",
         color: "2,0,36,0.7",
-        image: "/images/trailScence4.png",
+        image: "/images/trialScene4.png",
       },
       {
         title: "Icon image",
-        color: "63,81,181,0.7",
+        subtitle: "Icon image",
+        color: "2,0,36,0.7",
         image: "/images/03.jpg",
       },
     ],
@@ -76,7 +77,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgba(100, 100, 121, 0.5);
+  // background: rgba(100, 100, 121, 0.5);
 }
 body {
   position: relative;

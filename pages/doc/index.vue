@@ -1,8 +1,5 @@
 <template lang="pug">
 div
-  b-navbar.search-bar(fixed-top, :burger="false")
-    template(slot="brand")
-      button.button(@click="$store.commit('open_menu', true)") Menu
   client-only
     .container(:class="{ 'empty-contain': in_loading || fail_load }")
       .section
@@ -24,12 +21,14 @@ div
           //  
         .columns.is-multiline(v-if="in_loading && !fail_load")
           ProjectEmptyCard(v-for="post in 6", :key="post")
+  
 </template>
 
 <script>
 import _isEmpty from "lodash/isEmpty";
 import ProjectCard from "~/components/docMD/ProjectCard.vue";
 import ProjectEmptyCard from "~/components/docMD/ProjectEmptyCard.vue";
+// import NavBarInner from '~/components/navlink/IndexMobile.vue';
 export default {
   name: "doc-list",
   components: { ProjectCard, ProjectEmptyCard },
@@ -90,10 +89,5 @@ export default {
 
 
 <style lang="scss" scoped>
-.search-bar.navbar.is-fixed-top {
-  // top: 50px;
-}
-.container.search-contain {
-  // padding-top: 50px;
-}
+
 </style>

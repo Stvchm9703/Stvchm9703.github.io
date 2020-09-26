@@ -1,29 +1,25 @@
 <template lang="pug">
 client-only
-  div 
-    b-navbar.search-bar(fixed-top, :burger="false")
-      template(slot="brand")
-        button.button(@click="$store.commit('open_menu', true)") Menu
-    .container(:class="{ 'empty-contain': in_loading || fail_load }")
-      .section
-        .content.is-1.disp_dark.docMD(
-          v-if="!fail_load && !in_loading",
-          v-html="$md.render(md_content)"
-        )
+  .container(:class="{ 'empty-contain': in_loading || fail_load }")
+    .section
+      .content.is-1.disp_dark.docMD(
+        v-if="!fail_load && !in_loading",
+        v-html="$md.render(this.md_content)"
+      )
 
-      .section(v-if="!fail_load && in_loading")
-        // loading screen
-        b-skeleton(height="40px")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
-        b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+    .section(v-if="!fail_load && in_loading")
+      // loading screen
+      b-skeleton(height="40px")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
+      b-skeleton(:width="skelRandWidth()", :height="skelRandHeight()")
 </template>
 
 <script>
@@ -172,7 +168,7 @@ export default {
       } else {
         this.$store.commit("set_route_map", [fileRouteMap, subDirRouteMap]);
       }
-      console.log(branchMap);
+      // console.log(branchMap);
 
       this.$store.commit(
         "file_list/set_project_name",

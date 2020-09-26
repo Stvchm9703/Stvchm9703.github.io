@@ -5,7 +5,7 @@ div
   footerTemp
 </template>
 <script>
-import navigationHeader from "~/components/navlink/InnerPage.vue";
+import navigationHeader from "~/components/navlink/IndexMobile.vue";
 import footerTemp from "~/components/common/footer.vue";
 export default {
   components: { navigationHeader, footerTemp },
