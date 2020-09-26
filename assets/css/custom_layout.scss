@@ -1,7 +1,8 @@
 @import "~bulma/sass/utilities/_all";
 @import "media_rule.scss";
 // change
-
+@import "bulma-timeline.sass";
+@import "color";
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -85,22 +86,10 @@ html {
 //
 .docMD {
   &.disp_dark {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       color: #98b9dc;
     }
-    span,
-    p,
-    ul,
-    li,
-    th,
-    tr,
-    td,
-    strong {
+    span, p, ul, li, th, tr, td, strong {
       color: #ffffff;
     }
     pre {
@@ -146,3 +135,91 @@ html {
   }
  
 }
+
+
+.timeline.is-center-manually {
+  .timeline-header {
+    display: flex;
+    width: 100%;
+    align-self: center;
+  }
+
+  .timeline-item {
+    width: 50%;
+    align-self: flex-end;
+
+    &.left-side {
+      align-self: flex-start;
+      margin-left: 0;
+      margin-right: $timeline-header-width / 2;
+
+      &::before {
+        right: -$timeline-line-width;
+        left: auto;
+      }
+
+      .timeline-marker {
+        left: auto;
+        right: -(($timeline-marker-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+
+        &.is-image {
+          @each $dimension in $dimensions {
+            &.is-#{$dimension}x#{$dimension} {
+              left: auto;
+              right: ($dimension / 2) * -1px;
+            }
+          }
+        }
+
+        &.is-icon {
+          left: auto;
+          right: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        }
+      }
+
+      .timeline-content {
+        padding: $timeline-rtl-content-padding;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-basis: 100%;
+      }
+    }
+
+    &.right-side {
+      margin-left: $timeline-item-padding-left;
+      padding-bottom: $timeline-item-padding-bottom;
+
+      &::before {
+        content: "";
+        background-color: $timeline-line-color;
+        display: block;
+        width: $timeline-line-width;
+        height: 100%;
+        position: absolute;
+        top: 0;
+      }
+
+      .timeline-marker {
+        left: -(($timeline-marker-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        right: auto;
+
+        &.is-image {
+          @each $dimension in $dimensions {
+            &.is-#{$dimension}x#{$dimension} {
+              right: auto;
+              left: ($dimension / 2) * -1px;
+            }
+          }
+        }
+
+        &.is-icon {
+          right: auto;
+          left: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        }
+      }
+    }
+  }
+}
+

@@ -81,7 +81,10 @@ div
             p exp: {{ k.exp }}
 
     infoBlock(index="5")
-      h1.title.is-size-1-desktop.is-size-3-touch.has-text-right.
+      h1.title.is-size-1-desktop.is-size-3-touch.has-text-centered.
+        Content Me
+      section.section
+        .col
 </template>
 
 <script scope>
@@ -94,6 +97,10 @@ import header_row_block from "~/components/mbr/header_row_block";
 import contact_row_block from "~/components/mbr/contact_row_block";
 export default {
   layout: "inner_page",
+  head : (self) => ({
+    title: `About Me - Stvchm9703`,
+    meta: [],
+  }),
   components: {
     infoBlock,
     SNSBlock,

@@ -23,7 +23,9 @@ export default {
   },
 
   pwa: {
-
+    workbox: {
+      cleanupOutdatedCaches: true
+    }
   },
   /*
   ** Customize the progress-bar color
@@ -44,9 +46,7 @@ export default {
   css: [
     '~/assets/css/fonts/font_face.css',
     '~/assets/css/page_trans.scss',
-    '~assets/css/theme.scss',
-    '~assets/css/color.scss',
-    '~assets/css/custom_layout.scss',
+    '~/assets/css/custom_layout.scss',
   ],
   styleResources: {
     // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
@@ -54,7 +54,7 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
-    beforeEnter(el) {}
+    beforeEnter(el) { }
   },
   rules: [
     {
@@ -80,8 +80,8 @@ export default {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma',
     'nuxt-buefy',
+    '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
@@ -117,7 +117,7 @@ export default {
         component: resolve(__dirname, 'pages/doc/_project_name.vue')
       })
     },
-    
+
   },
   static: {
     prefix: false
@@ -157,6 +157,7 @@ export default {
     analyze: true,
     minifyCSS: true,
     minifyJS: true,
+    cache: false,
     postcss: {
       preset: {
         features: {
@@ -207,11 +208,19 @@ export default {
             // cacheGroupKey here is `commons` as the key of the cacheGroup
             name: 'common',
             chunks: 'initial',
+            enforce: true
           },
           vendor: {
             test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
             name: 'vendor',
             chunks: 'initial',
+            enforce: true
+          },
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true
           }
         }
       },
