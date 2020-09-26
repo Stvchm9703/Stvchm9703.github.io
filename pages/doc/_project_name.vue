@@ -75,7 +75,7 @@ export default {
     async fetchBranchList() {
       let req_url = `https://api.github.com/repos/${this.$route.params["user"]}/${this.$route.params["project_name"]}/branches`;
       let lip = await this.$axios.$get(req_url);
-      console.log("branch:", lip);
+      // console.log("branch:", lip);
       let branchRouteMap = {
         title: "Branch",
         subtitle:
@@ -104,9 +104,9 @@ export default {
           lip = await this.$axios.$get(readme_url[0].download_url);
         }
       } else {
-        console.log(
-          `https://raw.githubusercontent.com/${this.$route.params["user"]}/${this.$route.params["project_name"]}/master/${fileName}`
-        );
+        // console.log(
+        //   `https://raw.githubusercontent.com/${this.$route.params["user"]}/${this.$route.params["project_name"]}/master/${fileName}`
+        // );
         lip = await this.$axios.$get(
           `https://raw.githubusercontent.com/${this.$route.params["user"]}/${this.$route.params["project_name"]}/master/${fileName}`
         );

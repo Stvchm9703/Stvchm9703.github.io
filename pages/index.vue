@@ -52,7 +52,7 @@ export default {
         "https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master/page/index.config.json"
       );
       this.title_list = y.data.title_list;
-      console.log(y.data.title_list);
+      // console.log(y.data.title_list);
     },
   },
   async created() {

@@ -54,9 +54,7 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
-    beforeEnter(el) {
-      // console.log('Before enter...');
-    }
+    beforeEnter(el) {}
   },
   rules: [
     {
@@ -82,10 +80,9 @@ export default {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    'nuxt-buefy',
     '@nuxtjs/bulma',
+    'nuxt-buefy',
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
     '@nuxt/content',

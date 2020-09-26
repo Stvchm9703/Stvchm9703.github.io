@@ -4,7 +4,7 @@ Nuxt
 <script>
 export default {
   created(){
-    console.log('layout hook craeatd');
+    // console.log('layout hook craeatd');
     this.$store.commit('open_menu' , false);
   }
 };

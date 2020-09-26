@@ -1,0 +1,27 @@
+<template lang="pug">
+.column.is-12-mobile.is-4-tablet.is-3-desktop.is-2-widescreen.is-2-fullhd.is-centered.lang-card-grid
+  .card
+    .card-image
+      figure.image.is-2by1
+        img(:src="icon_image")
+    .card-content
+      p.title.has-text-centered.has-text-dark.is-size-4 {{ desp_title }}
+      p.subtitle.has-text-dark.is-size-6 {{ desp_subtitle }}
+      slot
+</template>
+
+<script>
+export default {
+  props: ["icon_image", "desp_title", "desp_subtitle"],
+};
+</script>
+
+<style lang="scss" >
+@import "~/assets/css/media_rule";
+.lang-card-grid {
+  display: grid;
+  @include when-small-mobile{
+    dsiplay : inline-flex;
+  }
+}
+</style>
