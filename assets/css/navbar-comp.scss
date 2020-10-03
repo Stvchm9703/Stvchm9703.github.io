@@ -1,0 +1,163 @@
+// component : navbar 
+// -----------------------------------------------
+// customize 
+.sv-navbar {
+  background: linear-gradient(0deg,
+      rgba(9, 19, 121, 0.1) 0%,
+      rgba(2, 0, 36, 0.7) 100%);
+  max-height: 65px;
+  height: 8%;
+
+  .navbar-start {
+    .navbar-item.has-dropdown.is-active {
+      .navbar-dropdown {
+        top: -165%;
+        border-radius: 2px !important;
+      }
+    }
+  }
+
+  .navbar-start {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .navbar-end {
+    display: none;
+  }
+
+  .linkListItem {
+    font-size: 20pt;
+    font-family: "Copr";
+    color: #fff;
+    height: 50px;
+    text-align: center;
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    width: auto;
+    flex: auto;
+    flex-flow: column;
+
+    &:hover {
+      color: rgba(2, 0, 36, 1);
+      background-color: rgba($color: #fefefe, $alpha: 0.7);
+      background: linear-gradient(0deg,
+          rgba(9, 19, 121, 0.1) 0%,
+          rgba($color: #fefefe, $alpha: 0.7) 100%);
+    }
+  }
+}
+
+// side-menu
+.innerNav {
+  padding: 15px;
+  font-family: "Copr";
+
+  .menu-list {
+    .menu-item {
+      transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      // color seting : move to lower-
+      // a:hover {
+      //   color: #fff;
+      //   background-color: #7957d5;
+      // }
+
+      a {
+        font-size: 20px;
+      }
+
+      &.extraRouteMap a {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+// IndexMobile.vue 
+.sv-navbar-mob {
+  a.navbar-burger.burger {
+    margin-left: 0;
+    display: block;
+  }
+}
+
+// 
+.sv-color-option-set {
+  .field {
+    margin-bottom: 0;
+  }
+
+  .b-radio.button.radio {
+    padding: 0.5em 0.8em;
+  }
+}
+
+
+
+// color-setting 
+.sv-light-mode .sv-theme {
+  color: $mono-set-12;
+  background-color: $mono-set-1;
+
+  .navbar-divider {
+    background-color: $mono-set-12;
+  }
+
+  .menu-list .menu-item {
+    a {
+      color: $mono-set-10;
+
+      &:hover {
+        color: $mono-set-0;
+        background-color: $primary;
+      }
+    }
+  }
+
+  .sv-color-option-set .b-radio {
+    background-color: $mono-set-3;
+    border-color: $mono-set-4;
+    color: $mono-set-12;
+
+    // color : 
+    &.is-active,
+    &:active {
+      background-color: $mono-set-12;
+      border-color: $mono-set-11;
+      color: $mono-set-3;
+    }
+  }
+}
+
+.sv-dark-mode .sv-theme {
+  color: $mono-set-1;
+  background-color: $mono-set-10;
+
+  p {
+    color: $mono-set-1;
+  }
+
+  .menu-list .menu-item a {
+    color: $light;
+
+    &:hover {
+      color: $mono-set-10;
+      background-color: $mono-set-2;
+    }
+  }
+
+  .sv-color-option-set .b-radio {
+
+    background-color: $mono-set-12;
+    border-color: $mono-set-11;
+    color: $mono-set-3;
+
+    // color : 
+    &.is-active,
+    &:active {
+      background-color: $mono-set-3;
+      border-color: $mono-set-4;
+      color: $mono-set-12;
+    }
+  }
+}

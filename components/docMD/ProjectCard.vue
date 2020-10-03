@@ -1,6 +1,6 @@
 <template lang="pug">
 .column.is-half-tablet.is-full-mobile.is-one-half-desktop.is-one-third-widescreen.is-one-third-fullhd
-  .card.is-offset-1
+  .card.is-offset-1.sv-theme-card
     header.card-header
       p.card-header-title(
         :class="{ 'github-header': provider_host === 'github' }"
@@ -35,12 +35,9 @@
         p last updated :
           time(:datetime="updated_at") {{ updated_at }}
     footer.card-footer
-      a.card-footer-item.has-background-primary.has-text-light(
-        href="javascript:void(0)",
-        @click="open_info_modal()"
-      ) Project Detail
-      nuxt-link.card-footer-item.has-text-info(
-        :to="'/doc/' + project_full_name"
+      a.card-footer-item.prim-dark-btn(@click="open_info_modal()") Project Detail
+      nuxt-link.card-footer-item.sec-dark-btn(
+        :to="'/doc/project?u=' + owner + '&proj=' + project_name",
         no-prefetch
       ) Show Document
 </template>
@@ -54,6 +51,7 @@ export default {
     project_full_name: { type: String, default: "" },
     fork: { type: Boolean, default: false },
     is_self_hosted: { type: Boolean, default: true },
+    owner: { type: String, default: "" },
     star_counted: { type: Number, default: 0 },
     forked_counted: { type: Number, default: 0 },
     language: { type: String, default: "" },
@@ -73,7 +71,6 @@ export default {
         parent: this.$parent,
         component: ProjectInfoModal,
         hasModalCard: true,
-        customClass: "custom-class custom-class-2",
         trapFocus: true,
         fullScreen: true,
       });
@@ -85,10 +82,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button.card-footer-item {
-  font-size: 16px;
-}
-.card-header-title .mdi {
-  margin-right: 12px;
-}
 </style>

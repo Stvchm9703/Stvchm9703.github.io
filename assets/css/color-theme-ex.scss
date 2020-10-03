@@ -1,0 +1,187 @@
+$mono-1 : hsl(240, 4%, 24%);
+$mono-2 : hsl(220, 2%, 34%);
+$mono-3 : hsl(225, 2%, 54%);
+$mono-4 : hsl(210, 2%, 75%);
+$mono-5 : hsl(207, 32%, 12%);
+
+$mono-set1-1: hsl(321, 45%, 73%);
+$mono-set1-2: hsl(300, 53%, 89%);
+$mono-set1-3: hsl(265, 23%, 45%);
+$mono-set1-4: hsl(225, 28%, 35%);
+$mono-set1-5: hsl(203, 88%, 13%);
+
+$mono-set2-1 : hsl(254, 6%, 43%);
+$mono-set2-2:hsl(30, 1%, 65%);
+$mono-set2-3:hsl(32, 8%, 51%);
+$mono-set2-4:hsl(28, 58%, 9%);
+$mono-set2-5:hsl(22, 51%, 17%);
+
+$mono-set3-1: hsl(235, 25%, 20%);
+$mono-set3-2:hsl(200, 13%, 5%);
+$mono-set3-3:hsl(6, 21%, 81%);
+$mono-set3-4:hsl(0, 96%, 43%);
+$mono-set3-5:hsl(0, 75%, 43%);
+
+
+
+$mono-set4-1: hsl(252, 7%, 14%);
+$mono-set4-2:hsl(208, 13%, 49%);
+$mono-set4-3:hsl(203, 17%, 58%);
+$mono-set4-4:hsl(203, 29%, 79%);
+$mono-set4-5:hsl(0, 33%, 41%);
+
+
+$mono-set5-1: hsl(60, 8%, 5%);
+$mono-set5-2:hsl(38, 5%, 43%);
+$mono-set5-3:hsl(34, 6%, 24%);
+$mono-set5-4:hsl(32, 8%, 62%);
+$mono-set5-5:hsl(30, 19%, 82%);
+
+
+// #C2B49B
+// #2E3D34
+// #746A3C
+// #515036
+// adjust-hue( $base-color, 20% )
+// lighten( $color, 12:%)
+// 
+
+// copy from bulma 
+// "~bulma/sass/helpers/color.sass";
+
+@mixin color-map-gen($color-map , $shade-map) {
+
+  @each $name, $pair in $color-map {
+    $color: nth($pair, 1);
+
+    .has-text-#{$name} {
+      color: $color !important;
+    }
+
+    a.has-text-#{$name} {
+
+      &:hover, &:focus {
+        color: bulmaDarken($color, 10%) !important;
+      }
+    }
+
+    .has-background-#{$name} {
+      background-color: $color !important;
+    }
+
+    @if length($pair)>=4 {
+      $color-light: nth($pair, 3);
+      $color-dark: nth($pair, 4);
+
+      // Light
+      .has-text-#{$name}-light {
+        color: $color-light !important;
+      }
+
+      a.has-text-#{$name}-light {
+
+        &:hover, &:focus {
+          color: bulmaDarken($color-light, 10%) !important;
+        }
+      }
+
+      .has-background-#{$name}-light {
+        background-color: $color-light !important;
+      }
+
+      // Dark
+      .has-text-#{$name}-dark {
+        color: $color-dark !important;
+      }
+
+      a.has-text-#{$name}-dark {
+
+        &:hover, &:focus {
+          color: bulmaLighten($color-dark, 10%) !important;
+        }
+      }
+
+      .has-background-#{$name}-dark {
+        background-color: $color-dark !important;
+      }
+    }
+  }
+  @each $name, $shade in $shade-map {
+    .has-text-#{$name} {
+      color: $shade !important;
+    }
+
+    .has-background-#{$name} {
+      background-color: $shade !important;
+    }
+  }
+}
+
+// default 
+
+$sv-light-colors:(
+  "primary"       : ($primary, $primary-invert, $primary-light, $primary-dark),
+  "link"          : ($link, $link-invert, $link-light, $link-dark),
+  "info"          : ($info, $info-invert, $info-light, $info-dark),
+  "success"       : ($success, $success-invert, $success-light, $success-dark),
+  "warning"       : ($warning, $warning-invert, $warning-light, $warning-dark),
+  "danger"        : ($danger, $danger-invert, $danger-light, $danger-dark),
+  
+  "white"         : ($mono-set-0, $mono-set-13),
+  "black"         : ($mono-set-13, $mono-set-0),
+  "light"         : ($mono-set-2, $mono-set-11),
+  "dark"          : ($mono-set-11, $mono-set-2),
+);
+
+$sv-light-shades: (
+  "black-bis"     : $mono-set-12,
+  "black-ter"     : $mono-set-11,
+  "grey-darker"   : $mono-set-10,
+  "grey-dark"     : $mono-set-9,
+  "grey"          : $mono-set-8,
+  "grey-light"    : $mono-set-4,
+  "grey-lighter"  : $mono-set-3,
+  "white-ter"     : $mono-set-2,
+  "white-bis"     : $mono-set-1,
+);
+
+.sv-light-mode {
+  @include color-map-gen($sv-light-colors, $sv-light-shades)
+}
+
+$sv-dark-colors:(
+  "primary"       : ($primary-invert, $primary, $primary-dark, $primary-light),
+  "link"          : ($link-invert, $link, $link-dark, $link-light),
+  "info"          : ($info-invert, $info, $info-dark, $info-light),
+  "success"       : ($success-invert, $success, $success-dark, $success-light),
+  "warning"       : ($warning-invert, $warning, $warning-dark, $warning-light),
+  "danger"        : ($danger-invert, $danger, $danger-dark, $danger-light),
+   
+  "black"         : ($mono-set-0, $mono-set-13),
+  "white"         : ($mono-set-13, $mono-set-0),
+  "dark"          : ($mono-set-2, $mono-set-11),
+  "light"         : ($mono-set-11, $mono-set-2),
+);
+
+$sv-dark-shades: (
+  "white-bis"     : $mono-set-12,
+  "white-ter"     : $mono-set-11,
+  "grey-lighter"  : $mono-set-10,
+  "grey-light"    : $mono-set-9,
+  "grey"          : $mono-set-8,
+  "grey-dark"     : $mono-set-4,
+  "grey-darker"   : $mono-set-3,
+  "balck-ter"     : $mono-set-2,
+  "balck-bis"     : $mono-set-1,
+);
+
+.sv-dark-mode {
+  @include color-map-gen($sv-dark-colors, $sv-dark-shades)
+
+}
+
+.sv-cyber-mode{
+
+}
+
+// .sv-

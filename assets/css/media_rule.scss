@@ -1,4 +1,7 @@
 @import "~bulma/sass/utilities/_all";
+
+$real-small-device-width : 480px;
+
 // lazy mixin
 @mixin when-small-mobile {
   @media only screen and (max-width: $tablet - 1px) {
@@ -12,8 +15,30 @@
   }
 }
 
+@mixin when-small-device {
+  @media only screen and (max-device-width : $real-small-device-width)  {
+    @content;
+  }
+}
+
 @mixin when-not-mobile {
   @media only screen and (min-width: $desktop) {
     @content;
+  }
+}
+
+@mixin print-only {
+  @media only screen {
+    display: none;
+  }
+
+  @media only print {
+    @content;
+  }
+}
+
+@mixin screen-only {
+  @media only print {
+    display: none;
   }
 }

@@ -1,5 +1,5 @@
 <template lang="pug">
-b-navbar.sv_navbar(
+b-navbar.sv-navbar(
   :fixed-bottom="true",
   type="is-home-set",
   @toggleActive="isToogledActive()"
@@ -27,8 +27,6 @@ b-navbar.sv_navbar(
         :to="item.path",
         :key="item.name"
       ) {{ item.name }}
-
-  
 </template>
 <script>
 import _groupBy from "lodash/groupBy";
@@ -39,7 +37,7 @@ export default {
     link_list: (self) => {
       // console.log(self.$router.options.routes);
       let list_a = self.$router.options.routes
-        .filter((e) => !e.path.includes("/:") && !/[\w]+\//.test(e.name))
+        .filter((e) => !e.path.includes("/:") && !/[\w]+\//.test(e.name) && !e.name.includes('index') )
         .map((e) => ({
           path: e.path,
           name: e.name,
@@ -73,64 +71,3 @@ export default {
   methods: {},
 };
 </script>
-<style lang="scss" >
-@import "~assets/css/media_rule.scss";
-// @import "~bulma/sass/utilities/_all";
-.sv_navbar {
-  background: linear-gradient(
-    0deg,
-    rgba(9, 19, 121, 0.1) 0%,
-    rgba(2, 0, 36, 0.7) 100%
-  );
-  max-height: 70px;
-  height: 10%;
-
-  // resolve is-fix-bottom
-  &.navbar.is-fixed-bottom {
-    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-    .navbar-menu {
-      transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-      .navbar-start {
-        .navbar-item.has-dropdown.is-active {
-          .navbar-dropdown {
-            top: -165%;
-            border-radius: 2px !important ;
-          }
-        }
-      }
-      @include when-mobile {
-        position: absolute;
-      }
-    }
-  }
-
-  .linkListItem {
-    font-size: 20pt;
-    font-family: "Copr";
-    color: #fff;
-    height: 50px;
-    text-align: center;
-    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-    &:hover {
-      color: rgba(2, 0, 36, 1);
-      background-color: rgba($color: #fefefe, $alpha: 0.7);
-      background: linear-gradient(
-        0deg,
-        rgba(9, 19, 121, 0.1) 0%,
-        rgba($color: #fefefe, $alpha: 0.7) 100%
-      );
-    }
-  }
-  .navbar-start {
-    width: 90%;
-    .linkListItem {
-      width: auto;
-      flex: auto;
-      flex-flow: column;
-    }
-  }
- 
-}
-</style>

@@ -1,33 +1,184 @@
+
+// @import "~bulma";
 // Colors
+$black          : hsl(0, 0%, 4%);
+$black-bis      : hsl(0, 0%, 7%);
+$black-ter      : hsl(0, 0%, 14%);
 
-$black: hsl(0, 0%, 4%);
-$black-bis: hsl(0, 0%, 7%);
-$black-ter: hsl(0, 0%, 14%);
+$grey-darker    : hsl(0, 0%, 21%);
+$grey-dark      : hsl(0, 0%, 29%);
+$grey           : hsl(0, 0%, 48%);
+$grey-light     : hsl(0, 0%, 71%);
+$grey-lighter   : hsl(0, 0%, 86%);
+$grey-lightest  : hsl(0, 0%, 93%);
 
-$grey-darker: hsl(0, 0%, 21%);
-$grey-dark: hsl(0, 0%, 29%);
-$grey: hsl(0, 0%, 48%);
-$grey-light: hsl(0, 0%, 71%);
-$grey-lighter: hsl(0, 0%, 86%);
-$grey-lightest: hsl(0, 0%, 93%);
+$white-ter      : hsl(0, 0%, 96%);
+$white-bis      : hsl(0, 0%, 98%);
+$white          : hsl(0, 0%, 100%);
 
-$white-ter: hsl(0, 0%, 96%);
-$white-bis: hsl(0, 0%, 98%);
-$white: hsl(0, 0%, 100%);
+$orange         : hsl(14, 100%, 53%);
+$yellow         : hsl(48, 100%, 67%);
+$green          : hsl(141, 53%, 53%);
+$turquoise      : hsl(171, 100%, 41%);
+$cyan           : hsl(204, 71%, 53%);
+$blue           : hsl(217, 71%, 53%);
+$purple         : hsl(271, 100%, 71%);
+$red            : hsl(348, 86%, 61%);
 
-$orange: hsl(14, 100%, 53%);
-$yellow: hsl(48, 100%, 67%);
-$green: hsl(141, 53%, 53%);
-$turquoise: hsl(171, 100%, 41%);
-$cyan: hsl(204, 71%, 53%);
-$blue: hsl(217, 71%, 53%);
-$purple: hsl(271, 100%, 71%);
-$red: hsl(348, 86%, 61%);
 
+// custom-module
+// sv-color-set-for-screen
+// $sv-white       : $grey-lightest;
+// $sv-black       : $grey-darkest;
+$mono-set-0:hsl(190.0, 2.0%, 95.0%);
+$mono-set-1:hsl(194.6, 5.3%, 88.8%);
+$mono-set-2:hsl(199.2, 8.6%, 82.6%);
+
+$mono-set-3:hsl(203.8, 11.9%, 76.4%);
+$mono-set-4:hsl(208.4, 15.2%, 70.2%);
+// Remark: not use within 70%~50%
+  $mono-set-5:hsl(213.0, 18.5%, 64.0%);
+  $mono-set-6:hsl(217.6, 21.8%, 57.8%);
+  $mono-set-7:hsl(222.2, 25.1%, 51.6%);
+// 
+$mono-set-8:hsl(226.8, 28.4%, 45.4%);
+$mono-set-9:hsl(231.4, 31.7%, 39.2%);
+$mono-set-10:hsl(236.0, 35.0%, 33.0%);
+
+$mono-set-11:hsl(240.6, 38.3%, 26.8%);
+$mono-set-12:hsl(245.2, 41.6%, 20.6%);
+$mono-set-13:hsl(249.8, 44.9%, 14.4%);
+
+// copy form derived-variable
+// $primary: $turquoise !default;
 $primary: #7957d5;
-$primary-invert: $white;
-$info: #167df0;
+$secondory : #8f539b;
+$thirdory : #8f539b;
+$info   : $cyan !default;
+$success: $green !default;
+$warning: $yellow !default;
+$danger : $red !default;
 
+$light  : $white-ter !default;
+$dark   : $grey-darker !default;
+
+// Invert colors
+
+$orange-invert   : findColorInvert($orange) !default;
+$yellow-invert   : findColorInvert($yellow) !default;
+$green-invert    : findColorInvert($green) !default;
+$turquoise-invert: findColorInvert($turquoise) !default;
+$cyan-invert     : findColorInvert($cyan) !default;
+$blue-invert     : findColorInvert($blue) !default;
+$purple-invert   : findColorInvert($purple) !default;
+$red-invert      : findColorInvert($red) !default;
+
+$primary-invert  : findColorInvert($primary) !default;
+$primary-light   : findLightColor($primary) !default;
+$primary-dark    : findDarkColor($primary) !default;
+
+$info-invert     : findColorInvert($info) !default;
+$info-light      : findLightColor($info) !default;
+$info-dark       : findDarkColor($info) !default;
+
+$success-invert  : findColorInvert($success) !default;
+$success-light   : findLightColor($success) !default;
+$success-dark    : findDarkColor($success) !default;
+
+$warning-invert  : findColorInvert($warning) !default;
+$warning-light   : findLightColor($warning) !default;
+$warning-dark    : findDarkColor($warning) !default;
+
+$danger-invert   : findColorInvert($danger) !default;
+$danger-light    : findLightColor($danger) !default;
+$danger-dark     : findDarkColor($danger) !default;
+
+$light-invert    : findColorInvert($light) !default;
+$dark-invert     : findColorInvert($dark) !default;
+
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+$custom-colors:(
+  "orange"        : ($orange,$orange-invert),
+  "yellow"        : ($yellow,$yellow-invert),
+  "green"         : ($green,$green-invert),
+  "turquoise"     : ($turquoise,$turquoise-invert),
+  "cyan"          : ($cyan,$cyan-invert),
+  "blue"          : ($blue,$blue-invert),
+  "purple"        : ($purple,$purple-invert),
+  "red"           : ($red,$red-invert),
+   
+  "white"         : ($mono-set-0, $mono-set-13),
+  "black"         : ($mono-set-13, $mono-set-0),
+  "light"         : ($mono-set-2, $mono-set-11),
+  "dark"          : ($mono-set-11, $mono-set-2),
+);
+
+
+$custom-shades: (
+  "black-bis"     : $mono-set-12,
+  "black-ter"     : $mono-set-11,
+  "grey-darker"   : $mono-set-10,
+  "grey-dark"     : $mono-set-9,
+  "grey"          : $mono-set-8,
+  "grey-light"    : $mono-set-4,
+  "grey-lighter"  : $mono-set-3,
+  "white-ter"     : $mono-set-2,
+  "white-bis"     : $mono-set-1,
+);
+
+
+// default color setup
+$colors: mergeColorMaps(
+(
+  "primary": ($primary, $primary-invert, $primary-light, $primary-dark),
+  "link"   : ($link, $link-invert, $link-light, $link-dark),
+  "info"   : ($info, $info-invert, $info-light, $info-dark),
+  "success": ($success, $success-invert, $success-light, $success-dark),
+  "warning": ($warning, $warning-invert, $warning-light, $warning-dark),
+  "danger" : ($danger, $danger-invert, $danger-light, $danger-dark)),
+  $custom-colors
+);
+
+// default 
+// $shades: mergeColorMaps(
+// (
+//   "black-bis"   : $black-bis,
+//   "black-ter"   : $black-ter,
+//   "grey-darker" : $grey-darker,
+//   "grey-dark"   : $grey-dark,
+//   "grey"        : $grey,
+//   "grey-light"  : $grey-light,
+//   "grey-lighter": $grey-lighter,
+//   "white-ter"   : $white-ter,
+//   "white-bis"   : $white-bis),
+//   $custom-shades
+// );
+
+$shades:$custom-shades;
+
+// * sv-color-map
+
+// $dark-colors-set : (
+//   "white" : ($mono-set-0, $mono-set-9),
+//   "black" : ($mono-set-10, $mono-set-1),
+// );
+
+// $sv-base-shades: (
+//   "black-bis"     : $mono-set-9,
+//   "black-ter"     : $mono-set-8,
+//   "grey-darker"   : $mono-set-7,
+//   "grey-dark"     : $mono-set-6,
+//   "grey"          : $mono-set-5,
+//   "grey-light"    : $mono-set-4,
+//   "grey-lighter"  : $mono-set-3,
+//   "white-ter"     : $mono-set-2,
+//   "white-bis"     : $mono-set-1,
+// );
+
+// 
 // Typography
 
 $family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto",
@@ -35,3 +186,5 @@ $family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto",
   "Helvetica", "Arial", sans-serif;
 $family-monospace: monospace;
 $render-mode: optimizeLegibility;
+
+

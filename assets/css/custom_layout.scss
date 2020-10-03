@@ -1,8 +1,10 @@
-@import "~bulma/sass/utilities/_all";
-@import "media_rule.scss";
+// @import "~bulma/sass/utilities/functions";
+// @import  "~buefy/src/scss/utils/_all.scss";
+// @import "media_rule.scss";
 // change
 @import "bulma-timeline.sass";
-@import "color";
+// @import "color";
+
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -25,31 +27,6 @@ html {
   margin: 0;
 }
 
-.button {
-  display: inline-block;
-  border-radius: 4px;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-
-  &--green {
-    border: 1px solid #3b8070;
-    color: #3b8070;
-    &:hover {
-      color: #fff;
-      background-color: #3b8070;
-    }
-  }
-
-  &--grey {
-    border: 1px solid #35495e;
-    color: #35495e;
-    &:hover {
-      color: #fff;
-      background-color: #35495e;
-    }
-  }
-}
 
 .title {
   display: block;
@@ -72,55 +49,30 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #35495e rgba(200, 200, 230, 0.7);
   scroll-padding: 0px 8px 8px 0px;
+
   /* Works on Chrome/Edge/Safari */
   &::-webkit-scrollbar {
     width: 5px;
+
     &-track {
       background-color: rgba(200, 200, 230, 0.4);
     }
+
     &-thumb {
       background-color: #35495e;
     }
   }
 }
-//
-.docMD {
-  &.disp_dark {
-    h1, h2, h3, h4, h5, h6 {
-      color: #98b9dc;
-    }
-    span, p, ul, li, th, tr, td, strong {
-      color: #ffffff;
-    }
-    pre {
-      background-color: rgb(40, 44, 52);
-      code {
-        text-shadow: none;
-        color: #abb2bf;
-        &.language-cmd,
-        &.language-bash {
-          color: #abb2bf;
-        }
-      }
-    }
-    blockquote p {
-      color: rgb(40, 44, 52);
-    }
-  }
-}
+
+
 
 .empty-contain {
   min-height: 80vh;
   width: 100%;
 }
-//docMD-render
 
-// @import "~bulma";
-// @import "~buefy/src/scss/buefy";
-.github-header {
-  background: linear-gradient(60deg, #24292e, #4e277b, #8241f9);
-  color: #fff;
-}
+
+// about page
 .background_layer {
   background-repeat: no-repeat no-repeat;
   background-position: center;
@@ -130,12 +82,40 @@ html {
 
 .front-layer {
   color: #98b9dc;
-  .aboutBlockMod .hero-body {
-    background: rgba(#24292e, 0.5);
+
+  .aboutBlockMod {
+    .hero-body {
+      background: rgba(40, 44, 52, 0.5);
+    }
   }
- 
+
+  .has-border-line {
+    border-bottom: 10px solid #8241f9;
+
+    @each $name,
+    $pair in $colors {
+      $color: nth($pair, 1);
+      $color-invert: nth($pair, 2);
+
+      &.is-#{$name} {
+        border-bottom-color: $color;
+      }
+    }
+
+    @include when-mobile {
+      border-bottom-width: 5px;
+    }
+  }
 }
 
+// about-page
+.column.lang-card-grid {
+  display: grid;
+  @include when-small-mobile {
+    dsiplay: inline-flex;
+  }
+
+}
 
 .timeline.is-center-manually {
   .timeline-header {
@@ -220,6 +200,73 @@ html {
         }
       }
     }
+
   }
 }
 
+.timeline.is-mobile-left {
+  @include when-mobile {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .timeline-header {
+      width: $timeline-header-width;
+      align-self: flex-start;
+      align-items: flex-start;
+
+    }
+
+    .timeline-item,
+    .timeline-item.left-side,
+    .timeline-item.right-side {
+      width: 100%;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      position: relative;
+      // align-self: flex-start;
+      justify-content: flex-start;
+      margin-left: $timeline-item-padding-left;
+      padding-bottom: $timeline-item-padding-bottom;
+      align-self: flex-start;
+      align-items: flex-start;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .timeline-marker {
+        left: -0.35em;
+        right: auto;
+
+        &.is-image,
+        &.is-icon {
+          right: auto;
+          left: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2);
+        }
+      }
+
+      .timeline-content {
+        align-items: flex-start;
+        padding: 1em 0 0 .5em;
+        padding: $timeline-content-padding;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.timeline-marker.is-icon.is-info.is-large {
+  height: 2.7em;
+  width: 2.7em;
+  left: -1.2em !important;
+
+  .mdi-36px {
+    height: 12px;
+  }
+}

@@ -1,5 +1,5 @@
 <template lang="pug">
-nav.navbar.sv_navbar_mob.is-fixed-bottom(
+nav.navbar.sv-navbar-mob.is-dark.is-fixed-bottom(
   role="navigation",
   aria-label="main navigation"
 )
@@ -18,20 +18,16 @@ nav.navbar.sv_navbar_mob.is-fixed-bottom(
 
   navigationHeader
 </template>
+
 <script>
-import navigationHeader from "~/components/navlink/InnerPage.vue";
+import navigationHeader from "~/components/navlink/sideNav.vue";
 import _groupBy from "lodash/groupBy";
 import _value from "lodash/values";
 import { mapState } from "vuex";
 export default {
   name: "inner_mob",
   components: { navigationHeader },
-  props: {
-    "hide-in-desktop": {
-      type: Boolean,
-      default: true,
-    },
-  },
+
   computed: {
     ...mapState({
       menuOnOpen: (state) => state.menu_on_open,
@@ -72,15 +68,3 @@ export default {
   }),
 };
 </script>
- <style lang="scss">
-@import "~assets/css/media_rule.scss";
-
-.sv_navbar_mob {
-  a.navbar-burger.burger {
-    margin-left: 0;
-    @include when-not-mobile {
-      display: block;
-    }
-  }
-}
-</style>

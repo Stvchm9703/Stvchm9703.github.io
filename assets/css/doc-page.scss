@@ -1,0 +1,418 @@
+// page : doc list
+//docMD-render
+// component : project card 
+.sv-theme-card {
+  button.card-footer-item {
+    font-size: 16px;
+  }
+
+  .card-header-title .mdi {
+    margin-right: 12px;
+  }
+}
+
+.sv-light-mode .sv-theme-card {
+  .card-content {
+    background-color: $mono-set-0;
+    color: $mono-set-12;
+  }
+
+  .card-footer {
+    .prim-dark-btn {
+      background-color: $primary;
+      color: $mono-set-0;
+    }
+
+    .sec-dark-btn {
+      background-color: $secondory;
+      color: $mono-set-0;
+    }
+
+    .card-footer-item:not(:last-child) {
+      border-right-color: $mono-set-8;
+    }
+  }
+}
+
+.sv-dark-mode .sv-theme-card {
+  .card-content {
+    color: $mono-set-1;
+    background-color: $mono-set-10;
+
+    .tags.has-addons .tag.is-dark {
+      color: $mono-set-10;
+      background-color: $mono-set-3;
+    }
+  }
+
+  .card-footer {
+    .prim-dark-btn {
+      background-color: $primary;
+      color: $mono-set-0;
+    }
+
+    .sec-dark-btn {
+      background-color: $secondory;
+      color: $mono-set-0;
+    }
+
+    .card-footer-item:not(:last-child) {
+      border-right-color: $mono-set-8;
+    }
+  }
+}
+
+.github-header {
+  background: linear-gradient(60deg, #24292e, #4e277b, #8241f9);
+  color: #fff;
+}
+
+// component : info-modal
+.docMD { 
+  @import "~highlight.js/scss/atom-one-dark.scss";
+  * {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  pre {
+    background-color: #282c34;
+  }
+
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none;
+  }
+   code[class*="language-"] {
+    color: $mono-set-1;
+  }
+}
+
+.sv-theme-modal {
+  &.modalcard {
+    width: auto;
+  }
+
+  .modal-card-foot .button {
+    padding: 5px 45px;
+  }
+
+  .lang-progess {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    background-color: #e1e4e8;
+    border-radius: 6px;
+    outline: 1px solid transparent;
+
+    span {
+      outline: 2px solid transparent;
+    }
+  }
+
+  .lang-set .desp-set {
+    margin-top: 0;
+
+    // display:flex;
+    .block {
+      margin: 7px;
+    }
+
+    .spot {
+      border-radius: 50%;
+      display: inline-block;
+      height: 1rem !important;
+      width: 1rem !important;
+      background-color: #999999;
+    }
+
+    .spot+span {
+      font-size: 10pt;
+      margin-bottom: 2px;
+      margin-left: 3px;
+    }
+  }
+
+
+  .b-tabs .docMD {
+    
+
+   
+  }
+
+  .panel-block:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+}
+
+.sv-light-mode .sv-theme-modal {
+  .modal-card-head {
+    border-color: $mono-set-1;
+  }
+
+  .modal-card-body,
+  .modal-card-foot {
+    border-color: $mono-set-1;
+    background-color: $mono-set-0;
+    color: $mono-set-12;
+  }
+
+
+  .media-content .content {
+
+    p,
+    strong {
+      color: $mono-set-12;
+    }
+
+    a {
+      color: $mono-set-7;
+    }
+  }
+
+  .b-tabs .tabs a {
+    color: $mono-set-12;
+    background-color: $mono-set-0;
+
+    &:hover {
+      color: $mono-set-12;
+      background-color: $mono-set-1;
+    }
+  }
+
+  .b-tabs .tabs .is-active a,
+  .b-tabs .tab-content {
+    color: $mono-set-12;
+    background-color: $mono-set-1;
+  }
+
+
+  .b-tabs .docMD {
+
+    p, strong, ul,li{
+      color: $mono-set-12;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $mono-set-11;
+    }
+
+    // table
+    th {
+      color: $mono-set-11;
+      border-bottom-color: $mono-set-6;
+    }
+
+    td {
+      color: $mono-set-11;
+      border-color: $mono-set-5;
+    }
+
+    a {
+      color: $mono-set-7;
+    }
+
+    code:not(.hljs) {
+      background-color: $mono-set-2;
+      color: lighten(invert($mono-set-2), 15%);
+    }
+
+
+  }
+
+  .b-tabs .panel {
+    .panel-block {
+      color: $mono-set-12;
+      background-color: $mono-set-2;
+      border-color: $mono-set-1;
+
+      &:hover {
+        background-color: $mono-set-1;
+      }
+
+      .panel-icon {
+        color: $mono-set-12;
+      }
+    }
+  }
+
+
+}
+
+.sv-dark-mode .sv-theme-modal {
+
+  .modal-card-body,
+  .modal-card-foot {
+    background-color: $mono-set-10;
+    color: $mono-set-2;
+    border-color: $mono-set-11;
+  }
+
+  .media-content .content {
+
+    p,
+    strong {
+      color: $mono-set-1;
+    }
+
+    a {
+      color: $mono-set-3;
+    }
+  }
+
+  .b-tabs .tabs ul {
+    border-color: $mono-set-6;
+
+  }
+
+  .b-tabs .tabs a {
+    color: $mono-set-2;
+
+    &:hover {
+      background-color: $mono-set-8;
+    }
+  }
+
+  .b-tabs .tabs .is-active a,
+  .b-tabs .tab-content {
+    color: $mono-set-2;
+    border-color: $mono-set-6;
+    background-color: $mono-set-9;
+  }
+
+  // preview
+  .b-tabs .docMD {
+
+    p, strong, ul,li {
+      color: $mono-set-3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $mono-set-2;
+    }
+
+    // table
+    th {
+      color: $mono-set-2;
+      border-bottom-color: $mono-set-6;
+    }
+
+    td {
+      color: $mono-set-3;
+      border-color: $mono-set-5;
+    }
+
+    a {
+      color: $mono-set-4;
+    }
+
+    code:not(.hljs) {
+      background-color: $mono-set-11;
+      color: darken(invert($mono-set-11), 15%);
+    }
+
+  }
+
+
+  .b-tabs .panel {
+    .panel-block {
+      color: $mono-set-2;
+      background-color: $mono-set-9;
+      border-color: $mono-set-6;
+
+      &:hover {
+        background-color: $mono-set-8;
+      }
+
+      .panel-icon {
+        color: $mono-set-2;
+      }
+    }
+  }
+
+  .close-btn {
+    background-color: $mono-set-9;
+    border-color: $mono-set-7;
+    color: $mono-set-0;
+
+    &:hover {
+      background-color: darken($mono-set-9, 3%);
+      border-color: darken($mono-set-7, 3%);
+      color: darken($mono-set-0, 3%);
+    }
+  }
+
+}
+
+
+.sv-light-mode .sv-theme-doc-render{
+  background-color: $mono-set-1;
+ 
+
+   p, strong, ul,li {
+     color: $mono-set-12;
+   }
+
+   h1, h2, h3, h4, h5, h6 {
+     color: $mono-set-11;
+   }
+
+   // table
+   th {
+     color: $mono-set-11;
+     border-bottom-color: $mono-set-6;
+   }
+
+   td {
+     color: $mono-set-11;
+     border-color: $mono-set-5;
+   }
+
+   a {
+     color: $mono-set-7;
+   }
+
+   code:not(.hljs) {
+     background-color: $mono-set-2;
+     color: lighten(invert($mono-set-2), 15%);
+   } 
+}
+
+
+.sv-dark-mode .sv-theme-doc-render{
+  background-color: $mono-set-10;
+ 
+    p, strong, ul,li {
+      color: $mono-set-3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $mono-set-2;
+    }
+
+    // table
+    th {
+      color: $mono-set-2;
+      border-bottom-color: $mono-set-6;
+    }
+
+    td {
+      color: $mono-set-3;
+      border-color: $mono-set-5;
+    }
+
+    a {
+      color: $mono-set-4;
+    }
+
+    code:not(.hljs) {
+      background-color: $mono-set-11;
+      color: darken(invert($mono-set-11), 15%);
+    }
+
+}
+
+
+

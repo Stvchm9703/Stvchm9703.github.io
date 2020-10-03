@@ -1,6 +1,6 @@
 <template lang="pug">
-.modal-card(style="width: auto")
-  header.modal-card-head.has-background-primary.github-header
+.modal-card.sv-theme-modal
+  header.modal-card-head.github-header
     p.modal-card-title.title.is-3
       i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
       | {{project.name}}
@@ -11,9 +11,8 @@
         // --------------------------------------------------------------
         // project-info : success-case
         article.media(v-if="!is_loading&&!fail_load")
-          figure.media-left
-            p.image.is-64x64.is-circle
-              img(:src="project.owner.avatar_url")
+          figure.media-left.image.is-64x64
+            img.is-rounded(:src="project.owner.avatar_url")
           .media-content
             .content
               p
@@ -43,10 +42,8 @@
                     span.tag.is-primary {{ project.forks_count }}
         // project-info : in-fetch
         article.media(v-if="is_loading&&!fail_load")
-          figure.media-left
-            p.image.is-64x64.is-circle
-              // img(width="64px", height="64px", :src="project.owner.avatar_url")
-              b-skeleton(circle, width="64px", height="64px")
+          figure.media-left.image.is-64x64
+            b-skeleton(circle, width="64px", height="64px")
           .media-content
             .content
               p
@@ -103,9 +100,9 @@
           // ------------------
         b-tab-item(label="File", icon="library" , value="file")
           div(v-if="!is_loading&&!fail_load")
-            h3 Default Branch: {{project.default_branch}}
+            h3.is-6 Default Branch: {{project.default_branch}}
             article.panel.is-primary
-              .panel-block
+              // .panel-block
                 p.control.has-icons-left
                   input.input.is-primary(type="text", placeholder="Search")
                   span.icon.is-left
@@ -122,7 +119,7 @@
             b-skeleton(size="is-large", :active="is_loading&&!fail_load" )
         b-tab-item(label="Branch", icon="source-fork" , value="branch")
           article.panel.is-primary
-            .panel-block
+            // .panel-block
               p.control.has-icons-left
                 input.input.is-primary(type="text", placeholder="Search")
                 span.icon.is-left
@@ -142,24 +139,24 @@
             )
         b-tab-item(label="Release Tag", icon="tag", value="tag")
           article.panel.is-primary
-            .panel-block
+            // .panel-block
               p.control.has-icons-left
                 input.input.is-primary(type="text", placeholder="Search")
                 span.icon.is-left
                   i.mdi.mdi-magnify(aria-hidden="true")
             
-          a.panel-block(
-            v-for="refSet in tags_list",
-            :href="project.html_url+'/releases/tag/'+refSet.name"
-            target="_blank"
-          )
-            span.panel-icon 
-              i.mdi.mdi-24px()
-            | {{refSet.name}}
-        
+            a.panel-block(
+              v-for="refSet in tags_list",
+              :href="project.html_url+'/releases/tag/'+refSet.name"
+              target="_blank"
+            )
+              span.panel-icon 
+                i.mdi.mdi-24px()
+              | {{refSet.name}}
+          
     
   footer.modal-card-foot
-    button.button(type="button", @click="$emit(\'close\')") Close
+    button.button.close-btn(type="button", @click="$emit(\'close\')") Close
     a.button.is-primary(:href="project.html_url" target="blank") 
       i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
       | Go to git reposity
@@ -167,8 +164,9 @@
 <script>
 import { mapState } from "vuex";
 import _isEmpty from "lodash/isEmpty";
+import debugUrl from "~/plugins/debugRequest";
 export default {
-  header: {},
+  
   name: "Project-info-modal",
   computed: {
     ...mapState({
@@ -253,7 +251,9 @@ export default {
       );
       console.log(readme_url);
       if (readme_url.length > 0) {
-        this.readme_md = await this.$axios.$get(readme_url[0].download_url);
+        this.readme_md = await this.$axios.$get(
+          (readme_url[0].download_url)
+        );
       }
     },
     async fetchLicience() {
@@ -280,44 +280,3 @@ export default {
 // 3. tab page
 // 4. commit tree
 </script>
-<style lang="scss" scoped>
-@import "highlight.js/scss/atom-one-dark.scss";
-
-.modal-card-foot .button {
-  padding: 5px 45px;
-}
-.lang-progess {
-  display: flex;
-  height: 8px;
-  overflow: hidden;
-  background-color: #e1e4e8;
-  border-radius: 6px;
-  outline: 1px solid transparent;
-  span {
-    outline: 2px solid transparent;
-  }
-}
-.lang-set .desp-set {
-  margin-top: 0;
-  // display:flex;
-  .block {
-    margin: 7px;
-  }
-  .spot {
-    border-radius: 50%;
-    display: inline-block;
-    height: 1rem !important;
-    width: 1rem !important;
-    // box-shadow: 0 0 0.3rem #555;
-    background-color: #dddddd;
-  }
-  .spot + span {
-    font-size: 10pt;
-    margin-bottom: 2px;
-    margin-left: 3px;
-  }
-}
-pre {
-  background-color: #282c34;
-}
-</style>

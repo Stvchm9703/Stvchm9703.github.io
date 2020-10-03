@@ -15,6 +15,9 @@ $timeline-item-padding-left: $timeline-header-width / 2 !default
 $timeline-item-padding-bottom: 2em !default
 $dimensions: 16 24 32 48 64 96 128 !default
 
+
+  
+
 .timeline
   display: flex
   flex-direction: column
@@ -55,6 +58,9 @@ $dimensions: 16 24 32 48 64 96 128 !default
       top: 1.2rem
       width: $timeline-marker-size
       &.is-image
+        border-radius: 100%
+        display: block
+        overflow: hidden
         @each $dimension in $dimensions
           &.is-#{$dimension}x#{$dimension}
             height: $dimension * 1px
@@ -62,9 +68,6 @@ $dimensions: 16 24 32 48 64 96 128 !default
             left: ( $dimension / 2 ) * -1px
             background: $timeline-marker-color
             border: $timeline-marker-border
-            border-radius: 100%
-            display: block
-            overflow: hidden
       &.is-icon
         display: flex
         align-items: center
@@ -79,7 +82,7 @@ $dimensions: 16 24 32 48 64 96 128 !default
         border-radius: 100%
         > i
           color: $white
-          font-size: $timeline-icon-size 
+          font-size: $timeline-icon-size
       &.is-outlined
         .image
           background: $white
@@ -91,25 +94,25 @@ $dimensions: 16 24 32 48 64 96 128 !default
         $color: nth($pair, 1)
         $color-invert: nth($pair, 2)
         &.is-#{$name}
-          background-color: $color 
-          border-color: $color 
+          background-color: $color
+          border-color: $color
           .image
-            border-color: $color 
+            border-color: $color
 
           &.is-icon
-            background-color: $color 
-            border-color: $color 
+            background-color: $color
+            border-color: $color
             > i
-              color: $color-invert 
+              color: $color-invert
           &.is-outlined
-            background-color: $white 
-            border-color: $color 
+            background-color: $white
+            border-color: $color
             .image
-              background-color: $white 
+              background-color: $white
             &.is-icon
-              background-color: $white 
+              background-color: $white
               > i
-                color: $color 
+                color: $color
     .timeline-content
       padding: 1em 0 0 .5em
       padding: $timeline-content-padding
@@ -207,3 +210,5 @@ $dimensions: 16 24 32 48 64 96 128 !default
       &.is-last
         &::before
           height: 1.2rem
+
+

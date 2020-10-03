@@ -1,12 +1,15 @@
 <template lang="pug">
-div 
+div
   // transition-group
   .front-layer
-    .hero.is-medium
+    .hero.is-medium.has-border-line
       .hero-body
         .container
           h1.title.is-1 More About ...
-    infoBlock.is-large(index="1", img_src="https://i.imgur.com/1CT7JYrh.jpg")
+    infoBlock.is-large.has-border-line(
+      index="1",
+      img_src="https://i.imgur.com/1CT7JYrh.jpg"
+    )
       h1.title.is-size-1-desktop.is-size-3-touch Steven
       h2.subtitle.is-3 Cheng Ho Man
       span.is-size-4.
@@ -15,10 +18,13 @@ div
       span.is-size-4.
         Also, Interested in game engine  
 
-    infoBlock(index="2", img_src="https://i.imgur.com/EiteW03h.png")
+    infoBlock.has-border-line(
+      index="2",
+      img_src="https://i.imgur.com/EiteW03h.png"
+    )
       h1.title.is-size-1-desktop.is-size-3-touch Who am I ?
       section.section
-        .timeline.is-center-manually
+        .timeline.is-center-manually.is-mobile-left
           header.timeline-header
             span.tag.is-medium.is-primary 2015
 
@@ -32,14 +38,15 @@ div
               span Community College Of City University
 
           .timeline-item.right-side
-            .timeline-marker.is-image.is-32x32
-              img(src="https://bulma.io/images/placeholders/32x32.png")
+            .timeline-marker.is-icon.is-info.is-large
+              i.mdi.mdi-briefcase-outline.mdi-36px
             .timeline-content
               p.heading November 2017 – May 2019
               p.is-size-5 Web Programmer
               span Teksbotics(Hong Kong) Limited
               p(lang="md").
-                kndfkg 
+                Teskbotic (HK) is a robotic solution kick-start company in Hong Kong.
+  
 
           .timeline-item.left-side
             .timeline-marker.is-icon.is-primary
@@ -52,11 +59,11 @@ div
           .timeline-header
             span.tag.is-medium.is-primary Now
 
-    infoBlock(index="3")
+    infoBlock.has-border-line.is-primary.has-background-turquoise(index="3")
       h1.title.is-size-1-desktop.is-size-3-touch.has-text-right.
         Favour Programming Language
-      section.section
-        .columns.is-centered.is-multiline.is-variable.is-mobile.is-1-desktop.is-1-widescreen.is-1-fullhd
+      .section.mx-0.px-0
+        .columns.is-centered.is-multiline.is-mobile
           ItemCard(
             v-for="k in fav_lang",
             :key="k.desp_title",
@@ -64,13 +71,13 @@ div
             :desp_title="k.desp_title",
             :desp_subtitle="k.desp_subtitle"
           )
-            p exp: {{ k.exp }}
+            p.is-hidden-touch exp: {{ k.exp }}
 
-    infoBlock(index="4")
+      // infoBlock.has-border-line(index="4")
       h1.title.is-size-1-desktop.is-size-3-touch.
         Available Programming Language
-      section.section
-        .columns.is-centered.is-multiline.is-variable.is-mobile.is-1-desktop.is-1-widescreen.is-1-fullhd
+      .section.mx-0.px-0
+        .columns.is-centered.is-multiline.is-mobile
           ItemCard(
             v-for="k in avail_lang",
             :key="k.desp_title",
@@ -78,16 +85,25 @@ div
             :desp_title="k.desp_title",
             :desp_subtitle="k.desp_subtitle"
           )
-            p exp: {{ k.exp }}
+            p.is-hidden-touch exp: {{ k.exp }}
 
-    infoBlock(index="5")
+    infoBlock(index="4")
       h1.title.is-size-1-desktop.is-size-3-touch.has-text-centered.
         Content Me
       section.section
-        .col
+        .container.is-fullwidth
+          .columns
+            .column 
+              p.is-size-5.
+                asking for commition is welcome!
+          .columns.is-desktop
+            .column
+              span Email
+            .column.has-text-right.has-text-left-touch
+              a(href="mailto:stv.chm@gmail.com") stv.chm@gmail.com
 </template>
 
-<script scope>
+<script scoped>
 //this page is for introduce self
 import infoBlock from "~/components/aboutBlock/InfoBlock.vue";
 import SNSBlock from "~/components/aboutBlock/SNSBlock.vue";
@@ -97,7 +113,7 @@ import header_row_block from "~/components/mbr/header_row_block";
 import contact_row_block from "~/components/mbr/contact_row_block";
 export default {
   layout: "inner_page",
-  head : (self) => ({
+  head: (self) => ({
     title: `About Me - Stvchm9703`,
     meta: [],
   }),
@@ -155,7 +171,8 @@ export default {
       {
         icon_image: "/images/icon_python.svg",
         desp_title: "Python",
-        desp_subtitle: "Simple Web server / API server, while Python is RAM eater",
+        desp_subtitle:
+          "Simple Web server / API server, while Python is RAM eater",
         exp: "2018~2020",
       },
       {

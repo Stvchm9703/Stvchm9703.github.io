@@ -5,7 +5,11 @@
 
 <script>
 export default {
-  name:"post-list",
+  name: "post-list",
   layout: "inner_page",
+  data: () => ({
+    post_list : [],
+  }),
+  fetchData: () => ({}),
 };
 </script>

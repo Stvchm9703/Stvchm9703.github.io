@@ -1,6 +1,11 @@
 <template lang="pug">
 section
-  b-sidebar(fullheight, :open="menuOnOpen", @close="onCancel()")
+  b-sidebar(
+    fullheight,
+    :open="menuOnOpen",
+    @close="onCancel()",
+    type="sv-theme"
+  )
     .innerNav
       b-menu
         b-menu-list(label="Menu")
@@ -24,6 +29,24 @@ section
             :key="k.name",
             :to="k.routerPath"
           ) 
+    .fixedBottom.innerNav
+      .menu-list
+        .menu-item 
+          a 
+            i.mdi.mdi-cross 
+            span Setting
+
+      .sv-color-option-set
+        h1 Color mode: {{ $colorMode.value }}
+        b-field 
+          b-radio-button(
+            v-for="opt in colorOptions",
+            :key="opt.val",
+            v-model="$colorMode.preference",
+            :native-value="opt.val"
+            type="is-active"
+          )
+            i.mdi(:class="opt.icon")
 </template>
 
 <script>
@@ -72,7 +95,14 @@ export default {
       return o;
     },
   },
-  data: () => ({ isOpened: false }),
+  data: () => ({
+    isOpened: false,
+    colorOptions: [
+      { val: "system", icon: "mdi-laptop" },
+      { val: "dark", icon: "mdi-power-sleep" },
+      { val: "light", icon: "mdi-white-balance-sunny" },
+    ],
+  }),
   methods: {
     onCancel() {
       this.$store.commit("open_menu", false);
@@ -88,31 +118,9 @@ export default {
           })
         : list,
   },
-  created() {},
+  created() {
+    console.log(this.$colorMode);
+  },
 };
 </script>
 
-
-<style lang="scss" >
-
-.innerNav {
-  padding: 15px;
-  font-family: "Copr";
-  .menu-list {
-    .menu-item {
-      transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-      a:hover {
-        color: #fff;
-        background-color: #7957d5;
-      }
-      a {
-        font-size: 24px;
-      }
-      &.extraRouteMap a {
-        font-size: 20px;
-      }
-    }
-  }
-}
-// TODO : resolve the scoped issue
-</style>

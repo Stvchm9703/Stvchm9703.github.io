@@ -11,6 +11,7 @@ div
             :project_name="post.name",
             :project_full_name="post.full_name",
             :fork="post.fork",
+            :owner ="post.owner.login"
             :is_self_hosted="isSelfHosted(post)",
             :star_counted="post.stargazers_count",
             :forked_counted="post.forks_count",
@@ -48,13 +49,13 @@ export default {
     async fetchPorjectList() {
       //
       this.post_list = await this.$axios.$get(
-        "https://api.github.com/users/Stvchm9703/repos"
+        "/gh_api/users/Stvchm9703/repos"
       );
       this.$store.commit("project_list/set_list", this.post_list);
     },
     async fetchColorIndex() {
       let colorIndex = await this.$axios.$get(
-        "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
+        "/gh_resx/ozh/github-colors/master/colors.json"
       );
       this.$store.commit("project_list/set_color_index", colorIndex);
     },

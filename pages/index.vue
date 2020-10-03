@@ -33,7 +33,7 @@ export default {
     title_list: [
       {
         title: "Blender v2.8",
-        subtitle : "test for render !",
+        subtitle: "test for render !",
         color: "2,0,36,0.7",
         image: "/images/trialScene4.png",
       },
@@ -48,9 +48,9 @@ export default {
   }),
   methods: {
     async fetchPost() {
-      let y = await this.$axios.get(
-        "https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master/page/index.config.json"
-      );
+      let url =
+        "/page_io/page/index.config.json";
+      let y = await this.$axios.get(url);
       this.title_list = y.data.title_list;
       // console.log(y.data.title_list);
     },

@@ -43,11 +43,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: [
-    '~/assets/css/fonts/font_face.css',
-    '~/assets/css/page_trans.scss',
-    '~/assets/css/custom_layout.scss',
-  ],
+  css: ['@/assets/css/_all.scss'],
   styleResources: {
     // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
   },
@@ -55,6 +51,16 @@ export default {
     name: 'page',
     mode: 'out-in',
     beforeEnter(el) { }
+  },
+
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: 'sv-',
+    classSufix: '-mode',
   },
   rules: [
     {
@@ -80,15 +86,16 @@ export default {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
+    // '@nuxtjs/bulma',
     'nuxt-buefy',
-    '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/markdownit',
     '@nuxtjs/proxy',
     '@nuxt/content',
     "@nuxtjs/svg",
     '@nuxtjs/onesignal',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/color-mode',
     // 'nuxt-payload-extractor',
   ],
   markdownit: {
@@ -104,19 +111,20 @@ export default {
       'markdown-it-highlightjs',
       'markdown-it-github-preamble',
       'markdown-it-table-of-contents',
+      'markdown-it-emoji',
     ],
     injected: true,
   },
   // router config
   router: {
     routeNameSplitter: '/',
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'doc_proj_md',
-        path: '/doc/:user/:project_name',
-        component: resolve(__dirname, 'pages/doc/_project_name.vue')
-      })
-    },
+    // extendRoutes(routes, resolve) {
+    //   routes.push({
+    //     name: 'doc_proj_md',
+    //     path: '/doc/:user/:project_name',
+    //     component: resolve(__dirname, 'pages/doc/_project_name.vue')
+    //   })
+    // },
 
   },
   static: {
@@ -130,7 +138,6 @@ export default {
   axios: {
     proxy: true,
     baseUrl: "https://stvchm9703.github.io/"
-
   },
 
   content: {},
@@ -138,12 +145,24 @@ export default {
   proxy: {
     // '/api': { target: 'http://0.0.0.0:8080', },
     // '/md': { target: 'http://0.0.0.0:3000' },
-    '/host_md/': {
-      target: 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io/master/',
-      pathRewrite: { '^/host_md/': '' }
-    },
-    '/projMD': { target: 'https://raw.githubusercontent.com/Stvchm9703/' }
+
+    // '/page_io': {
+    //   target: 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master/',
+    //   pathRewrite: { '^/page_io': 'http://0.0.0.0:8081' || 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master', },
+    //   logLevel: 'debug'
+    // },
+    // '/gh_resx': {
+    //   target: 'https://raw.githubusercontent.com/',
+    //   pathRewrite: { '^/gh_resx': 'http://0.0.0.0:8080' || 'https://raw.githubusercontent.com' },
+    //   logLevel: 'debug'
+    // },
+    // '/gh_api': {
+    //   target: 'https://api.github.com/',
+    //   pathRewrite: { '^/gh_api': 'http://0.0.0.0:9170' || 'https://api.github.com' },
+    //   logLevel: 'debug'
+    // }
   },
+
   vue: {
     config: {
       productionTip: false,
@@ -161,7 +180,7 @@ export default {
     postcss: {
       preset: {
         features: {
-          customProperties: false
+          customProperties: true
         }
       }
     },

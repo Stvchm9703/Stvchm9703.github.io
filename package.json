@@ -21,8 +21,7 @@
     "@nuxtjs/markdownit": "^1.2.10",
     "markdown-it": "^11.0.1",
     "nuxt": "^2.14.0",
-    "nuxt-buefy": "^0.3.31",
-    "vue-svg-transition": "^0.2.1"
+    "nuxt-buefy": "^0.3.31"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^1.1.1",
@@ -43,6 +42,7 @@
     "lodash-webpack-plugin": "^0.11.5",
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-div": "^1.1.0",
+    "markdown-it-emoji": "^1.4.0",
     "markdown-it-github-headings": "^1.1.2",
     "markdown-it-github-preamble": "^1.0.0",
     "markdown-it-highlightjs": "^3.2.0",
@@ -59,6 +59,6 @@
     "sass-loader": "^8.0.0",
     "terser-webpack-plugin": "^4.1.0",
     "vee-validate": "^3.0.11",
-    "vue2-smooth-scroll": "^1.5.0"
+    "vue-d3-network": "^0.1.28"
   }
 }

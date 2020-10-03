@@ -1,6 +1,6 @@
 <template lang="pug">
 client-only
-  .container(:class="{ 'empty-contain': in_loading || fail_load }")
+  .container.sv-theme-doc-render(:class="{ 'empty-contain': in_loading || fail_load }")
     .section
       .content.is-1.disp_dark.docMD(
         v-if="!fail_load && !in_loading",
@@ -25,14 +25,13 @@ client-only
 <script>
 import _isEmpty from "lodash/isEmpty";
 import _cloneDeep from "lodash/cloneDeep";
-import "highlight.js/scss/atom-one-dark.scss";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "docMDRender_old",
   layout: "inner_page",
 
   head: (self) => ({
-    title: `Document - ${self.$route.params["project_name"]}`,
+    title: `Document - ${self.$route.query["proj"]}`,
     meta: [],
   }),
   data: () => ({
@@ -73,7 +72,10 @@ export default {
     skelRandWidth: () => (Math.random() * 60 + 20).toFixed(2) + "%",
 
     async fetchBranchList() {
-      let req_url = `https://api.github.com/repos/${this.$route.params["user"]}/${this.$route.params["project_name"]}/branches`;
+      let user = this.$route.query["u"];
+      let proj = this.$route.query["proj"];
+
+      let req_url = `/gh_api/repos/${user}/${proj}/branches`;
       let lip = await this.$axios.$get(req_url);
       // console.log("branch:", lip);
       let branchRouteMap = {
@@ -86,7 +88,7 @@ export default {
           name: e.name,
           path: e.name,
           _type: "branch",
-          routerPath: `/doc/${this.$route.params["user"]}/${this.$route.params["project_name"]}/?filePath=${e.path}&type=${e.type}&branch=${e.name}`,
+          routerPath: `/doc/project?u=${user}&proj=${proj}&filePath=${e.path}&type=${e.type}&branch=${e.name}`,
         })),
       };
       this.$store.commit("set_route_map", [branchRouteMap]);
@@ -94,6 +96,8 @@ export default {
     },
     async fetchPost(fileName) {
       let lip = "";
+      let user = this.$route.query["u"];
+      let proj = this.$route.query["proj"];
       if (_isEmpty(fileName)) {
         let readme_url = this.mdFileList.filter(
           (e) =>
@@ -108,18 +112,17 @@ export default {
         //   `https://raw.githubusercontent.com/${this.$route.params["user"]}/${this.$route.params["project_name"]}/master/${fileName}`
         // );
         lip = await this.$axios.$get(
-          `https://raw.githubusercontent.com/${this.$route.params["user"]}/${this.$route.params["project_name"]}/master/${fileName}`
+          `/gh_resx/${user}/${proj}/master/${fileName}`
         );
       }
       this.md_content = lip;
     },
     async fetchFileList(tarDir) {
       let request_url = "";
-      if (
-        !_isEmpty(this.$route.params["project_name"]) &&
-        !_isEmpty(this.$route.params["user"])
-      ) {
-        request_url = `https://api.github.com/repos/${this.$route.params["user"]}/${this.$route.params["project_name"]}/contents/`;
+      let user = this.$route.query["u"];
+      let proj = this.$route.query["proj"];
+      if (!_isEmpty(user) && !_isEmpty(proj)) {
+        request_url = `/gh_api/repos/${user}/${proj}/contents`;
         if (!_isEmpty(tarDir)) {
           request_url = `${request_url}/${tarDir}`;
         }
@@ -135,7 +138,7 @@ export default {
         name: e.name,
         path: e.path,
         _type: e.type,
-        routerPath: `/doc/${this.$route.params["user"]}/${this.$route.params["project_name"]}/?filePath=${e.path}&type=${e.type}`,
+        routerPath: `/doc/project?u=${user}&proj=${proj}&filePath=${e.path}&type=${e.type}`,
       }));
       let pathList = redList[0].path.split("/");
       let subDirRouteMap = {
@@ -149,7 +152,7 @@ export default {
           name: "..",
           path: pathList.slice(0, pathList.length - 2).join("/"),
           _type: "dir",
-          routerPath: `/doc/${this.$route.params["user"]}/${this.$route.params["project_name"]}/?filePath=${jk}&type=dir`,
+          routerPath: `/doc/project?u=${user}&proj=${proj}&filePath=${jk}&type=dir`,
         });
       }
       let fileRouteMap = {
@@ -172,7 +175,7 @@ export default {
 
       this.$store.commit(
         "file_list/set_project_name",
-        `${this.$route.params["user"]}/${this.$route.params["project_name"]}`
+        `${user}/${proj}`
       );
     },
   },
