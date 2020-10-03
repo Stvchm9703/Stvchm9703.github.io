@@ -1,8 +1,8 @@
 <template lang="pug">
-.sv-layout
+.sv-layout.sv-full-height-layout
   navigationHeader
   nuxt 
-  footerTemp
+  footerTemp.short-footer
   // colorDebug
 </template>
 <script>

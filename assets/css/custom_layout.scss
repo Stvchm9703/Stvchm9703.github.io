@@ -65,10 +65,40 @@ html {
 }
 
 
+.footer{
+  position: static;
+  width: 100%;
+  bottom: 0;
+}
+
+.sv-full-height-layout {
+ 
+  .footer {
+    position: fixed;
+    bottom:1.5em;
+    padding: 2em 1.5em;
+  }
+}
+.sv-light-mode .footer{
+  background-color: $mono-set-3;
+  color: $mono-set-12;
+
+  a,
+  strong {
+    color: $mono-set-10;
+  }
+}
+.sv-dark-mode .footer {
+  background-color: $mono-set-13;
+  color: $mono-set-2;
+  a, strong {
+    color: $primary;
+  }
+}
 
 .empty-contain {
   min-height: 80vh;
-  width: 100%;
+  // width: 100%;
 }
 
 
@@ -111,10 +141,27 @@ html {
 // about-page
 .column.lang-card-grid {
   display: grid;
+  .card{
+    background-color: $mono-set-0;
+    color: $mono-set-10;
+    p {
+      color: $mono-set-10;
+    }
+  }
   @include when-small-mobile {
     dsiplay: inline-flex;
   }
+}
 
+.sv-dark-mode .lang-card-grid {
+  .card {
+    background-color: $mono-set-0;
+    color: $mono-set-10;
+    p {
+      color: $mono-set-10;
+    }
+
+  }
 }
 
 .timeline.is-center-manually {

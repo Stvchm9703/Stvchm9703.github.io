@@ -11,10 +11,3 @@ footer.footer
       a(href="http://creativecommons.org/licenses/by-nc-sa/4.0/") CC BY NC SA 4.0
       | .
 </template>
-<style lang="scss" scoped>
-.footer {
-  position: static;
-  width: 100%;
-  bottom: 0;
-}
-</style>

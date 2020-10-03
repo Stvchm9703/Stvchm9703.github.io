@@ -1,4 +1,14 @@
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
+  @if $b-hsb==0 {
+    @return hsla(0, 0, 0, $a)
+  }
 
+  @else {
+    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
+    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
+    @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
+  }
+}
 // @import "~bulma";
 // Colors
 $black          : hsl(0, 0%, 4%);
@@ -51,13 +61,23 @@ $mono-set-13:hsl(249.8, 44.9%, 14.4%);
 
 // copy form derived-variable
 // $primary: $turquoise !default;
-$primary: #7957d5;
-$secondory : #8f539b;
-$thirdory : #8f539b;
-$info   : $cyan !default;
-$success: $green !default;
-$warning: $yellow !default;
-$danger : $red !default;
+// $primary: #7957d5;
+// $secondory : #8f539b;
+// $thirdory : #8f539b;
+
+$primary : hsl(26, 89%, 55%);
+$secondory : lighten(adjust-hue($primary, 10), 10% );
+$thirdory : lighten(adjust-hue($primary, 15), 15%);
+
+
+// $info   : $cyan !default;
+// $success: $green !default;
+// $warning: $yellow !default;
+// $danger : $red !default;
+$info : hsl(215, 86%, 63%);
+$success: hsl(156, 59%, 51%);
+$warning: hsl(58, 87%, 62%);
+$danger : hsl(0, 100%, 60%);
 
 $light  : $white-ter !default;
 $dark   : $grey-darker !default;

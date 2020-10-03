@@ -5,8 +5,8 @@
       figure.image.is-2by1
         img(:src="icon_image")
     .card-content
-      p.title.has-text-centered.has-text-dark.is-size-4 {{ desp_title }}
-      p.subtitle.has-text-dark.is-size-6.is-hidden-touch {{ desp_subtitle }}
+      p.title.has-text-centered.is-size-4 {{ desp_title }}
+      p.subtitle.is-size-6.is-hidden-touch {{ desp_subtitle }}
       slot
 </template>
 

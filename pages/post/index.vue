@@ -10,6 +10,5 @@ export default {
   data: () => ({
     post_list : [],
   }),
-  fetchData: () => ({}),
 };
 </script>

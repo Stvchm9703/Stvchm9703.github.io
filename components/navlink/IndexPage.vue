@@ -13,24 +13,24 @@ b-navbar.sv-navbar(
       :to="k.path",
       :key="k.name"
     ) {{ k.name }}
-    b-navbar-dropdown.linkListItem(
-      tag="div",
-      v-for="k in link_set",
-      :label="k.name",
-      :key="k.name"
-    )
-      b-navbar-item(
-        v-for="item in k.sub_path",
-        key="item.name",
-        tag="nuxt-link",
-        prefetch,
-        :to="item.path",
-        :key="item.name"
-      ) {{ item.name }}
+    // b-navbar-dropdown.linkListItem(
+    //   tag="div",
+    //   v-for="k in link_set",
+    //   :label="k.name",
+    //   :key="k.name"
+    // )
+    //   b-navbar-item(
+    //     v-for="item in k.sub_path",
+    //     key="item.name",
+    //     tag="nuxt-link",
+    //     prefetch,
+    //     :to="item.path",
+    //     :key="item.name"
+    //   ) {{ item.name }}
 </template>
 <script>
-import _groupBy from "lodash/groupBy";
-import _value from "lodash/values";
+// import _groupBy from "lodash/groupBy";
+// import _value from "lodash/values";
 export default {
   layout: "inner_page",
   computed: {
@@ -46,24 +46,24 @@ export default {
 
       return list_a;
     },
-    link_set: (self) => {
-      let list_b = self.$router.options.routes
-        .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
-        .map((e) => ({
-          path: e.path,
-          name: e.name,
-          header: e.name.replace(/\/[\w]+/, ""),
-        }));
-      list_b = _groupBy(list_b, "header");
-      let o = [];
-      for (let key in list_b) {
-        o.push({
-          name: key,
-          sub_path: list_b[key],
-        });
-      }
-      return o;
-    },
+    // link_set: (self) => {
+    //   let list_b = self.$router.options.routes
+    //     .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
+    //     .map((e) => ({
+    //       path: e.path,
+    //       name: e.name,
+    //       header: e.name.replace(/\/[\w]+/, ""),
+    //     }));
+    //   list_b = _groupBy(list_b, "header");
+    //   let o = [];
+    //   for (let key in list_b) {
+    //     o.push({
+    //       name: key,
+    //       sub_path: list_b[key],
+    //     });
+    //   }
+    //   return o;
+    // },
   },
   data: () => ({
     isOpened: false,

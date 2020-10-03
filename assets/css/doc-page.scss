@@ -18,18 +18,19 @@
   }
 
   .card-footer {
+    // border-top-color: $mono-set-8;
     .prim-dark-btn {
-      background-color: $primary;
       color: $mono-set-0;
+      background-color: $primary;
     }
 
     .sec-dark-btn {
+      color: $mono-set-11;
       background-color: $secondory;
-      color: $mono-set-0;
     }
 
     .card-footer-item:not(:last-child) {
-      border-right-color: $mono-set-8;
+      border-right-color: $mono-set-2;
     }
   }
 }
@@ -41,19 +42,22 @@
 
     .tags.has-addons .tag.is-dark {
       color: $mono-set-10;
-      background-color: $mono-set-3;
+      background-color: $mono-set-1;
     }
   }
 
   .card-footer {
+    border-top-color: $mono-set-8;
     .prim-dark-btn {
       background-color: $primary;
       color: $mono-set-0;
+      font-weight: 700;
     }
 
     .sec-dark-btn {
       background-color: $secondory;
-      color: $mono-set-0;
+      color: $mono-set-11;
+      font-weight: 700;
     }
 
     .card-footer-item:not(:last-child) {
@@ -137,8 +141,6 @@
 
   .b-tabs .docMD {
     
-
-   
   }
 
   .panel-block:first-child {

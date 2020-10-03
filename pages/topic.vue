@@ -1,15 +1,16 @@
 <template lang="pug">
-.container.is-fluid
-  .section
-    span.title.is-center.
-      Tagged Post 
-    .columns
-      client-only
-        // D3Network.column
+.container.is-fluid.empty-contain
+  .section.fix-top
     .columns
       .column
+        span.is-size-1.has-text-light.
+          Tagged Post 
+      .column.has-text-right
         span.has-text-light Last update :
           time(:datetime="last_updated") {{ last_updated }}
+    
+          
+          
 </template>
 
 <script>
@@ -19,7 +20,7 @@ import D3Network from "vue-d3-network";
 
 export default {
   name: "tag-graph",
-  layout: "inner_page",
+  layout: "inner_fullheigh_page",
   components: { D3Network },
   data: () => ({
     in_loading: true,

@@ -50,8 +50,8 @@ section
 </template>
 
 <script>
-import _groupBy from "lodash/groupBy";
-import _value from "lodash/values";
+// import _groupBy from "lodash/groupBy";
+// import _value from "lodash/values";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "inner-page-nav",
@@ -76,24 +76,24 @@ export default {
         .sort((a, b) => a.path.length - b.path.length);
       return list_a;
     },
-    link_set: (self) => {
-      let list_b = self.$router.options.routes
-        .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
-        .map((e) => ({
-          path: e.path,
-          name: e.name,
-          header: e.name.replace(/\/[\w]+/, ""),
-        }));
-      list_b = _groupBy(list_b, "header");
-      let o = [];
-      for (let key in list_b) {
-        o.push({
-          name: key,
-          sub_path: list_b[key].sort((a, b) => a.path.length - b.path.length),
-        });
-      }
-      return o;
-    },
+    // link_set: (self) => {
+    //   let list_b = self.$router.options.routes
+    //     .filter((e) => /[\w]+\//.test(e.name) && !e.path.includes("/:"))
+    //     .map((e) => ({
+    //       path: e.path,
+    //       name: e.name,
+    //       header: e.name.replace(/\/[\w]+/, ""),
+    //     }));
+    //   list_b = _groupBy(list_b, "header");
+    //   let o = [];
+    //   for (let key in list_b) {
+    //     o.push({
+    //       name: key,
+    //       sub_path: list_b[key].sort((a, b) => a.path.length - b.path.length),
+    //     });
+    //   }
+    //   return o;
+    // },
   },
   data: () => ({
     isOpened: false,
