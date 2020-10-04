@@ -5,6 +5,7 @@
       p.card-header-title(
         :class="{ 'github-header': provider_host === 'github' }"
       )
+        // githubIcon
         i.mdi(:class="{ 'mdi-github': provider_host === 'github' }")
         | {{ project_name }}
     .card-content
@@ -43,6 +44,7 @@
 </template>
 <script>
 import ProjectInfoModal from "~/components/docMD/ProjectInfoModal.vue";
+// import githubIcon  from 'mdi-vue/Github.vue';
 export default {
   name: "Project-Card",
   props: {
@@ -58,6 +60,9 @@ export default {
     created_at: { type: String, default: "" },
     updated_at: { type: String, default: "" },
   },
+//   components :{
+// githubIcon
+//   },
   computed: {
     provider_host() {
       return "github";
@@ -80,6 +85,3 @@ export default {
 // TODO:
 // 1. check up the card content beatify ?
 </script>
-
-<style lang="scss" scoped>
-</style>

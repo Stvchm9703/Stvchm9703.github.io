@@ -2,6 +2,7 @@
 .modal-card.sv-theme-modal
   header.modal-card-head.github-header
     p.modal-card-title.title.is-3
+      // githubIcon
       i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
       | {{project.name}}
     
@@ -102,12 +103,6 @@
           div(v-if="!is_loading&&!fail_load")
             h3.is-6 Default Branch: {{project.default_branch}}
             article.panel.is-primary
-              // .panel-block
-                p.control.has-icons-left
-                  input.input.is-primary(type="text", placeholder="Search")
-                  span.icon.is-left
-                    i.mdi.mdi-magnify(aria-hidden="true")
-              
               a.panel-block(
                 v-for="fileSet in file_list",
               )
@@ -158,6 +153,7 @@
   footer.modal-card-foot
     button.button.close-btn(type="button", @click="$emit(\'close\')") Close
     a.button.is-primary(:href="project.html_url" target="blank") 
+      // githubIcon
       i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
       | Go to git reposity
 </template>
@@ -165,9 +161,12 @@
 import { mapState } from "vuex";
 import _isEmpty from "lodash/isEmpty";
 import debugUrl from "~/plugins/debugRequest";
+// import githubIcon  from 'mdi-vue/Github.vue';
+
 export default {
   
   name: "Project-info-modal",
+  // components:{githubIcon},
   computed: {
     ...mapState({
       project: (state) => state.project_list.on_showing_project,

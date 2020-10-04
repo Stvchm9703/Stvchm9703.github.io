@@ -2,7 +2,7 @@
 .sv-layout.sv-full-height-layout
   navigationHeader
   nuxt 
-  footerTemp.short-footer
+  footerTemp
   // colorDebug
 </template>
 <script>
@@ -16,7 +16,6 @@ export default {
     // colorDebug: process.env.NODE_ENV === "development" ? colorDebug : null,
   },
   created() {
-    // console.log('layout hook craeatd');
     this.$store.commit("open_menu", false);
   },
 };

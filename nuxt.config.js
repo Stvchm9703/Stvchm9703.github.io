@@ -27,7 +27,10 @@ export default {
     workbox: {
       cleanupOutdatedCaches: true,
       cacheAssets: false, // for /*
-      offline: false // for /_nuxt/*    
+      offline: false, // for /_nuxt/* 
+      // runtimeCaching : false,
+      skipWaiting: false,
+      // importScripts: [ 'sw.cli.js' ],
     }
   },
   /*
@@ -47,9 +50,7 @@ export default {
   ** Global CSS
   */
   css: ['@/assets/css/_all.scss'],
-  styleResources: {
-    // scss: ['~/assets/css/*.scss', '~/assets/css/**/*.scss']
-  },
+  styleResources: {},
   pageTransition: {
     name: 'page',
     mode: 'out-in',
@@ -112,12 +113,12 @@ export default {
     '@nuxtjs/color-mode',
     // 'nuxt-payload-extractor',
   ],
-  buefy: { css: false },
+  buefy: { css: false, materialDesignIcons: true },
   markdownit: {
     preset: 'default',
     linkify: true,
     breaks: true,
-    use: [
+    use: [ 
       'markdown-it-div',
       'markdown-it-attrs',
       'markdown-it-multimd-table',
@@ -157,26 +158,7 @@ export default {
 
   content: {},
 
-  proxy: {
-    // '/api': { target: 'http://0.0.0.0:8080', },
-    // '/md': { target: 'http://0.0.0.0:3000' },
-
-    // '/page_io': {
-    //   target: 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master/',
-    //   pathRewrite: { '^/page_io': 'http://0.0.0.0:8081' || 'https://raw.githubusercontent.com/Stvchm9703/Stvchm9703.github.io.page/master', },
-    //   logLevel: 'debug'
-    // },
-    // '/gh_resx': {
-    //   target: 'https://raw.githubusercontent.com/',
-    //   pathRewrite: { '^/gh_resx': 'http://0.0.0.0:8080' || 'https://raw.githubusercontent.com' },
-    //   logLevel: 'debug'
-    // },
-    // '/gh_api': {
-    //   target: 'https://api.github.com/',
-    //   pathRewrite: { '^/gh_api': 'http://0.0.0.0:9170' || 'https://api.github.com' },
-    //   logLevel: 'debug'
-    // }
-  },
+  proxy: {},
 
   vue: {
     config: {
@@ -238,23 +220,25 @@ export default {
     optimization: {
       minimize: true,
       splitChunks: {
-        chunks: 'initial',
+        chunks: 'all',
         automaticNameDelimiter: '.',
-        name: undefined,
         cacheGroups: {
-          commons: {
+          vendor: {
             test: /[\\/]node_modules[\\/]/,
             // cacheGroupKey here is `commons` as the key of the cacheGroup
-            name: 'common',
-            chunks: 'initial',
+            name: (mod) => {
+              const packageName = mod.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              return `npm.${packageName.replace('@', '')}`;
+            },
+            chunks: 'all',
             enforce: true
           },
-          vendor: {
-            test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
-            name: 'vendor',
-            chunks: 'initial',
-            enforce: true
-          },
+          // vendor: {
+          //   test: /[\\/]node_modules[\\/](vue|vuex|nuxt|vue-router)[\\/]/,
+          //   name: 'vendor',
+          //   chunks: 'initial',
+          //   enforce: true
+          // },
           styles: {
             name: 'styles',
             test: /\.(css|vue)$/,
