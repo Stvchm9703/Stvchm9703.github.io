@@ -2,6 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LodashPlugin = require('lodash-webpack-plugin');
+const path = require('path');
 export default {
   // mode: 'spa',
   ssr: true,
@@ -24,7 +25,9 @@ export default {
 
   pwa: {
     workbox: {
-      cleanupOutdatedCaches: true
+      cleanupOutdatedCaches: true,
+      cacheAssets: false, // for /*
+      offline: false // for /_nuxt/*    
     }
   },
   /*
@@ -32,13 +35,13 @@ export default {
   */
   // loading: { color: '#fff' },
   loading: {
-    color: '#3273dc',
+    color: '#f5b656',
     height: '5px'
   },
   loadingIndicator: {
-    name: 'circle',
-    color: '#3273dc',
-    background: '#4a5568'
+    name: 'folding-cube',
+    color: '#f5b656',
+    background: '#2b2a5f'
   },
   /*
   ** Global CSS
@@ -68,7 +71,18 @@ export default {
       use: [
         isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
         'css-loader', 'sass-loader',],
+      exclude: [
+        path.resolve(__dirname, "**/test/*"),
+        path.resolve(__dirname, "**/*.test.*"),
+      ],
     },
+    {
+      test: /\.vue$/i,
+      exclude: [
+        path.resolve(__dirname, "**/test/*.vue"),
+        path.resolve(__dirname, "**/*.test.vue"),
+      ],
+    }
   ],
   /*
   ** Plugins to load before mounting the App
@@ -98,7 +112,7 @@ export default {
     '@nuxtjs/color-mode',
     // 'nuxt-payload-extractor',
   ],
-  buefy: { css : false },
+  buefy: { css: false },
   markdownit: {
     preset: 'default',
     linkify: true,
@@ -178,6 +192,11 @@ export default {
     minifyCSS: true,
     minifyJS: true,
     cache: false,
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true
+    },
     postcss: {
       preset: {
         features: {
@@ -294,7 +313,8 @@ export default {
     fallback: '404.html',
     exclude: [
       /^\/test/,
-      /^\/example/
+      /^\/example/,
+      '**/*.test.*',
     ],
   },
   // ignorePrefix: isDev ? [] : ['**/*.test.*','pages/test/*.vue'],

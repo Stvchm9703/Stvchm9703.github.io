@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:ev="http://www.w3.org/2001/xml-events" width="2560px" height="2560px">
+  <defs>
+    <radialGradient id="gr" fx="50%" fy="50%" r="70%" spreadMethod="pad">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <!-- <stop offset="50%" stop-color="#556b2f" stop-opacity="1" /> -->
+      <stop offset="100%" stop-color="#000000" stop-opacity="1" />
+    </radialGradient>
+    <pattern id="p1" patternUnits="userSpaceOnUse" x="0" y="0" width="35" height="60.621778266"
+      patternTransform="translate(1280,800) rotate(330 0 0)">
+      <path stroke="#fff" stroke-width="2" fill="none"
+        d="M0 0V10.103629711 L17.5 20.207259422 L35 10.103629711V0M0 60.621778266 V50.518148555L17.5 40.414518844 L35 50.518148555V60.621778266M17.5 20.207259422v20.207259422" />
+    </pattern>
+    <linearGradient id="grad" x2="0.4" y2="0.6">
+      <stop offset="0%" stop-color="#1a1435" />
+      <stop offset="100%" stop-color="#373b72" />
+    </linearGradient>
+    <mask id="msk" x="0" y="0" width="2560" height="1600">
+      <path fill="#000" d="M0 0H2560V2560H0z"/>
+      <path fill="url(#p1)" d="M0 0H2560V2560H0z"/>
+    </mask>
+  </defs>
+  <path fill="url(#grad)" d="M0 0H2560V2560H0z"/>
+  <path mask="url(#msk)" fill="url(#gr)" d="M0 0H2560V2560H0z"/>
+
+</svg>

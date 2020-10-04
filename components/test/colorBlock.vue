@@ -45,7 +45,7 @@ export default {
 // @import "~color";
 @import "~bulma/sass/utilities/_all";
 
-@import "~/assets/css/color.scss";
+@import "~/assets/css/scss/color.scss";
 
 $debug-mono-list: $mono-set-0, $mono-set-1, $mono-set-2, $mono-set-3,
   $mono-set-4, $mono-set-5, $mono-set-6, $mono-set-7, $mono-set-8, $mono-set-9,

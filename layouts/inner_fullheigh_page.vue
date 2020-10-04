@@ -8,12 +8,12 @@
 <script>
 import navigationHeader from "~/components/navlink/IndexMobile.vue";
 import footerTemp from "~/components/common/footer.vue";
-import colorDebug from "~/components/test/colorBlock.vue";
+// import colorDebug from "~/components/test/colorBlock.vue";
 export default {
   components: {
     navigationHeader,
     footerTemp,
-    colorDebug: process.env.NODE_ENV === "development" ? colorDebug : null,
+    // colorDebug: process.env.NODE_ENV === "development" ? colorDebug : null,
   },
   created() {
     // console.log('layout hook craeatd');

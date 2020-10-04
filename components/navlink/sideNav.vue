@@ -118,9 +118,6 @@ export default {
           })
         : list,
   },
-  created() {
-    console.log(this.$colorMode);
-  },
 };
 </script>
 

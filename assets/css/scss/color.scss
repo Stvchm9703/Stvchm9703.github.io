@@ -64,11 +64,10 @@ $mono-set-13:hsl(249.8, 44.9%, 14.4%);
 // $primary: #7957d5;
 // $secondory : #8f539b;
 // $thirdory : #8f539b;
-
+// #f27f26
 $primary : hsl(26, 89%, 55%);
 $secondory : lighten(adjust-hue($primary, 10), 10% );
 $thirdory : lighten(adjust-hue($primary, 15), 15%);
-
 
 // $info   : $cyan !default;
 // $success: $green !default;

@@ -1,18 +1,19 @@
+// util
 @import "~bulma/sass/utilities/_all";
-@import "color";
-@import "media_rule";
+@import "scss/color";
+@import "scss/media_rule";
 @import './fonts/font_face.css';
 
-@import 'page_trans.scss';
-
+// _elem
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
 @import "~bulma/sass/form/_all";
 @import "~bulma/sass/components/_all";
 @import "~bulma/sass/grid/_all";
 // @import "~bulma/sass/helpers/_all";
-@import "color-theme-ex.scss";
+@import "scss/color-theme-ex.scss";
 
+// helper
 @import "~bulma/sass/helpers/float.sass";
 @import "~bulma/sass/helpers/other.sass";
 @import "~bulma/sass/helpers/overflow.sass";
@@ -21,10 +22,15 @@
 @import "~bulma/sass/helpers/typography.sass";
 @import "~bulma/sass/helpers/visibility.sass";
 
+// layout
 @import "~bulma/sass/layout/_all";
 @import "~buefy/src/scss/buefy";
 
-@import "custom_layout.scss";
-@import "navbar-comp.scss";
-@import "doc-page.scss";
-@import "about-page.scss";
+// extra
+@import 'scss/page_trans.scss';
+@import "scss/custom_layout.scss";
+@import "scss/navbar-comp.scss";
+@import "scss/doc-page.scss";
+@import "scss/about-page.scss";
+
+

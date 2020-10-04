@@ -44,14 +44,18 @@ html {
   padding-bottom: 15px;
 }
 
-.sv-light-mode{
-  .title , .subtitle {
+.sv-light-mode {
+
+  .title,
+  .subtitle {
     color: $mono-set-0;
   }
 }
 
 .sv-dark-mode {
-  .title, .subtitle {
+
+  .title,
+  .subtitle {
     color: $mono-set-0;
   }
 }
@@ -77,21 +81,24 @@ html {
 }
 
 
-.footer{
+.footer {
   position: static;
   width: 100%;
   bottom: 0;
 }
 
 .sv-full-height-layout {
- 
+  .empty-contain{
+    min-height:  95vh;
+  }
   .footer {
     position: fixed;
-    bottom:1.5em;
+    bottom: 1.5em;
     padding: 2em 1.5em;
   }
 }
-.sv-light-mode .footer{
+
+.sv-light-mode .footer {
   background-color: $mono-set-3;
   color: $mono-set-12;
 
@@ -100,10 +107,13 @@ html {
     color: $mono-set-10;
   }
 }
+
 .sv-dark-mode .footer {
   background-color: $mono-set-13;
   color: $mono-set-2;
-  a, strong {
+
+  a,
+  strong {
     color: $primary;
   }
 }
@@ -116,6 +126,7 @@ html {
 // about-block
 .has-border-line {
   border-bottom: 10px solid #8241f9;
+
   @each $name,
   $pair in $colors {
     $color: nth($pair, 1);
@@ -149,4 +160,14 @@ html {
   @include when-mobile {
     border-bottom-width: 2px;
   }
+}
+
+.sv-layout {
+  background-image: url('~static/images/bg-hexagon.svg');
+  background-repeat: no-repeat no-repeat;
+  background-position: center;
+  background-attachment: scroll;
+  background-size: cover;
+  // width:auto;
+  // height: 100%;
 }

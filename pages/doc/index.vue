@@ -11,7 +11,7 @@ div
             :project_name="post.name",
             :project_full_name="post.full_name",
             :fork="post.fork",
-            :owner ="post.owner.login"
+            :owner="post.owner.login",
             :is_self_hosted="isSelfHosted(post)",
             :star_counted="post.stargazers_count",
             :forked_counted="post.forks_count",
@@ -22,7 +22,6 @@ div
           //  
         .columns.is-multiline(v-if="in_loading && !fail_load")
           ProjectEmptyCard(v-for="post in 6", :key="post")
-  
 </template>
 
 <script>
@@ -48,9 +47,7 @@ export default {
   methods: {
     async fetchPorjectList() {
       //
-      this.post_list = await this.$axios.$get(
-        "/gh_api/users/Stvchm9703/repos"
-      );
+      this.post_list = await this.$axios.$get("/gh_api/users/Stvchm9703/repos");
       this.$store.commit("project_list/set_list", this.post_list);
     },
     async fetchColorIndex() {
@@ -64,22 +61,24 @@ export default {
     },
   },
   async beforeMount() {
-    this.in_loading = true;
-    if (!_isEmpty(this.$route.hash)) {
-      let ytmp = this.$route.hash.split("/");
-      if (ytmp.length > 1) {
-        this.hash_project = ytmp[1];
+    // console.log(this);
+    this.$nextTick(async () => {
+      this.in_loading = true;
+      if (!_isEmpty(this.$route.hash)) {
+        let ytmp = this.$route.hash.split("/");
+        if (ytmp.length > 1) {
+          this.hash_project = ytmp[1];
+        }
       }
-    }
-
-    try {
-      await Promise.all([this.fetchPorjectList(), this.fetchColorIndex()]);
-    } catch (e) {
-      console.warn("axios:", e);
-      this.fail_load = true;
-    } finally {
-      this.in_loading = false;
-    }
+      try {
+        await Promise.all([this.fetchPorjectList(), this.fetchColorIndex()]);
+      } catch (e) {
+        console.warn("axios:", e);
+        this.fail_load = true;
+      } finally {
+        this.in_loading = false;
+      }
+    });
   },
 };
 // TODO:
@@ -90,5 +89,4 @@ export default {
 
 
 <style lang="scss" scoped>
-
 </style>

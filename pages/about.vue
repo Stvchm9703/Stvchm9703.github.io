@@ -46,7 +46,7 @@ div
               span Teksbotics(Hong Kong) Limited
               p(lang="md").
                 Teskbotic (HK) is a robotic solution kick-start company in Hong Kong.
-  
+
 
           .timeline-item.left-side
             .timeline-marker.is-icon.is-primary
@@ -109,8 +109,8 @@ import infoBlock from "~/components/aboutBlock/InfoBlock.vue";
 import SNSBlock from "~/components/aboutBlock/SNSBlock.vue";
 import ItemCard from "~/components/aboutBlock/itemCard.vue";
 
-import header_row_block from "~/components/mbr/header_row_block";
-import contact_row_block from "~/components/mbr/contact_row_block";
+// import header_row_block from "~/components/mbr/header_row_block";
+// import contact_row_block from "~/components/mbr/contact_row_block";
 export default {
   layout: "inner_page",
   head: (self) => ({
@@ -121,8 +121,8 @@ export default {
     infoBlock,
     SNSBlock,
     ItemCard,
-    header_row_block,
-    contact_row_block,
+    // header_row_block,
+    // contact_row_block,
   },
   methods: {
     img_style: (img_src) => ({

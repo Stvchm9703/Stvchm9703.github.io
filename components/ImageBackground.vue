@@ -80,7 +80,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "~/assets/css/media_rule.scss";
+@import "~/assets/css/scss/media_rule.scss";
 
 // index / image-background
 .bgContainer {
