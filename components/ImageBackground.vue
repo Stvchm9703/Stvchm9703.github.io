@@ -101,7 +101,7 @@ export default {
   @include when-small-mobile {
     .carousel-items .carousel-arrow,
     .carousel-items .carousel-arrow .icon {
-      z-index: 100;
+      z-index: 10;
       height: 36px;
       width: 36px;
       .mdi::before {
