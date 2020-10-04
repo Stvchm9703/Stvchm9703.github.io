@@ -98,6 +98,7 @@ export default {
     '@nuxtjs/color-mode',
     // 'nuxt-payload-extractor',
   ],
+  buefy: { css : false },
   markdownit: {
     preset: 'default',
     linkify: true,
@@ -297,6 +298,7 @@ export default {
     ],
   },
   // ignorePrefix: isDev ? [] : ['**/*.test.*','pages/test/*.vue'],
+  ignore: ['**/*.test.*', 'pages/test/*.vue'],
   ignoreOptions: {
     ignorecase: false
   },

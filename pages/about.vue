@@ -92,14 +92,14 @@ div
         Content Me
       section.section
         .container.is-fullwidth
-          .columns
+          .columns.has-thin-border-line.is-light
             .column 
               p.is-size-5.
-                asking for commition is welcome!
-          .columns.is-desktop
-            .column
+                Asking for commission is welcome!
+          .columns.is-desktop.has-thin-border-line.is-light
+            .column.has-text-right-touch
               span Email
-            .column.has-text-right.has-text-left-touch
+            .column.has-text-right
               a(href="mailto:stv.chm@gmail.com") stv.chm@gmail.com
 </template>
 

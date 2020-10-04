@@ -1,0 +1,203 @@
+// about page
+.background_layer {
+  background-repeat: no-repeat no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.front-layer {
+  color: $mono-set-1;
+
+  .aboutBlockMod {
+    .hero-body {
+      background: rgba($mono-set-11, 0.5);
+    }
+  }
+  a {
+    color: $mono-set-3;
+  }
+}
+
+// about-page
+.column.lang-card-grid {
+  display: grid;
+
+  .card {
+    background-color: $mono-set-0;
+    color: $mono-set-10;
+
+    p {
+      color: $mono-set-10;
+    }
+  }
+
+  @include when-small-mobile {
+    dsiplay: inline-flex;
+  }
+}
+
+.sv-dark-mode .lang-card-grid {
+  .card {
+    background-color: $mono-set-0;
+    color: $mono-set-10;
+
+    p {
+      color: $mono-set-10;
+    }
+  }
+}
+
+.timeline.is-center-manually {
+  .timeline-header {
+    display: flex;
+    width: 100%;
+    align-self: center;
+  }
+
+  .timeline-item {
+    width: 50%;
+    align-self: flex-end;
+
+    &.left-side {
+      align-self: flex-start;
+      margin-left: 0;
+      margin-right: $timeline-header-width / 2;
+
+      &::before {
+        right: -$timeline-line-width;
+        left: auto;
+      }
+
+      .timeline-marker {
+        left: auto;
+        right: -(($timeline-marker-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+
+        &.is-image {
+          @each $dimension in $dimensions {
+            &.is-#{$dimension}x#{$dimension} {
+              left: auto;
+              right: ($dimension / 2) * -1px;
+            }
+          }
+        }
+
+        &.is-icon {
+          left: auto;
+          right: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        }
+      }
+
+      .timeline-content {
+        padding: $timeline-rtl-content-padding;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-basis: 100%;
+      }
+    }
+
+    &.right-side {
+      margin-left: $timeline-item-padding-left;
+      padding-bottom: $timeline-item-padding-bottom;
+
+      &::before {
+        content: "";
+        background-color: $timeline-line-color;
+        display: block;
+        width: $timeline-line-width;
+        height: 100%;
+        position: absolute;
+        top: 0;
+      }
+
+      .timeline-marker {
+        left: -(($timeline-marker-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        right: auto;
+
+        &.is-image {
+          @each $dimension in $dimensions {
+            &.is-#{$dimension}x#{$dimension} {
+              right: auto;
+              left: ($dimension / 2) * -1px;
+            }
+          }
+        }
+
+        &.is-icon {
+          right: auto;
+          left: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2) - $timeline-line-width;
+        }
+      }
+    }
+
+  }
+}
+
+.timeline.is-mobile-left {
+  @include when-mobile {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .timeline-header {
+      width: $timeline-header-width;
+      align-self: flex-start;
+      align-items: flex-start;
+
+    }
+
+    .timeline-item,
+    .timeline-item.left-side,
+    .timeline-item.right-side {
+      width: 100%;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      position: relative;
+      // align-self: flex-start;
+      justify-content: flex-start;
+      margin-left: $timeline-item-padding-left;
+      padding-bottom: $timeline-item-padding-bottom;
+      align-self: flex-start;
+      align-items: flex-start;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .timeline-marker {
+        left: -0.35em;
+        right: auto;
+
+        &.is-image,
+        &.is-icon {
+          right: auto;
+          left: -(($timeline-marker-icon-size / 2) - $timeline-marker-border-size / 2);
+        }
+      }
+
+      .timeline-content {
+        align-items: flex-start;
+        padding: 1em 0 0 .5em;
+        padding: $timeline-content-padding;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.timeline-marker.is-icon.is-info.is-large {
+  height: 2.7em;
+  width: 2.7em;
+  left: -1.2em !important;
+
+  .mdi-36px {
+    height: 12px;
+  }
+}
