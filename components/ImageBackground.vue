@@ -8,8 +8,10 @@
     indicator-position="is-top is-mobile-top",
     :pause-hover="false",
     :pause-info="false",
+    :arrow="false",
     :arrow-hover="false",
-    arrow-position="is-mobile-top"
+    arrow-position="is-mobile-top",
+    :value="in_view"
   )
     b-carousel-item(v-for="(carousel, i) in carousels", :key="i")
       section.hero.background_layer.is-fullheight(:style="carousel.style")
@@ -21,20 +23,31 @@
                 h1.title.is-size-1-desktop.is-size-3-touch.is-shadow {{ carousel.title }}
                 h2.subtitle.is-size-3-desktop.is-size-5-touch.is-shadow {{ carousel.subtitle }}
     template(slot="indicators", slot-scope="props")
-      span.al.image.is-hidden-touch(:style="carousels[props.i].style")
+      figure.al.image.is-hidden-touch.is-3by1
+        img(:src="carousels[props.i]._image")
       span.indicator-style.is-dots.is-hidden-desktop
+
+    .carousel-arrow
+      span.icon.has-icons-left(@click="toggle_left()")
+        leftArrowIcon
+      span.icon.has-icons-right(@click="toggle_right()")
+        rightArrowIcon
 </template>
 
 <script>
 import _isArray from "lodash/isArray";
 import _isEmpty from "lodash/isEmpty";
+import leftArrowIcon from "mdi-vue/ChevronDoubleLeft.vue";
+import rightArrowIcon from "mdi-vue/ChevronDoubleRight.vue";
 export default {
   props: {
     src: {},
   },
   data: () => ({
     carousels: [],
+    in_view: 0,
   }),
+  components: { leftArrowIcon, rightArrowIcon },
   methods: {
     init_set_list() {
       if (_isArray(this.src)) {
@@ -42,6 +55,7 @@ export default {
           this.carousels = this.src.map((e) => ({
             title: e.title,
             subtitle: e.subtitle,
+
             style: !_isEmpty(e.image)
               ? { "background-image": "url(" + e.image + ")" }
               : { "background-color": "rgba(" + e.color + ")" },
@@ -63,14 +77,33 @@ export default {
           this.carousels = [
             {
               title: this.src.title,
+              subtitle: e.subtitle,
+
               style: !_isEmpty(this.src.image)
                 ? { "background-image": "url(" + this.src.image + ")" }
                 : { "background-color": "rgba(" + this.src.color + ")" },
+              _image: e.image,
             },
           ];
         } catch (e) {
           console.warn(e);
         }
+      }
+    },
+    toggle_left() {
+      console.log("toggle left ");
+      if (this.in_view == 0) {
+        this.in_view = this.carousels.length - 1;
+      } else {
+        this.in_view--;
+      }
+    },
+    toggle_right() {
+      console.log("toggle right ");
+      if (this.in_view == this.carousels.length - 1) {
+        this.in_view = 0;
+      } else {
+        this.in_view++;
       }
     },
   },
@@ -159,10 +192,10 @@ export default {
       .al {
         height: 100px;
         width: 200px;
-        background-repeat: no-repeat no-repeat;
-        background-position: center;
-        background-attachment: scroll;
-        background-size: cover;
+        // background-repeat: no-repeat no-repeat;
+        // background-position: center;
+        // background-attachment: scroll;
+        // background-size: cover;
         img {
           filter: grayscale(100%);
         }

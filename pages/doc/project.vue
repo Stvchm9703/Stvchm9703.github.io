@@ -32,7 +32,16 @@ export default {
 
   head: (self) => ({
     title: `Document - ${self.$route.query["proj"]}`,
-    meta: [],
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'og:title', property: 'og:title', content: 'Steven Chm - Github Page' },
+      { hid: 'og:description', property: 'og:description', content: 'Steven Chm - Github Page and Tech-Blog' },
+      { hid: 'og:url', property: 'og:url', content: 'https://stvchm9703.github.io/doc' },
+      { hid: 'og:image', property: 'og:image', content: 'https://avatars2.githubusercontent.com/u/15327054?s=400&u=167a64d9000e6ea245b6807fb4a7a1dab537d35a&v=4' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+    ],
   }),
   data: () => ({
     fail_load: false,

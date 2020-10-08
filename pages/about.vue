@@ -8,7 +8,7 @@ div
           h1.title.is-1 More About ...
     infoBlock.is-large.has-border-line(
       index="1",
-      img_src="https://i.imgur.com/1CT7JYrh.jpg"
+      img_src="/images/profile.jpg"
     )
       h1.title.is-size-1-desktop.is-size-3-touch Steven
       h2.subtitle.is-3 Cheng Ho Man
@@ -30,7 +30,8 @@ div
 
           .timeline-item.left-side
             .timeline-marker.is-icon.is-primary
-              i.mdi.mdi-flag
+              // i.mdi.mdi-flag
+              flagIcon
             .timeline-content
               p.heading September 2015 - July 2017
               p.is-size-5 Student
@@ -39,7 +40,8 @@ div
 
           .timeline-item.right-side
             .timeline-marker.is-icon.is-info.is-large
-              i.mdi.mdi-briefcase-outline.mdi-36px
+              // i.mdi.mdi-briefcase-outline.mdi-36px
+              briefcaseIcon(width="36px", height="36px")
             .timeline-content
               p.heading November 2017 – May 2019
               p.is-size-5 Web Programmer
@@ -50,7 +52,8 @@ div
 
           .timeline-item.left-side
             .timeline-marker.is-icon.is-primary
-              i.mdi.mdi-flag
+              // i.mdi.mdi-flag
+              flagIcon
             .timeline-content
               p.heading September 2017 - September 2020
               p.is-size-5 Student (part-time)
@@ -87,7 +90,9 @@ div
           )
             p.is-hidden-touch exp: {{ k.exp }}
 
-    infoBlock(index="4")
+    projectTileBlock
+
+    infoBlock(index="5")
       h1.title.is-size-1-desktop.is-size-3-touch.has-text-centered.
         Content Me
       section.section
@@ -107,10 +112,12 @@ div
 //this page is for introduce self
 import infoBlock from "~/components/aboutBlock/InfoBlock.vue";
 import SNSBlock from "~/components/aboutBlock/SNSBlock.vue";
+import projectTileBlock from "~/components/aboutBlock/projectTile.vue";
 import ItemCard from "~/components/aboutBlock/itemCard.vue";
-
-// import header_row_block from "~/components/mbr/header_row_block";
-// import contact_row_block from "~/components/mbr/contact_row_block";
+import ProjectCard from "~/components/docMD/ProjectCard.vue";
+import flagIcon from "mdi-vue/Flag.vue";
+import briefcaseIcon from "mdi-vue/BriefcaseOutline.vue";
+import moment from "moment";
 export default {
   layout: "inner_page",
   head: (self) => ({
@@ -120,20 +127,29 @@ export default {
   components: {
     infoBlock,
     SNSBlock,
+    projectTileBlock,
     ItemCard,
-    // header_row_block,
-    // contact_row_block,
+    ProjectCard,
+    flagIcon,
+    briefcaseIcon,
   },
   methods: {
     img_style: (img_src) => ({
       "background-image": `url("${img_src}")`,
     }),
+    isSelfHosted(post) {
+      return post.owner.login === "Stvchm9703";
+    },
+    toDisplayDate(datetime_str) {
+      return moment(datetime_str, "YYYY-MM-DDTHH:mm:ssZ").format("YYYY-MM-DD");
+    },
+    async fetchStarList() {
+      let url = "/page_io/page/about.config.json";
+      let fetched_data = await this.$axios.$get(url);
+      this.star_project = fetched_data.star_project;
+    },
   },
   data: () => ({
-    fav_lang: [],
-    avail_lang: [],
-  }),
-  asyncData: (context) => ({
     fav_lang: [
       {
         icon_image: "/images/icon_nodejs.svg",
@@ -182,6 +198,11 @@ export default {
         exp: "2017~2018",
       },
     ],
+   
   }),
+
+  async created() {
+    // await this.fetchStarList();
+  },
 };
 </script>

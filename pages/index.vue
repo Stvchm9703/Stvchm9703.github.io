@@ -4,6 +4,7 @@
     ImageBackground(v-if="!in_loading", :src="title_list")
   NavLink.is-hidden-touch
   NavLinkMob.is-hidden-desktop
+
 </template>
 
 <script>
@@ -13,6 +14,7 @@ import NavLinkMob from "~/components/navlink/IndexMobile.vue";
 export default {
   name: "index-page",
   components: { ImageBackground, NavLink, NavLinkMob },
+  
   transition: "page",
   layout: "default",
   computed: {

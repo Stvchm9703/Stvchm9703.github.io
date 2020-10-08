@@ -33,7 +33,7 @@ section
       .menu-list
         .menu-item 
           a 
-            i.mdi.mdi-cross 
+            // i.mdi.mdi-cross 
             span Setting
 
       .sv-color-option-set
@@ -43,18 +43,25 @@ section
             v-for="opt in colorOptions",
             :key="opt.val",
             v-model="$colorMode.preference",
-            :native-value="opt.val"
+            :native-value="opt.val",
             type="is-active"
           )
-            i.mdi(:class="opt.icon")
+            laptopIcon(v-if="opt.icon === 'mdi-laptop'")
+            powerSleepIcon(v-if="opt.icon === 'mdi-power-sleep'")
+            sunnyIcon(v-if="opt.icon === 'mdi-white-balance-sunny'")
 </template>
 
 <script>
 // import _groupBy from "lodash/groupBy";
 // import _value from "lodash/values";
 import { mapState, mapGetters } from "vuex";
+import laptopIcon from "mdi-vue/Laptop.vue";
+import powerSleepIcon from "mdi-vue/PowerSleep.vue";
+import sunnyIcon from "mdi-vue/WhiteBalanceSunny.vue";
+
 export default {
   name: "inner-page-nav",
+  components: { laptopIcon, powerSleepIcon, sunnyIcon },
   computed: {
     ...mapState({
       menuOnOpen: (state) => state.menu_on_open,

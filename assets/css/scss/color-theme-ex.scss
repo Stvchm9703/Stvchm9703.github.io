@@ -180,8 +180,64 @@ $sv-dark-shades: (
 
 }
 
-.sv-cyber-mode{
 
-}
 
 // .sv-
+
+
+ @each $name, $pair in $sv-light-colors {
+   $color: nth($pair, 1);
+
+   .has-text-#{$name}-force {
+     color: $color !important;
+   }
+
+   a.has-text-#{$name}-force {
+
+     &:hover,
+     &:focus {
+       color: bulmaDarken($color, 10%) !important;
+     }
+   }
+
+   .has-background-#{$name}-force {
+     background-color: $color !important;
+   }
+
+   @if length($pair)>=4 {
+     $color-light: nth($pair, 3);
+     $color-dark: nth($pair, 4);
+
+     // Light
+     .has-text-#{$name}-light-force {
+       color: $color-light !important;
+     }
+
+     a.has-text-#{$name}-light-force {
+
+       &:hover,&:focus {
+         color: bulmaDarken($color-light, 10%) !important;
+       }
+     }
+
+     .has-background-#{$name}-light-force {
+       background-color: $color-light !important;
+     }
+
+     // Dark
+     .has-text-#{$name}-dark-force {
+       color: $color-dark !important;
+     }
+
+     a.has-text-#{$name}-dark-force {
+
+       &:hover,&:focus {
+         color: bulmaLighten($color-dark, 10%) !important;
+       }
+     }
+
+     .has-background-#{$name}-dark-force {
+       background-color: $color-dark !important;
+     }
+   }
+ }

@@ -1,13 +1,15 @@
 <template lang="pug">
-.hero.aboutBlockMod.background_layer(:style="img_style")
+.hero.aboutBlockMod.background_layer(:style="img_style" )
   .hero-body
-    .container
+    .container(:class="container_class")
       slot
 </template>
 <script>
 export default {
   props: {
     img_src: { type: String, default: "" },
+    container_class: { type: String, default: "" },
+    container_class: { type: String, default: "" },
   },
   computed: {
     img_style: (self) => ({

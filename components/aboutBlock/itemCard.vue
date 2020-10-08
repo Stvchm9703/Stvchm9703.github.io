@@ -1,6 +1,6 @@
 <template lang="pug">
 .column.is-6-mobile.is-4-tablet.is-3-desktop.is-2-widescreen.is-2-fullhd.is-centered.lang-card-grid
-  .card
+  .card.box
     .card-image
       figure.image.is-2by1
         img(:src="icon_image")

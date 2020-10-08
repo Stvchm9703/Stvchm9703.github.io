@@ -1,8 +1,10 @@
 .page {
+
   &-enter-active,
   &-leave-active {
     transition: opacity 0.5s;
   }
+
   &-enter,
   &-leave-active {
     opacity: 0;
@@ -10,6 +12,7 @@
 }
 
 .slice {
+
   &-left-enter,
   &-right-leave-active {
     opacity: 0;
@@ -23,30 +26,30 @@
   }
 }
 
+
+
+
 html,
 body {
   &::-webkit-scrollbar {
     display: none;
   }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 element.style {
   --mouse-x: 0;
   --mouse-y: 398;
 }
+
 .moving-gradient[data-v-0f21cde2] {
-  background: transparent
-    radial-gradient(
-      at calc((500 - var(--mouse-x, 0)) * 1%)
-        calc((500 - var(--mouse-y, 0)) * 1%),
+  background: transparent radial-gradient(at calc((500 - var(--mouse-x, 0)) * 1%) calc((500 - var(--mouse-y, 0)) * 1%),
       #12c2e9,
       #c471ed,
       #f64f6d,
-      #ffcb56
-    )
-    no-repeat 0 0;
+      #ffcb56) no-repeat 0 0;
 }
-
-

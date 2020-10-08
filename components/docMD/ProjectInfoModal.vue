@@ -2,8 +2,7 @@
 .modal-card.sv-theme-modal
   header.modal-card-head.github-header
     p.modal-card-title.title.is-3
-      // githubIcon
-      i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
+      githubIcon
       | {{project.name}}
     
   section.modal-card-body
@@ -88,8 +87,11 @@
     //tab-header 
     section
       b-tabs(type="is-boxed", :expanded="true", v-model="tagPage")
-        b-tab-item(label="Preview/Capture",  icon="information-outline", value="info")
+        b-tab-item(value="info")
           // information : success  
+          template( slot="header")
+            infoOutlineIcon
+            span Preview/Capture
           .tab-content(v-if="!is_loading&&!fail_load")
             .block.content.is-1.docMD(v-if="readme_md!=''", v-html="$md.render(readme_md)")
             .block.content.is-1(v-if="project.license != null")
@@ -99,7 +101,10 @@
             b-skeleton.block.content.is-1(height="80px" ,:active="is_loading&&!fail_load")
             b-skeleton.block.content.is-1(:active="is_loading&&!fail_load")
           // ------------------
-        b-tab-item(label="File", icon="library" , value="file")
+        b-tab-item(value="file")
+          template(slot="header")
+            libraryIcon
+            span File
           div(v-if="!is_loading&&!fail_load")
             h3.is-6 Default Branch: {{project.default_branch}}
             article.panel.is-primary
@@ -107,12 +112,16 @@
                 v-for="fileSet in file_list",
               )
                 span.panel-icon 
-                  i.mdi.mdi-24px(:class="{'mdi-file-code-outline' : fileSet.type==='file', 'mdi-folder': fileSet.type==='dir'}")
+                  fileIcon(v-if="fileSet.type==='file'")
+                  folderIcon(v-if="fileSet.type==='dir'")
                 | {{fileSet.name}}
           div(v-if="is_loading&&!fail_load")
             b-skeleton(:active="is_loading&&!fail_load" )
             b-skeleton(size="is-large", :active="is_loading&&!fail_load" )
-        b-tab-item(label="Branch", icon="source-fork" , value="branch")
+        b-tab-item(value="branch")
+          template(slot="header")
+            sourceForkIcon
+            span Branch
           article.panel.is-primary
             // .panel-block
               p.control.has-icons-left
@@ -132,7 +141,10 @@
               v-if="is_loading&&!fail_load"
               height="80px"
             )
-        b-tab-item(label="Release Tag", icon="tag", value="tag")
+        b-tab-item( value="tag")
+          template(slot="header")
+            tagIcon
+            span Release Tag
           article.panel.is-primary
             // .panel-block
               p.control.has-icons-left
@@ -146,27 +158,38 @@
               target="_blank"
             )
               span.panel-icon 
-                i.mdi.mdi-24px()
+                tagIcon
               | {{refSet.name}}
           
     
   footer.modal-card-foot
     button.button.close-btn(type="button", @click="$emit(\'close\')") Close
     a.button.is-primary(:href="project.html_url" target="blank") 
-      // githubIcon
-      i.mdi(:class="{'mdi-github' : provider_host ==='github'}")
+      githubIcon
       | Go to git reposity
 </template>
 <script>
 import { mapState } from "vuex";
 import _isEmpty from "lodash/isEmpty";
 import debugUrl from "~/plugins/debugRequest";
-// import githubIcon  from 'mdi-vue/Github.vue';
-
+import githubIcon from "mdi-vue/Github.vue";
+import infoOutlineIcon from "mdi-vue/InformationOutline.vue";
+import libraryIcon from "mdi-vue/Library.vue";
+import sourceForkIcon from "mdi-vue/SourceFork.vue";
+import tagIcon from "mdi-vue/Tag.vue";
+import fileIcon from "mdi-vue/FileCodeOutline.vue";
+import folderIcon from "mdi-vue/FolderOutline.vue";
 export default {
-  
   name: "Project-info-modal",
-  // components:{githubIcon},
+  components: {
+    githubIcon,
+    infoOutlineIcon,
+    libraryIcon,
+    sourceForkIcon,
+    tagIcon,
+    fileIcon,
+    folderIcon,
+  },
   computed: {
     ...mapState({
       project: (state) => state.project_list.on_showing_project,
@@ -231,7 +254,7 @@ export default {
       //
       this.tags_list = tagListData;
       this.file_list = fileListData;
-      // console.log('fileListData:',fileListData);
+      console.log("fileListData:", fileListData);
       this.release_tags = releaseTag
         .filter((e) => e.ref.includes("refs/heads"))
         .map((e) => ({
@@ -243,6 +266,7 @@ export default {
         }));
     },
     async fetchInfoContent() {
+      if (_isEmpty(this.file_list)) throw "empty file list";
       let readme_url = this.file_list.filter(
         (e) =>
           e.name.toLowerCase() === "readme.md" ||
@@ -250,9 +274,7 @@ export default {
       );
       console.log(readme_url);
       if (readme_url.length > 0) {
-        this.readme_md = await this.$axios.$get(
-          (readme_url[0].download_url)
-        );
+        this.readme_md = await this.$axios.$get(readme_url[0].download_url);
       }
     },
     async fetchLicience() {
