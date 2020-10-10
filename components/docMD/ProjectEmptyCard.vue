@@ -1,23 +1,30 @@
 <template lang="pug">
 .column.is-half-tablet.is-full-mobile.is-one-half-desktop.is-one-third-widescreen.is-one-third-fullhd
-  .card.is-offset-1.sv-theme-card
-    header.card-header
-      b-skeleton.card-header-title(height="48px")
-    .card-content
-      .content
-        b-skeleton.field(width="80%")
-        b-skeleton.field(width="60%")
-        b-skeleton.field(width="40%")
-        b-skeleton.field(width="60%")
-        b-skeleton.field(width="50%")
-        b-skeleton.field(width="70%")
-    footer.card-footer
-      .card-footer-item.prim-dark-btn
-        b-skeleton(size="is-large")
-      .card-footer-item.sec-dark-btn 
-        b-skeleton(size="is-large")
+  transition(name="slide-fade")
+    .card.is-offset-1.sv-theme-card(
+      v-if="is_ready",
+      :class="`tile-ani-delay-${sort_index}`"
+    )
+      header.card-header
+        b-skeleton.card-header-title(height="48px")
+      .card-content
+        .content
+          b-skeleton.field(width="80%")
+          b-skeleton.field(width="60%")
+          b-skeleton.field(width="40%")
+          b-skeleton.field(width="60%")
+          b-skeleton.field(width="50%")
+          b-skeleton.field(width="70%")
+      footer.card-footer
+        .card-footer-item.prim-dark-btn
+          b-skeleton(size="is-large")
+        .card-footer-item.sec-dark-btn 
+          b-skeleton(size="is-large")
 </template>
 <script>
 // TODO:
 // 1. check up the card content beatify ?
+export default {
+  props: ["sort_index", "is_ready"],
+};
 </script>

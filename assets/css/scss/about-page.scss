@@ -204,3 +204,51 @@
     height: 12px;
   }
 }
+
+
+
+.project-tile-cont {
+  min-height: 30em;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(1em);
+  opacity: 0;
+}
+
+.proj-info.image img.has-ratioless {
+  width: auto;
+  margin : auto;
+}
+
+@for $i from 1 through 9 {
+  .tile-ani-delay-#{($i - 1)} {
+    &.slide-fade-enter-active {
+      transition-delay: ($i - 1) * 70ms;
+    }
+
+    &.slide-fade-leave-active {
+      transition-delay: (9 - $i) * 70ms;
+    }
+  }
+}
+
+.sv-project-box {
+  background-color: $mono-set-7;
+  .icon-btn {
+    background-color: $mono-set-7;
+    height: 100%;
+
+    .mdi>svg {
+      width: 0.8em;
+      height: 0.8em;
+    }
+  }
+}

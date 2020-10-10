@@ -26,6 +26,16 @@
 @import "~bulma/sass/layout/_all";
 @import "~buefy/src/scss/buefy";
 
+// animation
+// node_modules\hover.css\scss\hover.scss
+@import "~hover.css/scss/_options";
+@import "~hover.css/scss/_mixins";
+@import "~hover.css/scss/_hacks";
+/* 2D TRANSITIONS */
+// @import "~hover.css/scss/effects/2d-transitions/_grow.scss";
+// @import "~hover.css/scss/hover.scss";
+@import "scss/hover-cust.scss";
+
 // extra
 @import 'scss/page_trans.scss';
 @import "scss/custom_layout.scss";

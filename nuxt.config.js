@@ -3,6 +3,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LodashPlugin = require('lodash-webpack-plugin');
 const path = require('path');
+
 export default {
   // mode: 'spa',
   ssr: true,
@@ -269,7 +270,7 @@ export default {
     plugins: [
       new LodashPlugin({
         'cloning': true
-      })
+      }),
     ]
   },
   buildModules: [

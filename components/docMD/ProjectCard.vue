@@ -1,47 +1,51 @@
 <template lang="pug">
 .column
-  .card.is-offset-1.sv-theme-card
-    header.card-header
-      p.card-header-title(
-        :class="{ 'github-header': provider_host === 'github' }"
-      )
-        githubIcon
-        | {{ project_name }}
-    slot(name="content")
-      .card-content
-        .content
-          .field.is-grouped.is-grouped-multiline
-            .control
-              .tags.has-addons
-                span.tag.is-dark from forked project:
-                span.tag.is-warning(v-if="fork") yes
-                span.tag.is-success(v-if="!fork") no
-            .control
-              .tags.has-addons
-                span.tag.is-dark self-owned :
-                span.tag.is-success(v-if="is_self_hosted") yes
-                span.tag.is-warning(v-if="!is_self_hosted") no
-          .field.is-grouped.is-grouped-multiline
-            .control
-              .tags.has-addons
-                span.tag.is-dark star :
-                span.tag.is-info {{ star_counted }}
-            .control
-              .tags.has-addons
-                span.tag.is-dark forked count:
-                span.tag.is-primary {{ forked_counted }}
-          p language : {{ language }}
-          p created :
-            time(:datetime="created_at") {{ created_at }}
-          p last updated :
-            time(:datetime="updated_at") {{ updated_at }}
-    slot(name="footer")
-      footer.card-footer
-        a.card-footer-item.prim-dark-btn(@click="open_info_modal()") Project Detail
-        nuxt-link.card-footer-item.sec-dark-btn(
-          :to="'/doc/project?u=' + owner + '&proj=' + project_name",
-          no-prefetch
-        ) Show Document
+  transition(name="slide-fade")
+    .card.is-offset-1.sv-theme-card(
+      v-if="is_ready",
+      :class="`tile-ani-delay-${sort_index}`"
+    )
+      header.card-header
+        p.card-header-title(
+          :class="{ 'github-header': provider_host === 'github' }"
+        )
+          githubIcon
+          | {{ project_name }}
+      slot(name="content")
+        .card-content
+          .content
+            .field.is-grouped.is-grouped-multiline
+              .control
+                .tags.has-addons
+                  span.tag.is-dark from forked project:
+                  span.tag.is-warning(v-if="fork") yes
+                  span.tag.is-success(v-if="!fork") no
+              .control
+                .tags.has-addons
+                  span.tag.is-dark self-owned :
+                  span.tag.is-success(v-if="is_self_hosted") yes
+                  span.tag.is-warning(v-if="!is_self_hosted") no
+            .field.is-grouped.is-grouped-multiline
+              .control
+                .tags.has-addons
+                  span.tag.is-dark star :
+                  span.tag.is-info {{ star_counted }}
+              .control
+                .tags.has-addons
+                  span.tag.is-dark forked count:
+                  span.tag.is-primary {{ forked_counted }}
+            p language : {{ language }}
+            p created :
+              time(:datetime="created_at") {{ created_at }}
+            p last updated :
+              time(:datetime="updated_at") {{ updated_at }}
+      slot(name="footer")
+        footer.card-footer
+          a.card-footer-item.prim-dark-btn(@click="open_info_modal()") Project Detail
+          nuxt-link.card-footer-item.sec-dark-btn(
+            :to="'/doc/project?u=' + owner + '&proj=' + project_name",
+            no-prefetch
+          ) Show Document
 </template>
 <script>
 import ProjectInfoModal from "~/components/docMD/ProjectInfoModal.vue";
@@ -62,6 +66,8 @@ export default {
     created_at: { type: String, default: "" },
     updated_at: { type: String, default: "" },
     footer_override: { type: Boolean, deafult: false },
+    is_ready: { type: Boolean, deafult: false },
+    sort_index: { type: Number, default: 0 },
   },
   components: { githubIcon },
   computed: {

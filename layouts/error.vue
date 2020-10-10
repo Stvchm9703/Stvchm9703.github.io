@@ -1,5 +1,6 @@
   
 <template lang="pug">
+
 section.section.hero
   .__nuxt-error-page.hero-body
     .container.is-centered

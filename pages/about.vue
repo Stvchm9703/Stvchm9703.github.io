@@ -117,7 +117,7 @@ import ItemCard from "~/components/aboutBlock/itemCard.vue";
 import ProjectCard from "~/components/docMD/ProjectCard.vue";
 import flagIcon from "mdi-vue/Flag.vue";
 import briefcaseIcon from "mdi-vue/BriefcaseOutline.vue";
-import moment from "moment";
+import moment from "moment-mini";
 export default {
   layout: "inner_page",
   head: (self) => ({

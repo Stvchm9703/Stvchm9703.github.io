@@ -4,6 +4,7 @@
   b-carousel.background.customBackground(
     :indicator-inside="true",
     :indicator-background="true",
+    indicator-style="line",
     indicator-mode="click",
     indicator-position="is-top is-mobile-top",
     :pause-hover="false",

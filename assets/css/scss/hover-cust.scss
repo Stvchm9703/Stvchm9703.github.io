@@ -1,0 +1,21 @@
+@mixin grow() {
+  @include hacks();
+  @include prefixed(transition-duration, $fastDuration);
+  @include prefixed(transition-property, transform);
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include prefixed(transform, scale(1.02));
+  }
+}
+
+
+@if $includeClasses {
+  .#{$nameSpace}-grow {
+    @include grow();
+    transition-delay: 0.1s;
+    display: block !important;
+
+  }
+}
