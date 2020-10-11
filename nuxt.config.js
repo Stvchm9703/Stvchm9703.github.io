@@ -13,7 +13,7 @@ export default {
   */
 
   head: {
-    title: process.env.npm_package_name || '',
+    title:  'Steven Chm - Github Page and Tech-Blog',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,9 +34,7 @@ export default {
       cleanupOutdatedCaches: true,
       cacheAssets: false, // for /*
       offline: false, // for /_nuxt/* 
-      // runtimeCaching : false,
       skipWaiting: false,
-      // importScripts: [ 'sw.cli.js' ],
     }
   },
   /*
@@ -140,13 +138,6 @@ export default {
   // router config
   router: {
     routeNameSplitter: '/',
-    // extendRoutes(routes, resolve) {
-    //   routes.push({
-    //     name: 'doc_proj_md',
-    //     path: '/doc/:user/:project_name',
-    //     component: resolve(__dirname, 'pages/doc/_project_name.vue')
-    //   })
-    // },
 
   },
   static: {
@@ -300,7 +291,8 @@ export default {
     }, '@nuxtjs/style-resources']
   ],
   generate: {
-    fallback: '404.html',
+    fallback: '200.html',
+    subFolders: false,
     exclude: [
       /^\/test/,
       /^\/example/,

@@ -15,11 +15,10 @@ section.section.hero
       p.subtitle.is-size-3-desktop.is-size-5-touch(v-if="targetPage==='error'") Back To Home Page, Fetch it again 
       
       p.description
-        nuxt-link.error-link(, to="/") Back To Home
+        nuxt-link.error-link(v-if="targetPage==='error'"  to="/") Back To Home      
+        nuxt-link.error-link(v-if="targetPage==='doc'"  to="/") Back To Document list
+        nuxt-link.error-link(v-if="targetPage==='post'"  to="/") Back To Post list
 
-
- 
-      
 </template>
 
 <script>
@@ -57,45 +56,15 @@ export default {
     return {
       title: this.message,
       meta: [
-        {
-          name: "viewport",
-          content: "width=device-width,initial-scale=1.0,minimum-scale=1.0",
-        },
+      { name: "viewport", content: "width=device-width,initial-scale=1.0,minimum-scale=1.0", },
+      { hid: "description", name: "description", content: "Steven Chm home page", },
+      { hid: "og:title", property: "og:title", content: "Steven Chm - Github Page", },
+      { hid: "og:description", property: "og:description", content: "Steven Chm - Github Page and Tech-Blog", },
+      { hid: "og:url", property: "og:url", content: "https://stvchm9703.github.io/", },
+      { hid: "og:image", property: "og:image", content: "https://avatars2.githubusercontent.com/u/15327054?s=400&u=167a64d9000e6ea245b6807fb4a7a1dab537d35a&v=4", },
+      { hid: "og:type", property: "og:type", content: "website" },
       ],
     };
   },
-  beforeMount() {
-    if (this.$route.fullPath.includes("/doc/")) {
-      // this.$router.push({ path: "/doc/" });
-    } else if (this.$route.fullPath.includes("/post/")) {
-    }
-  },
 };
 </script>
-
-<style lang="scss">
-// .__nuxt-error-page {
-//   padding: 1rem;
-//   text-align: center;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   font-family: sans-serif;
-//   font-weight: 100 !important;
-//   -ms-text-size-adjust: 100%;
-//   -webkit-text-size-adjust: 100%;
-//   -webkit-font-smoothing: antialiased;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-// }
-// .__nuxt-error-page .error {
-//   max-width: 450px;
-// }
-// .__nuxt-error-page a {
-//   // color: #7f828b !important;
-//   text-decoration: none;
-// }
-</style>

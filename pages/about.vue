@@ -122,7 +122,16 @@ export default {
   layout: "inner_page",
   head: (self) => ({
     title: `About Me - Stvchm9703`,
-    meta: [],
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "About - Steven Chm", },
+      { hid: "og:title", property: "og:title", content: "About Steven Chm - Github Page", },
+      { hid: "og:description", property: "og:description", content: "About Steven Chm", },
+      { hid: "og:url", property: "og:url", content: "https://stvchm9703.github.io/about", },
+      { hid: "og:image", property: "og:image", content: "https://avatars2.githubusercontent.com/u/15327054?s=400&u=167a64d9000e6ea245b6807fb4a7a1dab537d35a&v=4", },
+      { hid: "og:type", property: "og:type", content: "website" },
+    ],
   }),
   components: {
     infoBlock,
