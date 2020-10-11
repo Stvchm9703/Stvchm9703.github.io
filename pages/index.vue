@@ -19,7 +19,7 @@ export default {
   computed: {
     link_list: (self) => {
       return self.$router.options.routes
-        .filter((e) => !e.path.includes("/:"))
+        .filter((e) => !e.path.includes("/:") && !e.path.includes("404") )
         .map((e) => {
           return {
             path: e.path,

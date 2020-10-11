@@ -75,7 +75,12 @@ export default {
     link_list: (self) => {
       // console.log(self.$router.options.routes);
       let list_a = self.$router.options.routes
-        .filter((e) => !e.path.includes("/:") && !/[\w]+\//.test(e.name))
+        .filter(
+          (e) =>
+            !e.path.includes("/:") &&
+            !/[\w]+\//.test(e.name) &&
+            !e.name.includes("404")
+        )
         .map((e) => ({
           path: e.path,
           name: e.name,
