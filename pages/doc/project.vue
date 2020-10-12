@@ -27,7 +27,7 @@ import _isEmpty from "lodash/isEmpty";
 import _cloneDeep from "lodash/cloneDeep";
 import { mapState, mapGetters } from "vuex";
 export default {
-  name: "docMDRender_old",
+  name: "docMDRender",
   layout: "inner_page",
 
   head: (self) => ({

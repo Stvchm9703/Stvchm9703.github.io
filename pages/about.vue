@@ -118,6 +118,7 @@ import flagIcon from "mdi-vue/Flag.vue";
 import briefcaseIcon from "mdi-vue/BriefcaseOutline.vue";
 import moment from "moment-mini";
 export default {
+  name : "About-page",
   layout: "inner_page",
   head: (self) => ({
     title: `About Me - Stvchm9703`,

@@ -8,8 +8,6 @@
       .column.has-text-right
         span.has-text-light Last update :
           time(:datetime="last_updated") {{ last_updated }}
-    
-          
   .section
     
 </template>
