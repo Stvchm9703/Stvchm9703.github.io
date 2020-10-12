@@ -4,18 +4,9 @@ export default [
     description:
       "School Project, a web application that using MongoDB as database to manage data",
     tag: [
-      {
-        key: "Golang",
-        desp: "Front-end Backend/API Server, with Gin framework",
-      },
-      {
-        key: "NuxtJs",
-        desp: "Front-end SPA/prebuild web application framework",
-      },
-      {
-        key: "MongoDB",
-        desp: "Backend Database storage server",
-      },
+      { key: "Golang", desp: "Front-end Backend/API Server, with Gin framework", },
+      { key: "NuxtJs", desp: "Front-end SPA/prebuild web application framework", },
+      { key: "MongoDB", desp: "Backend Database storage server", },
     ],
     project_info: {
       id: 199086045,
@@ -68,23 +59,10 @@ export default [
     description:
       "School Project, a Unity Application that using NATS and ProtoBuffer to build online game system",
     tag: [
-      {
-        key: "Golang",
-        desp: "Backend Server to manage the game room",
-      },
-      {
-        key: "NATS",
-        desp:
-          "Message queueing server, to pass message to server-side service worker",
-      },
-      {
-        key: "Unity Engine",
-        desp: "Frontend Application for player play the game",
-      },
-      {
-        key: "Redis",
-        desp: "For backend server's data sharing and temporary storage",
-      },
+      { key: "Golang", desp: "Backend Server to manage the game room", },
+      { key: "NATS", desp: "Message queueing server, to pass message to server-side service worker", },
+      { key: "Unity Engine", desp: "Frontend Application for player play the game", },
+      { key: "Redis", desp: "For backend server's data sharing and temporary storage", },
     ],
     project_info: {
       id: 216969222,
@@ -126,14 +104,8 @@ export default [
     description:
       "Company Project, a Single Page Application that using Vue and Flask to view online data",
     tag: [
-      {
-        key: "Python",
-        desp: "Backend API Server for providing data",
-      },
-      {
-        key: "Vue",
-        desp: "Client side Web App for displaying",
-      },
+      { key: "Python", desp: "Backend API Server for providing data", },
+      { key: "Vue", desp: "Client side Web App for displaying", },
     ],
     project_info: {},
     self_own: false,
@@ -167,6 +139,8 @@ export default [
     image_list: [
       "/images/about/pepper/cn_b1_index.jpg",
       "/images/about/pepper/03 Events_Today.png",
+      "/images/about/pepper/pepper_event.jpg",
+      "/images/about/pepper/pepper_event2.jpg",
     ],
   },
 
@@ -243,23 +217,10 @@ export default [
     description:
       "School Project, a Unity Application that using NATS and ProtoBuffer to build online game system",
     tag: [
-      {
-        key: "Golang",
-        desp: "Backend Server to manage the game room",
-      },
-      {
-        key: "NATS",
-        desp:
-          "Message queueing server, to pass message to server-side service worker",
-      },
-      {
-        key: "Unity Engine",
-        desp: "Frontend Application for player play the game",
-      },
-      {
-        key: "Redis",
-        desp: "For backend server's data sharing and temporary storage",
-      },
+      { key: "Golang", desp: "Backend Server to manage the game room", },
+      { key: "NATS", desp: "Message queueing server, to pass message to server-side service worker", },
+      { key: "Unity Engine", desp: "Frontend Application for player play the game", },
+      { key: "Redis", desp: "For backend server's data sharing and temporary storage", },
     ],
     project_info: {
       id: 216969222,

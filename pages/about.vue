@@ -20,7 +20,7 @@ div
 
     infoBlock.has-border-line(
       index="2",
-      img_src="https://i.imgur.com/EiteW03h.png"
+      img_src="/images/about/pepper/pepper_dayly.jpg"
     )
       h1.title.is-size-1-desktop.is-size-3-touch Who am I ?
       section.section
@@ -76,7 +76,6 @@ div
           )
             p.is-hidden-touch exp: {{ k.exp }}
 
-      // infoBlock.has-border-line(index="4")
       h1.title.is-size-1-desktop.is-size-3-touch.
         Available Programming Language
       .section.mx-0.px-0
