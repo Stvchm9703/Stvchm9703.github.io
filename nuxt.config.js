@@ -13,7 +13,7 @@ export default {
   */
 
   head: {
-    title:  'Steven Chm - Github Page and Tech-Blog',
+    title: 'Steven Chm - Github Page and Tech-Blog',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,7 +34,7 @@ export default {
       cleanupOutdatedCaches: true,
       cacheAssets: false, // for /*
       offline: false, // for /_nuxt/* 
-      skipWaiting: false,
+      skipWaiting: false
     }
   },
   /*
@@ -58,7 +58,7 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
-    beforeEnter(el) { }
+    beforeEnter (el) { }
   },
 
   colorMode: {

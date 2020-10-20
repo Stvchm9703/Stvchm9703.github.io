@@ -1,35 +1,36 @@
 <template lang="pug">
-div
-  .container(:class="{ 'empty-contain': !end_fetch || fail_load }")
-    .section
-      .columns.is-multiline
-        ProjectEmptyCard(
-          v-for="post in 6",
-          :key="post",
-          :sort_index="post",
-          :is_ready="in_loading && !fail_load"
-        )
-      .columns.is-multiline(
-        v-if="!in_loading && !fail_load"
+.container(:class="{ 'empty-contain': !end_fetch || fail_load }")
+  .section.fix-top.pb-0
+    .columns.pb-0
+      .column.pb-0
+        span.is-size-1.has-text-light-force.
+          Document List 
+  .section
+    .columns.is-multiline(v-if="!end_fetch && !fail_load")
+      ProjectEmptyCard(
+        v-for="post in 6",
+        :key="post",
+        :sort_index="post",
+        :is_ready="in_loading && !fail_load"
       )
-        ProjectCard.is-half-tablet.is-full-mobile.is-half-desktop.is-one-third-widescreen.is-one-third-fullhd(
-          v-for="(post, index) in post_list",
-          :key="post.id",
-          :project_id="post.id",
-          :project_name="post.name",
-          :project_full_name="post.full_name",
-          :fork="post.fork",
-          :owner="post.owner.login",
-          :is_self_hosted="isSelfHosted(post)",
-          :star_counted="post.stargazers_count",
-          :forked_counted="post.forks_count",
-          :language="post.language",
-          :created_at="toDisplayDate(post.created_at)",
-          :updated_at="toDisplayDate(post.updated_at)",
-          :sort_index="index",
-          :is_ready="end_fetch && !fail_load"
-        )
-        
+    .columns.is-multiline(v-if="!in_loading && !fail_load")
+      ProjectCard.is-half-tablet.is-full-mobile.is-half-desktop.is-one-third-widescreen.is-one-third-fullhd(
+        v-for="(post, index) in post_list",
+        :key="post.id",
+        :project_id="post.id",
+        :project_name="post.name",
+        :project_full_name="post.full_name",
+        :fork="post.fork",
+        :owner="post.owner.login",
+        :is_self_hosted="isSelfHosted(post)",
+        :star_counted="post.stargazers_count",
+        :forked_counted="post.forks_count",
+        :language="post.language",
+        :created_at="toDisplayDate(post.created_at)",
+        :updated_at="toDisplayDate(post.updated_at)",
+        :sort_index="index",
+        :is_ready="end_fetch && !fail_load"
+      )
 </template>
 
 <script>
