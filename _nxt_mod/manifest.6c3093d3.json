@@ -1,0 +1,54 @@
+{
+  "name": "stvchm9703.github.io",
+  "short_name": "stvchm9703.github.io",
+  "description": "stv chm logging app",
+  "icons": [
+    {
+      "src": "/_nxt_mod/icons/icon_64x64.46472c.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_120x120.46472c.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_144x144.46472c.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_152x152.46472c.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_192x192.46472c.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_384x384.46472c.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nxt_mod/icons/icon_512x512.46472c.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f5b656",
+  "lang": "en"
+}

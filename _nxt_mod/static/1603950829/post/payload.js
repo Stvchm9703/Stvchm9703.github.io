@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/post", {data:[{}],fetch:[],mutations:[["open_menu",false]]});

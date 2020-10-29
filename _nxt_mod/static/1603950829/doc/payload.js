@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/doc", {data:[{}],fetch:[],mutations:[["open_menu",false]]});
