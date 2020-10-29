@@ -57,8 +57,8 @@ div
             .timeline-content
               p.heading September 2017 - September 2020
               p.is-size-5 Student (part-time)
+              p Bachelorr of Computing Sceince 
               p School Of Continuing and Professional Education
-              p Golang study
           .timeline-header
             span.tag.is-medium.is-primary Now
 
