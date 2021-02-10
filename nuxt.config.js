@@ -3,7 +3,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LodashPlugin = require('lodash-webpack-plugin');
 const path = require('path');
-
+// const MinChunkSizePlugin = require("MinChunkSizePlugin");
 export default {
   // mode: 'spa',
   ssr: true,
@@ -218,6 +218,8 @@ export default {
       minimize: true,
       splitChunks: {
         chunks: 'all',
+         minSize: 10000,
+        maxSize: 250000,
         automaticNameDelimiter: '.',
         cacheGroups: {
           vendor: {
